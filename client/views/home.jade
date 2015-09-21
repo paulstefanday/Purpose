@@ -1,0 +1,15 @@
+#home.box
+
+  .logo
+    i.ion-ios-people
+    h1 Profiles
+    p Manage profiles accross all your applications
+
+  br
+
+
+  //- If not logged in
+  button(ng-if="!vm.isUser()" ng-click="vm.authenticate('facebook')" ladda-button="vm.laddaLoading" data-style="expand-right")
+    | Get started via Facebook
+
+  a.button(ng-if="vm.isUser()" href="/#/dashboard") View Dashboard

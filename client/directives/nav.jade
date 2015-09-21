@@ -1,0 +1,23 @@
+#navigation(ng-class="{ active : vm.showNav }")
+
+  button.menu-link(ng-click="vm.showNav = !vm.showNav")
+    i.ion-navicon(ng-hide="vm.showNav")
+    i.ion-ios-close-empty(ng-show="vm.showNav")
+
+  ul#menu
+
+    //- Logged out
+    li(ng-hide="vm.loggedIn()")
+      a(href='#/' ng-click="vm.hide()") Home
+    li(ng-hide="vm.loggedIn()")
+      a(href='' ng-click="vm.login()") Login
+
+    //- Logged in
+    li(ng-show="vm.loggedIn()")
+      a(href='#/dashboard' ng-click="vm.hide()") Profiles
+    li(ng-show="vm.loggedIn()")
+      a(href='#/organisation' ng-click="vm.hide()") Organisation
+    li(ng-show="vm.loggedIn()")
+      a(href='' ng-click="vm.logout()") Logout
+
+
