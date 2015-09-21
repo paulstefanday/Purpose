@@ -1,4 +1,4 @@
-export default /*@ngInject*/ function($auth, $http, $timeout) {
+export default /*@ngInject*/ function($auth, $http, $timeout, fileUpload) {
 
 	this.getOrgs = () => $http.get('/api/v1/job').then(res => this.organisations = res.data)
 
@@ -30,6 +30,11 @@ export default /*@ngInject*/ function($auth, $http, $timeout) {
     $timeout(() => this.selected = item, 200);
   }
 
+  this.uploadFile = function(){
+      fileUpload.uploadFileToUrl(this.selectedFile, "/api/v1/image")
+        .then(res => this.organisation_logo = res.url);
+  };
+      
   this.getOrgs();
 
 }

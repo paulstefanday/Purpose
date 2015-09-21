@@ -16,10 +16,10 @@ angular.module(name, [
 	'satellizer',
 	'btford.socket-io',
 	'ui.router',
-  'ngAnimate',
+	'ngAnimate',
 	'oitozero.ngSweetAlert',
-  'ladda',
-  'ngMap'
+	'ladda',
+	'ngMap'
 ])
   .config(require('./config'))
   .run(require('./global'))
@@ -28,12 +28,45 @@ angular.module(name, [
 // App Parts
 require('./bootstrap')(name)
 	.directive(...require('./directives/map'))
-  .directive(...require('./directives/nav'))
+  	.directive(...require('./directives/nav'))
 	.factory('socket', /*@ngInject*/ function(socketFactory) {
 		return socketFactory({ prefix: '', ioSocket: io.connect('http://localhost:3000/') })
 	})
+	.directive('fileModel', ['$parse', function ($parse) {
+	    return {
+	        restrict: 'A',
+	        link: function(scope, element, attrs) {
+	            var model = $parse(attrs.fileModel);
+	            var modelSetter = model.assign;
+	            
+	            element.bind('change', function(){
+	                scope.$apply(function(){
+	                    modelSetter(scope, element[0].files[0]);
+	                });
+	            });
+	        }
+	    };
+	}])
+	.service('fileUpload', /*@ngInject*/ function ($http, $q) {
+	    this.uploadFileToUrl = function(file, uploadUrl){
+	    	var q = $q.defer();
 
+	        var fd = new FormData();
+	        fd.append('file', file);
+	        $http.post(uploadUrl, fd, {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	        })
+	        .success(function(res){
+	        	q.resolve(res)
+	        })
+	        .error(function(err){
+	        	q.reject(err)
+	        });
 
+	        return q.promise;
+	    }
+	});
 
 
 

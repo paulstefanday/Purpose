@@ -35,6 +35,7 @@ var formidable = require('koa-formidable')
 
 
 module.exports.image = function *() {
+  
   var self = this,
       thunkify = require('thunkify-wrap'),
       form = yield formidable.parse(this),
@@ -52,6 +53,7 @@ module.exports.image = function *() {
   yield upload();
 
   self.body = { url: 'https://s3-ap-southeast-2.amazonaws.com/purposecareer/' + form.files.file.name }
+
 }
 
 /**
@@ -72,9 +74,7 @@ module.exports.image = function *() {
 
 module.exports.find = function *() {
 
-  var result = yield M.User.get(this.user.id).getJoin({
-    jobs: true
-  }).run();
+  var result = yield M.User.get(this.user.id).getJoin({ jobs: true }).run();
 
   this.body = result.jobs || [];
   this.status = 200;

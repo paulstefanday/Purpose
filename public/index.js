@@ -372,7 +372,38 @@ angular.module(name, ['satellizer', 'btford.socket-io', 'ui.router', 'ngAnimate'
 
 // App Parts
 (_require$directive = (_require = require('./bootstrap')(name)).directive.apply(_require, _toConsumableArray(require('./directives/map')))).directive.apply(_require$directive, _toConsumableArray(require('./directives/nav'))).factory('socket', /*@ngInject*/["socketFactory", function (socketFactory) {
-  return socketFactory({ prefix: '', ioSocket: io.connect('http://localhost:3000/') });
+	return socketFactory({ prefix: '', ioSocket: io.connect('http://localhost:3000/') });
+}]).directive('fileModel', ['$parse', function ($parse) {
+	return {
+		restrict: 'A',
+		link: function link(scope, element, attrs) {
+			var model = $parse(attrs.fileModel);
+			var modelSetter = model.assign;
+
+			element.bind('change', function () {
+				scope.$apply(function () {
+					modelSetter(scope, element[0].files[0]);
+				});
+			});
+		}
+	};
+}]).service('fileUpload', /*@ngInject*/["$http", "$q", function ($http, $q) {
+	this.uploadFileToUrl = function (file, uploadUrl) {
+		var q = $q.defer();
+
+		var fd = new FormData();
+		fd.append('file', file);
+		$http.post(uploadUrl, fd, {
+			transformRequest: angular.identity,
+			headers: { 'Content-Type': undefined }
+		}).success(function (res) {
+			q.resolve(res);
+		}).error(function (err) {
+			q.reject(err);
+		});
+
+		return q.promise;
+	};
 }]);
 
 },{"./bootstrap":1,"./config":2,"./directives/map":3,"./directives/nav":5,"./global":6,"angular":20,"angular-animate":15,"angular-socket-io":16,"angular-sweetalert":17,"angular-ui-router":18,"ladda-angular":24,"ngmap":26,"satellizer":27,"socket.io-client":28,"sweetalert":78}],8:[function(require,module,exports){
@@ -452,7 +483,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div class=\"container\"><header><h1 ng-if=\"!vm.edit\">Manage Organisations</h1><h1 ng-if=\"!vm.new &amp;&amp; vm.edit\">Edit: {{ vm.selected.name }}</h1><h1 ng-if=\"vm.new &amp;&amp; vm.edit\">Create Organisation</h1></header><aside><button ng-click=\"vm.startNew()\" class=\"full\">Create Organisation</button><div ng-if=\"vm.organisations.length &gt; 0\" class=\"organisations\"><hr/><h5>Organsations</h5><button ng-repeat=\"organisation in vm.organisations\" ng-click=\"vm.select(organisation)\" class=\"full light\">{{ organisation.name }}</button></div></aside><article><div class=\"frame\"> <form action=\"/api/v1/image\" method=\"post\" enctype=\"multipart/form-data\"><input type=\"file\" name=\"file\" multiple=\"\"/><input type=\"submit\" value=\"Upload\"/></form></div><div ng-if=\"!vm.edit &amp;&amp; vm.selected\" class=\"frame\"><p>public: {{ vm.selected.public }}</p><p>secret: {{ vm.selected.private }}</p><pre>{{ vm.selected | json }}</pre><button ng-click=\"vm.edit = true\">Edit</button><button ng-click=\"vm.delete()\" class=\"light\">Delete</button></div><form name=\"orgForm\" ng-if=\"!vm.new &amp;&amp; vm.edit\" ng-submit=\"vm.update()\" class=\"frame\"><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.name\"/><button ng-disabled=\"orgForm.$invalid\">Update</button><button ng-click=\"vm.edit = false; vm.selected = false;\" class=\"light\">Cancel</button></form><form name=\"newOrgForm\" ng-if=\"vm.new &amp;&amp; vm.edit\" ng-submit=\"vm.create()\" class=\"frame\"><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.name\"/><button ng-disabled=\"newOrgForm.$invalid\">Create</button><button ng-click=\"vm.edit = false; vm.new = false; vm.selected = false;\" class=\"light\">Cancel</button></form></article></div>");;return buf.join("");
+buf.push("<div class=\"container\"><header><h1 ng-if=\"!vm.edit\">Manage Organisations</h1><h1 ng-if=\"!vm.new &amp;&amp; vm.edit\">Edit: {{ vm.selected.name }}</h1><h1 ng-if=\"vm.new &amp;&amp; vm.edit\">Create Organisation</h1></header><aside><button ng-click=\"vm.startNew()\" class=\"full\">Create Organisation</button><div ng-if=\"vm.organisations.length &gt; 0\" class=\"organisations\"><hr/><h5>Organsations</h5><button ng-repeat=\"organisation in vm.organisations\" ng-click=\"vm.select(organisation)\" class=\"full light\">{{ organisation.name }}</button></div></aside><article><div ng-if=\"!vm.edit &amp;&amp; vm.selected\" class=\"frame\"><p>public: {{ vm.selected.public }}</p><p>secret: {{ vm.selected.private }}</p><pre>{{ vm.selected | json }}</pre><button ng-click=\"vm.edit = true\">Edit</button><button ng-click=\"vm.delete()\" class=\"light\">Delete</button></div><form name=\"orgForm\" ng-if=\"!vm.new &amp;&amp; vm.edit\" ng-submit=\"vm.update()\" class=\"frame\"><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.name\"/><label>Organisation Logo</label><img src=\"{{ vm.organisation_logo }}\" ng-if=\"vm.organisation_logo\" style=\"width:100px;height:100px;\"/><div ng-if=\"!vm.organisation_logo\"><input type=\"file\" file-model=\"vm.selectedFile\" style=\"width:80%;\"/><a ng-click=\"vm.uploadFile()\" style=\"width:18%;height: 36px;padding: 8px 10px;float: right;\">Upload</a></div><button ng-disabled=\"orgForm.$invalid\">Update</button><button ng-click=\"vm.edit = false; vm.selected = false;\" class=\"light\">Cancel</button></form><form name=\"newOrgForm\" ng-if=\"vm.new &amp;&amp; vm.edit\" ng-submit=\"vm.create()\" class=\"frame\"><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.name\"/><label>Organisation Logo</label><img src=\"{{ vm.organisation_logo }}\" ng-if=\"vm.organisation_logo\" style=\"width:100px;height:100px;\"/><div ng-if=\"!vm.organisation_logo\"><input type=\"file\" file-model=\"vm.selectedFile\" style=\"width:80%;\"/><a ng-click=\"vm.uploadFile()\" style=\"width:18%;height: 36px;padding: 8px 10px;float: right;\">Upload</a></div><button ng-disabled=\"newOrgForm.$invalid\">Create</button><button ng-click=\"vm.edit = false; vm.new = false; vm.selected = false;\" class=\"light\">Cancel</button></form></article></div>");;return buf.join("");
 };
 },{"jade/runtime":23}],13:[function(require,module,exports){
 'use strict';
@@ -461,7 +492,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-exports['default'] = /*@ngInject*/["$auth", "$http", "$timeout", function ($auth, $http, $timeout) {
+exports['default'] = /*@ngInject*/["$auth", "$http", "$timeout", "fileUpload", function ($auth, $http, $timeout, fileUpload) {
   var _this = this;
 
   this.getOrgs = function () {
@@ -508,6 +539,14 @@ exports['default'] = /*@ngInject*/["$auth", "$http", "$timeout", function ($auth
     $timeout(function () {
       return _this.selected = item;
     }, 200);
+  };
+
+  this.uploadFile = function () {
+    var _this2 = this;
+
+    fileUpload.uploadFileToUrl(this.selectedFile, "/api/v1/image").then(function (res) {
+      return _this2.organisation_logo = res.url;
+    });
   };
 
   this.getOrgs();

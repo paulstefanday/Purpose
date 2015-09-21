@@ -17,12 +17,6 @@
 
   article
 
-    .frame 
-      form(action='/api/v1/image', method='post', enctype='multipart/form-data')
-        input(type='file', name='file', multiple='')
-        input(type='submit', value='Upload')
-
-
     //- Preview
     .frame(ng-if="!vm.edit && vm.selected")
       p public: {{ vm.selected.public }}
