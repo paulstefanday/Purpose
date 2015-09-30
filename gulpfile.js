@@ -13,6 +13,7 @@ var dist = './public';
 
 gulp.task('less', function() {
   return gulp.src([
+      './node_modules/ng-flat-datepicker/dist/ng-flat-datepicker.css',
       './client/styles/index.less',
       './client/directives/**/*.less',
       './client/views/**/*.less',

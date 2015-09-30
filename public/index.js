@@ -1,6 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
@@ -153,8 +151,6 @@ module.exports = exports['default'];
 
 },{}],2:[function(require,module,exports){
 (function (process){
-'use strict';
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
@@ -165,9 +161,7 @@ exports['default'] = /*@ngInject*/["$stateProvider", "$urlRouterProvider", "$aut
 
   $authProvider.loginUrl = '/api/v1/login';
   $authProvider.signupUrl = '/api/v1/signup';
-  $authProvider.loginRoute = '/';
-  $authProvider.signupRoute = '/';
-  $authProvider.tokenPrefix = 'profileApp';
+  $authProvider.tokenPrefix = 'pruposeApp';
   $authProvider.authHeader = 'Authorization';
   $authProvider.authToken = '';
 
@@ -198,25 +192,33 @@ exports['default'] = /*@ngInject*/["$stateProvider", "$urlRouterProvider", "$aut
         return q.promise;
       }]
     }
-  }).state('admin.dashboard', {
-    url: "/dashboard",
+  }).state('admin.jobs', {
+    url: "/jobs",
     controllerAs: 'vm',
-    controller: require('./views/dashboard.js'),
-    template: require('./views/dashboard.jade')
-  }).state('admin.organisation', {
-    url: "/organisation",
+    controller: require('./views/jobs.js'),
+    template: require('./views/jobs.jade')
+  }).state('admin.new', {
+    url: "/new",
     controllerAs: 'vm',
-    controller: require('./views/organisation.js'),
-    template: require('./views/organisation.jade')
+    controller: require('./views/new.js'),
+    template: require('./views/new.jade')
+  }).state('login', {
+    url: "/login",
+    controllerAs: 'vm',
+    controller: require('./views/login.js'),
+    template: require('./views/login.jade')
+  }).state('signup', {
+    url: "/signup",
+    controllerAs: 'vm',
+    controller: require('./views/signup.js'),
+    template: require('./views/signup.jade')
   });
 }];
 
 module.exports = exports['default'];
 
 }).call(this,require("1YiZ5S"))
-},{"./views/dashboard.jade":8,"./views/dashboard.js":9,"./views/home.jade":10,"./views/home.js":11,"./views/organisation.jade":12,"./views/organisation.js":13,"1YiZ5S":22}],3:[function(require,module,exports){
-'use strict';
-
+},{"./views/home.jade":8,"./views/home.js":9,"./views/jobs.jade":10,"./views/jobs.js":11,"./views/login.jade":12,"./views/login.js":13,"./views/new.jade":14,"./views/new.js":15,"./views/signup.jade":16,"./views/signup.js":17,"1YiZ5S":26}],3:[function(require,module,exports){
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
@@ -277,7 +279,7 @@ exports['default'] = ['customMap', CustomMap];
 //https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/ngMap.map.html
 module.exports = exports['default'];
 
-},{"lodash":25}],4:[function(require,module,exports){
+},{"lodash":29}],4:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -285,11 +287,9 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div id=\"navigation\" ng-class=\"{ active : vm.showNav }\"><button ng-click=\"vm.showNav = !vm.showNav\" class=\"menu-link\"><i ng-hide=\"vm.showNav\" class=\"ion-navicon\"></i><i ng-show=\"vm.showNav\" class=\"ion-ios-close-empty\"></i></button><ul id=\"menu\"><li ng-hide=\"vm.loggedIn()\"><a href=\"#/\" ng-click=\"vm.hide()\">Home</a></li><li ng-hide=\"vm.loggedIn()\"><a href=\"\" ng-click=\"vm.login()\">Login</a></li><li ng-show=\"vm.loggedIn()\"><a href=\"#/dashboard\" ng-click=\"vm.hide()\">Profiles</a></li><li ng-show=\"vm.loggedIn()\"><a href=\"#/organisation\" ng-click=\"vm.hide()\">Organisation</a></li><li ng-show=\"vm.loggedIn()\"><a href=\"\" ng-click=\"vm.logout()\">Logout</a></li></ul></div>");;return buf.join("");
+buf.push("<div id=\"navigation\" ng-class=\"{ active : vm.showNav }\"><button ng-click=\"vm.showNav = !vm.showNav\" class=\"menu-link\"><i ng-hide=\"vm.showNav\" class=\"ion-navicon\"></i><i ng-show=\"vm.showNav\" class=\"ion-ios-close-empty\"></i></button><ul id=\"menu\"><li><a href=\"#/\" ng-click=\"vm.hide()\">Find Job</a></li><li ng-hide=\"vm.loggedIn()\"><a href=\"#/login\" ng-click=\"vm.hide()\">Login</a></li><li ng-hide=\"vm.loggedIn()\"><a href=\"#/signup\" ng-click=\"vm.hide()\">Signup</a></li><li ng-show=\"vm.loggedIn()\"><a href=\"#/jobs\" ng-click=\"vm.hide()\">My Jobs</a></li><li ng-show=\"vm.loggedIn()\"><a href=\"#/new\" ng-click=\"vm.hide()\">New Job</a></li><li ng-show=\"vm.loggedIn()\"><a href=\"\" ng-click=\"vm.logout()\">Logout</a></li></ul></div>");;return buf.join("");
 };
-},{"jade/runtime":23}],5:[function(require,module,exports){
-'use strict';
-
+},{"jade/runtime":27}],5:[function(require,module,exports){
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
@@ -337,8 +337,6 @@ exports['default'] = ['nav', Nav];
 module.exports = exports['default'];
 
 },{"./nav.jade":4}],6:[function(require,module,exports){
-"use strict";
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -348,8 +346,6 @@ exports["default"] = /*@ngInject*/["$rootScope", "$auth", function ($rootScope, 
 module.exports = exports["default"];
 
 },{}],7:[function(require,module,exports){
-'use strict';
-
 var _require$directive, _require;
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
@@ -366,9 +362,10 @@ require('sweetalert');
 require('angular-sweetalert');
 require('ladda-angular');
 require('ngmap');
+require('ng-flat-datepicker');
 
 // App
-angular.module(name, ['satellizer', 'btford.socket-io', 'ui.router', 'ngAnimate', 'oitozero.ngSweetAlert', 'ladda', 'ngMap']).config(require('./config')).run(require('./global'));
+angular.module(name, ['satellizer', 'btford.socket-io', 'ui.router', 'ngAnimate', 'oitozero.ngSweetAlert', 'ladda', 'ngMap', 'ngFlatDatepicker']).config(require('./config')).run(require('./global')).constant('Categories', ['Policy & research', 'Education', 'Social Work', 'Administration', 'Project Management', 'PR', 'Campaigning', 'Fundraising', 'Legal', 'Human Resoruces', 'Finance', 'Technoloy', 'Design', 'International Development', 'Business Development']).constant('Issues', ['Social Work', 'Education', 'Environment', 'International Aid', 'Mental Health', 'Diversity', 'Drug & alcohol']);
 
 // App Parts
 (_require$directive = (_require = require('./bootstrap')(name)).directive.apply(_require, _toConsumableArray(require('./directives/map')))).directive.apply(_require$directive, _toConsumableArray(require('./directives/nav'))).factory('socket', /*@ngInject*/["socketFactory", function (socketFactory) {
@@ -406,7 +403,7 @@ angular.module(name, ['satellizer', 'btford.socket-io', 'ui.router', 'ngAnimate'
 	};
 }]);
 
-},{"./bootstrap":1,"./config":2,"./directives/map":3,"./directives/nav":5,"./global":6,"angular":20,"angular-animate":15,"angular-socket-io":16,"angular-sweetalert":17,"angular-ui-router":18,"ladda-angular":24,"ngmap":26,"satellizer":27,"socket.io-client":28,"sweetalert":78}],8:[function(require,module,exports){
+},{"./bootstrap":1,"./config":2,"./directives/map":3,"./directives/nav":5,"./global":6,"angular":24,"angular-animate":19,"angular-socket-io":20,"angular-sweetalert":21,"angular-ui-router":22,"ladda-angular":28,"ng-flat-datepicker":30,"ngmap":31,"satellizer":32,"socket.io-client":33,"sweetalert":81}],8:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -414,31 +411,42 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div class=\"container\"><header><h1>Dashboard</h1></header><aside><h5>Select an organisation</h5><select ng-options=\"org.id as org.name for org in vm.organisations\" ng-change=\"vm.getProfiles()\" ng-model=\"vm.organisation\">{{ organisation.name }}</select><div ng-if=\"vm.organisation &amp;&amp; vm.profiles.length &gt; 0\" class=\"profiles\"><hr/><h5>Profiles</h5><button ng-repeat=\"profile in vm.profiles\">{{ profile.email }}</button></div></aside><article><pre>{{ selected | json }}</pre></article></div>");;return buf.join("");
+buf.push("<section class=\"section-header\"><div class=\"container\"><div class=\"logo\"><i class=\"ion-ios-people\"></i><h1>Purpose</h1><p>Select a category below to find a career with a purpose</p></div><form class=\"home-category\"><select ng-model=\"vm.type\" style=\"max-width:400px;\" ng-change=\"vm.changeFeed()\"><option value=\"\">Select a category here...</option><option value=\"{{ category }}\" ng-repeat=\"category in vm.categories\">{{ category }}</option></select></form></div></section><section class=\"section-body clearfix\"><div class=\"container\"><a href=\"#/job/{{ job.id }}\" ng-repeat=\"job in vm.jobs\" style=\"position:relative;\" class=\"frame\"><div style=\"background-image: url('{{ job.organisation_logo }}')\" class=\"image\"></div><div class=\"padding\"><h3 class=\"dark\">{{ job.role }}</h3><p>{{ job.type }} at {{ job.organisation_name }} in {{ job.state }}</p><p style=\"position:absolute;bottom:4px;opacity:0.4;font-size:12px;\">Applications close {{ job.finish | date }}</p></div></a></div></section>");;return buf.join("");
 };
-},{"jade/runtime":23}],9:[function(require,module,exports){
-'use strict';
-
+},{"jade/runtime":27}],9:[function(require,module,exports){
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-exports['default'] = /*@ngInject*/["$auth", "$http", function ($auth, $http) {
+exports['default'] = /*@ngInject*/["$auth", "$state", "$http", "Categories", function ($auth, $state, $http, Categories) {
   var _this = this;
 
-  this.getOrgs = function () {
-    $http.get('/api/v1/job/').then(function (res) {
-      return _this.organisations = res.data;
+  this.authenticate = function (provider) {
+    $auth.authenticate(provider).then(function (res) {
+      return $state.go('admin.jobs');
     });
   };
 
-  this.getProfiles = function () {
-    $http.get('/api/v1/job/' + _this.organisation + '/profiles').then(function (res) {
-      return console.log(res);
+  this.categories = Categories;
+
+  this.isUser = function () {
+    return $auth.isAuthenticated();
+  };
+
+  this.changeFeed = function () {
+    var data = _this.type ? { query: { category: _this.type } } : {};
+    $http.post('/api/v1/search', data).then(function (res) {
+      return _this.jobs = res.data;
     });
   };
 
-  this.getOrgs();
+  this.getJobs = function () {
+    return $http.get('/api/v1/search').then(function (res) {
+      return _this.jobs = res.data;
+    });
+  };
+
+  this.getJobs();
 }];
 
 module.exports = exports['default'];
@@ -451,26 +459,59 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div id=\"home\" class=\"box\"><div class=\"logo\"><i class=\"ion-ios-people\"></i><h1>Profiles</h1><p>Manage profiles accross all your applications</p></div><br/><button ng-if=\"!vm.isUser()\" ng-click=\"vm.authenticate('facebook')\" ladda-button=\"vm.laddaLoading\" data-style=\"expand-right\">Get started via Facebook</button><a ng-if=\"vm.isUser()\" href=\"/#/dashboard\" class=\"button\">View Dashboard</a></div>");;return buf.join("");
+buf.push("<div class=\"container jobs\"><header><h1 ng-if=\"!vm.selected\">Manage jobs</h1><h1 ng-if=\"vm.selected\">Editing {{ vm.selected.name }}</h1></header><div ng-if=\"!vm.selected\" class=\"jobs-feed\"><div ng-repeat=\"job in vm.jobs\" class=\"third\"><div class=\"frame\"><h2 class=\"dark\">{{ job.role }}</h2><p>This job is for {{ job.type }} and application entry finished at {{ job.finish | date }}.</p><button ng-click=\"vm.select(job)\">Edit</button><button ng-click=\"vm.delete(job)\" class=\"light\">Delete</button></div></div><div class=\"third\"><div class=\"frame new\"><h2 class=\"dark\">Create new job ad?</h2><a href=\"/#/new\" class=\"button\">Get started!</a></div></div></div><form name=\"jobForm\" ng-submit=\"vm.update()\" ng-if=\"vm.selected\"><aside><h5>Basic info</h5><div class=\"frame job-form\"><label>Job role</label><input type=\"text\" ng-model=\"vm.selected.role\"/><label>Job type</label><select ng-model=\"vm.selected.type\"><option value=\"Part time\">Part time</option><option value=\"Full time\">Full time</option><option value=\"1 day a week\">1 day a week</option><option value=\"2 days a week\">2 days a week</option><option value=\"3 days a week\">3 days a week</option><option value=\"4 days a week\">4 days a week</option></select><label>Job category</label><select ng-model=\"vm.selected.category\"><option value=\"{{ category }}\" ng-repeat=\"category in vm.categories\">{{ category }}</option></select><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.organisation_name\"/><label>Organisation Logo</label><div ng-if=\"vm.selected.organisation_logo\" class=\"one\"><img src=\"{{ vm.selected.organisation_logo }}\"/><a ng-click=\"vm.resetFile()\">Delete</a></div><div ng-if=\"!vm.selected.organisation_logo\" class=\"one\"><input type=\"file\" file-model=\"vm.selectedFile\" style=\"width:80%;\"/><a ng-click=\"vm.uploadFile()\">Upload</a></div><label>Application start date</label><input type=\"text\" ng-model=\"vm.selected.start\" ng-flat-datepicker=\"ng-flat-datepicker\"/><label>Application end date</label><input type=\"text\" ng-model=\"vm.selected.finish\" ng-flat-datepicker=\"ng-flat-datepicker\"/><label>Salery amount</label><input type=\"number\" ng-model=\"vm.selected.salery_avg\"/><label>Country</label><input type=\"text\" ng-model=\"vm.selected.country\"/><label>State</label><input type=\"text\" ng-model=\"vm.selected.state\"/></div></aside><article><h5>Descriptions</h5><div class=\"frame\"><label>Description</label><textarea ng-model=\"vm.selected.description\" class=\"job-description\"></textarea><label>Instructions on how to apply</label><textarea ng-model=\"vm.selected.apply_instructions\"></textarea></div></article><button ng-disabled=\"jobForm.$invalid\">Update</button><button ng-click=\"vm.selected = false;\" class=\"light\">Cancel</button><br/><br/><br/><br/></form></div>");;return buf.join("");
 };
-},{"jade/runtime":23}],11:[function(require,module,exports){
-'use strict';
-
+},{"jade/runtime":27}],11:[function(require,module,exports){
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-exports['default'] = /*@ngInject*/["$auth", "$state", function ($auth, $state) {
+exports['default'] = /*@ngInject*/["$auth", "$http", "$timeout", "fileUpload", "Categories", function ($auth, $http, $timeout, fileUpload, Categories) {
+  var _this = this;
 
-  this.authenticate = function (provider) {
-    $auth.authenticate(provider).then(function (res) {
-      return $state.go('admin.dashboard');
+  this.categories = Categories;
+
+  this.getJobs = function () {
+    return $http.get('/api/v1/job').then(function (res) {
+      return _this.jobs = res.data;
     });
   };
 
-  this.isUser = function () {
-    return $auth.isAuthenticated();
+  this.update = function () {
+    return $http.put('/api/v1/job/' + _this.selected.id, _this.selected).then(function (res) {
+      return _this.selected = false;
+    });
   };
+
+  this['delete'] = function (item) {
+    return $http['delete']('/api/v1/job/' + item.id).then(function (res) {
+      _this.jobs = _this.jobs.filter(function (record) {
+        return record.id !== item.id;
+      });
+    });
+  };
+
+  this.select = function (item) {
+    _this.selected = false;
+    $timeout(function () {
+      return _this.selected = item;
+    }, 200);
+  };
+
+  this.uploadFile = function () {
+    var _this2 = this;
+
+    fileUpload.uploadFileToUrl(this.selectedFile, "/api/v1/image").then(function (res) {
+      return _this2.selected.organisation_logo = res.url;
+    });
+  };
+
+  this.resetFile = function () {
+    _this.selected.organisation_logo = '';
+    _this.seletedFile = false;
+  };
+
+  this.getJobs();
 }];
 
 module.exports = exports['default'];
@@ -483,80 +524,102 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div class=\"container\"><header><h1 ng-if=\"!vm.edit\">Manage Organisations</h1><h1 ng-if=\"!vm.new &amp;&amp; vm.edit\">Edit: {{ vm.selected.name }}</h1><h1 ng-if=\"vm.new &amp;&amp; vm.edit\">Create Organisation</h1></header><aside><button ng-click=\"vm.startNew()\" class=\"full\">Create Organisation</button><div ng-if=\"vm.organisations.length &gt; 0\" class=\"organisations\"><hr/><h5>Organsations</h5><button ng-repeat=\"organisation in vm.organisations\" ng-click=\"vm.select(organisation)\" class=\"full light\">{{ organisation.name }}</button></div></aside><article><div ng-if=\"!vm.edit &amp;&amp; vm.selected\" class=\"frame\"><p>public: {{ vm.selected.public }}</p><p>secret: {{ vm.selected.private }}</p><pre>{{ vm.selected | json }}</pre><button ng-click=\"vm.edit = true\">Edit</button><button ng-click=\"vm.delete()\" class=\"light\">Delete</button></div><form name=\"orgForm\" ng-if=\"!vm.new &amp;&amp; vm.edit\" ng-submit=\"vm.update()\" class=\"frame\"><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.name\"/><label>Organisation Logo</label><img src=\"{{ vm.organisation_logo }}\" ng-if=\"vm.organisation_logo\" style=\"width:100px;height:100px;\"/><div ng-if=\"!vm.organisation_logo\"><input type=\"file\" file-model=\"vm.selectedFile\" style=\"width:80%;\"/><a ng-click=\"vm.uploadFile()\" style=\"width:18%;height: 36px;padding: 8px 10px;float: right;\">Upload</a></div><button ng-disabled=\"orgForm.$invalid\">Update</button><button ng-click=\"vm.edit = false; vm.selected = false;\" class=\"light\">Cancel</button></form><form name=\"newOrgForm\" ng-if=\"vm.new &amp;&amp; vm.edit\" ng-submit=\"vm.create()\" class=\"frame\"><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.name\"/><label>Organisation Logo</label><img src=\"{{ vm.organisation_logo }}\" ng-if=\"vm.organisation_logo\" style=\"width:100px;height:100px;\"/><div ng-if=\"!vm.organisation_logo\"><input type=\"file\" file-model=\"vm.selectedFile\" style=\"width:80%;\"/><a ng-click=\"vm.uploadFile()\" style=\"width:18%;height: 36px;padding: 8px 10px;float: right;\">Upload</a></div><button ng-disabled=\"newOrgForm.$invalid\">Create</button><button ng-click=\"vm.edit = false; vm.new = false; vm.selected = false;\" class=\"light\">Cancel</button></form></article></div>");;return buf.join("");
+buf.push("<section class=\"login-section\"><div class=\"container\"><h1>Login</h1><button ng-if=\"!vm.isUser()\" ng-click=\"vm.authenticate('facebook')\" ladda-button=\"vm.laddaLoading\" data-style=\"expand-right\" class=\"full\">Via Facebook</button><h5>or</h5><form name=\"loginForm\"><input type=\"email\" ng-model=\"vm.user.email\" placeholder=\"Email\" required=\"required\"/><input type=\"password\" ng-model=\"vm.user.password\" placeholder=\"Password\" required=\"required\"/><button ng-disable=\"loginForm.$invalid\" ng-click=\"vm.login()\" class=\"full\">Login</button></form></div></section>");;return buf.join("");
 };
-},{"jade/runtime":23}],13:[function(require,module,exports){
-'use strict';
-
+},{"jade/runtime":27}],13:[function(require,module,exports){
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-exports['default'] = /*@ngInject*/["$auth", "$http", "$timeout", "fileUpload", function ($auth, $http, $timeout, fileUpload) {
+exports['default'] = /*@ngInject*/["$auth", "$state", "$http", function ($auth, $state, $http) {
   var _this = this;
 
-  this.getOrgs = function () {
-    return $http.get('/api/v1/job').then(function (res) {
-      return _this.organisations = res.data;
+  this.go = function () {
+    return $state.go('admin.jobs');
+  };
+
+  this.authenticate = function (provider) {
+    $auth.authenticate(provider).then(function (res) {
+      return _this.go();
     });
   };
 
-  this.startNew = function () {
-    _this.selected = {};
-    _this.edit = true;
-    _this['new'] = true;
-  };
-
-  this.create = function () {
-    return $http.post('/api/v1/job', _this.selected).then(function (res) {
-      _this.organisations.push(res.data);
-      _this.selected = res.data;
-      _this['new'] = false;
-      _this.edit = false;
+  this.login = function () {
+    return $auth.login(_this.user).then(function (res) {
+      return _this.go();
     });
   };
-
-  this.update = function () {
-    return $http.put('/api/v1/job/' + _this.selected.id, _this.selected).then(function (res) {
-      return _this.edit = false;
-    });
-  };
-
-  this['delete'] = function () {
-    return $http['delete']('/api/v1/job/' + _this.selected.id).then(function (res) {
-      _this.selected = false;
-      _this.edit = false;
-      _this.organisations = _this.organisations.filter(function (org) {
-        return org.id !== res.data.id;
-      });
-    });
-  };
-
-  this.select = function (item) {
-    _this.selected = false;
-    _this.edit = false;
-    _this['new'] = false;
-    $timeout(function () {
-      return _this.selected = item;
-    }, 200);
-  };
-
-  this.uploadFile = function () {
-    var _this2 = this;
-
-    fileUpload.uploadFileToUrl(this.selectedFile, "/api/v1/image").then(function (res) {
-      return _this2.organisation_logo = res.url;
-    });
-  };
-
-  this.getOrgs();
 }];
 
 module.exports = exports['default'];
 
 },{}],14:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+
+buf.push("<div class=\"container\"><header><h1>New Job</h1></header><section><form name=\"newOrgForm\" ng-submit=\"vm.create()\"><aside><h5>Basic info</h5><div class=\"frame job-form\"><label>Job role</label><input type=\"text\" ng-model=\"vm.selected.role\"/><label>Job type</label><select ng-model=\"vm.selected.type\"><option value=\"Part time\">Part time</option><option value=\"Full time\">Full time</option><option value=\"1 day a week\">1 day a week</option><option value=\"2 days a week\">2 days a week</option><option value=\"3 days a week\">3 days a week</option><option value=\"4 days a week\">4 days a week</option></select><label>Job category</label><select ng-model=\"vm.selected.category\"><option value=\"{{ category }}\" ng-repeat=\"category in vm.categories\">{{ category }}</option></select><label>Organisation Name</label><input type=\"text\" ng-model=\"vm.selected.organisation_name\"/><label>Organisation Logo</label><div ng-if=\"vm.selected.organisation_logo\" class=\"one\"><img src=\"{{ vm.selected.organisation_logo }}\"/><a ng-click=\"vm.resetFile()\">Delete</a></div><div ng-if=\"!vm.selected.organisation_logo\" class=\"one\"><input type=\"file\" file-model=\"vm.selectedFile\" style=\"width:80%;\"/><a ng-click=\"vm.uploadFile()\">Upload</a></div><label>Application start date</label><input type=\"text\" ng-model=\"vm.selected.start\" ng-flat-datepicker=\"ng-flat-datepicker\"/><label>Application end date</label><input type=\"text\" ng-model=\"vm.selected.finish\" ng-flat-datepicker=\"ng-flat-datepicker\"/><label>Salery amount</label><input type=\"number\" ng-model=\"vm.selected.salery_avg\"/><label>Country</label><input type=\"text\" ng-model=\"vm.selected.country\"/><label>State</label><input type=\"text\" ng-model=\"vm.selected.state\"/></div></aside><article><h5>Descriptions</h5><div class=\"frame\"><label>Description</label><textarea ng-model=\"vm.selected.description\" class=\"job-description\"></textarea><label>Instructions on how to apply</label><textarea ng-model=\"vm.selected.apply_instructions\"></textarea></div></article><button ng-disabled=\"newOrgForm.$invalid\">Create</button></form></section></div>");;return buf.join("");
+};
+},{"jade/runtime":27}],15:[function(require,module,exports){
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+exports['default'] = /*@ngInject*/["$auth", "$http", "$timeout", "fileUpload", "$state", function ($auth, $http, $timeout, fileUpload, $state) {
+  var _this = this;
+
+  this.create = function () {
+    return $http.post('/api/v1/job', _this.selected).then(function (res) {
+      $state.go('admin.jobs');
+    });
+  };
+}];
+
+module.exports = exports['default'];
+
+},{}],16:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+
+buf.push("<section class=\"login-section\"><div class=\"container\"><h1>Signup</h1><button ng-if=\"!vm.isUser()\" ng-click=\"vm.authenticate('facebook')\" ladda-button=\"vm.laddaLoading\" data-style=\"expand-right\" class=\"full\">Via Facebook</button><h5>or</h5><form name=\"signupForm\"><input type=\"email\" ng-model=\"vm.user.email\" placeholder=\"Email\" required=\"required\"/><input type=\"password\" ng-model=\"vm.user.password\" placeholder=\"Password\" required=\"required\"/><button ng-disable=\"signupForm.$invalid\" ng-click=\"vm.signup()\" class=\"full\">Signup</button></form></div></section>");;return buf.join("");
+};
+},{"jade/runtime":27}],17:[function(require,module,exports){
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+exports['default'] = /*@ngInject*/["$auth", "$state", "$http", function ($auth, $state, $http) {
+  var _this = this;
+
+  this.go = function () {
+    return $state.go('admin.jobs');
+  };
+
+  this.authenticate = function (provider) {
+    $auth.authenticate(provider).then(function (res) {
+      return _this.go();
+    });
+  };
+
+  this.signup = function () {
+    return $auth.signup(_this.user).then(function (res) {
+      return _this.go();
+    });
+  };
+}];
+
+module.exports = exports['default'];
+
+},{}],18:[function(require,module,exports){
 /**
- * @license AngularJS v1.4.5
+ * @license AngularJS v1.4.6
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -598,7 +661,7 @@ var CSS_PREFIX = '', TRANSITION_PROP, TRANSITIONEND_EVENT, ANIMATION_PROP, ANIMA
 // Also, the only modern browser that uses vendor prefixes for transitions/keyframes is webkit
 // therefore there is no reason to test anymore for other vendor prefixes:
 // http://caniuse.com/#search=transition
-if (window.ontransitionend === undefined && window.onwebkittransitionend !== undefined) {
+if (isUndefined(window.ontransitionend) && isDefined(window.onwebkittransitionend)) {
   CSS_PREFIX = '-webkit-';
   TRANSITION_PROP = 'WebkitTransition';
   TRANSITIONEND_EVENT = 'webkitTransitionEnd transitionend';
@@ -607,7 +670,7 @@ if (window.ontransitionend === undefined && window.onwebkittransitionend !== und
   TRANSITIONEND_EVENT = 'transitionend';
 }
 
-if (window.onanimationend === undefined && window.onwebkitanimationend !== undefined) {
+if (isUndefined(window.onanimationend) && isDefined(window.onwebkitanimationend)) {
   CSS_PREFIX = '-webkit-';
   ANIMATION_PROP = 'WebkitAnimation';
   ANIMATIONEND_EVENT = 'webkitAnimationEnd animationend';
@@ -4418,11 +4481,11 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
-},{}],15:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":14}],16:[function(require,module,exports){
+},{"./angular-animate":18}],20:[function(require,module,exports){
 /*
  * @license
  * angular-socket-io v0.7.0
@@ -4527,7 +4590,7 @@ angular.module('btford.socket-io', []).
     }];
   });
 
-},{}],17:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
 @fileOverview
 
@@ -4583,7 +4646,7 @@ angular.module('oitozero.ngSweetAlert', [])
 	return self;
 }]);
 
-},{}],18:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -8954,9 +9017,9 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],19:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /**
- * @license AngularJS v1.4.5
+ * @license AngularJS v1.4.6
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -9014,7 +9077,7 @@ function minErr(module, ErrorConstructor) {
       return match;
     });
 
-    message += '\nhttp://errors.angularjs.org/1.4.5/' +
+    message += '\nhttp://errors.angularjs.org/1.4.6/' +
       (module ? module + '/' : '') + code;
 
     for (i = SKIP_INDEXES, paramPrefix = '?'; i < templateArgs.length; i++, paramPrefix = '&') {
@@ -9851,6 +9914,8 @@ function copy(source, destination, stackSource, stackDest) {
       } else if (isRegExp(source)) {
         destination = new RegExp(source.source, source.toString().match(/[^\/]*$/)[0]);
         destination.lastIndex = source.lastIndex;
+      } else if (isFunction(source.cloneNode)) {
+          destination = source.cloneNode(true);
       } else {
         var emptyObject = Object.create(getPrototypeOf(source));
         return copy(source, emptyObject, stackSource, stackDest);
@@ -10001,7 +10066,7 @@ function equals(o1, o2) {
         for (key in o2) {
           if (!(key in keySet) &&
               key.charAt(0) !== '$' &&
-              o2[key] !== undefined &&
+              isDefined(o2[key]) &&
               !isFunction(o2[key])) return false;
         }
         return true;
@@ -10697,10 +10762,9 @@ function bindJQuery() {
 
   // bind to jQuery if present;
   var jqName = jq();
-  jQuery = window.jQuery; // use default jQuery.
-  if (isDefined(jqName)) { // `ngJq` present
-    jQuery = jqName === null ? undefined : window[jqName]; // if empty; use jqLite. if not empty, use jQuery specified by `ngJq`.
-  }
+  jQuery = isUndefined(jqName) ? window.jQuery :   // use jQuery (if present)
+           !jqName             ? undefined     :   // use jqLite
+                                 window[jqName];   // use jQuery specified by `ngJq`
 
   // Use jQuery if it exists with proper functionality, otherwise default to us.
   // Angular 1.2+ requires jQuery 1.7+ for on()/off() support.
@@ -10805,22 +10869,24 @@ function getter(obj, path, bindFnToScope) {
 /**
  * Return the DOM siblings between the first and last node in the given array.
  * @param {Array} array like object
- * @returns {jqLite} jqLite collection containing the nodes
+ * @returns {Array} the inputted object or a jqLite collection containing the nodes
  */
 function getBlockNodes(nodes) {
-  // TODO(perf): just check if all items in `nodes` are siblings and if they are return the original
-  //             collection, otherwise update the original collection.
+  // TODO(perf): update `nodes` instead of creating a new object?
   var node = nodes[0];
   var endNode = nodes[nodes.length - 1];
-  var blockNodes = [node];
+  var blockNodes;
 
-  do {
-    node = node.nextSibling;
-    if (!node) break;
-    blockNodes.push(node);
-  } while (node !== endNode);
+  for (var i = 1; node !== endNode && (node = node.nextSibling); i++) {
+    if (blockNodes || nodes[i] !== node) {
+      if (!blockNodes) {
+        blockNodes = jqLite(slice.call(nodes, 0, i));
+      }
+      blockNodes.push(node);
+    }
+  }
 
-  return jqLite(blockNodes);
+  return blockNodes || nodes;
 }
 
 
@@ -11204,7 +11270,7 @@ function serializeObject(obj) {
     val = toJsonReplacer(key, val);
     if (isObject(val)) {
 
-      if (seen.indexOf(val) >= 0) return '<<already seen>>';
+      if (seen.indexOf(val) >= 0) return '...';
 
       seen.push(val);
     }
@@ -11215,7 +11281,7 @@ function serializeObject(obj) {
 function toDebugString(obj) {
   if (typeof obj === 'function') {
     return obj.toString().replace(/ \{[\s\S]*$/, '');
-  } else if (typeof obj === 'undefined') {
+  } else if (isUndefined(obj)) {
     return 'undefined';
   } else if (typeof obj !== 'string') {
     return serializeObject(obj);
@@ -11321,8 +11387,9 @@ function toDebugString(obj) {
  * @name angular.version
  * @module ng
  * @description
- * An object that contains information about the current AngularJS version. This object has the
- * following properties:
+ * An object that contains information about the current AngularJS version.
+ *
+ * This object has the following properties:
  *
  * - `full` – `{string}` – Full version string, such as "0.9.18".
  * - `major` – `{number}` – Major version number, such as "0".
@@ -11331,11 +11398,11 @@ function toDebugString(obj) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
-  full: '1.4.5',    // all of these placeholder strings will be replaced by grunt's
+  full: '1.4.6',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 4,
-  dot: 5,
-  codeName: 'permanent-internship'
+  dot: 6,
+  codeName: 'multiplicative-elevation'
 };
 
 
@@ -11925,7 +11992,7 @@ function jqLiteInheritedData(element, name, value) {
 
   while (element) {
     for (var i = 0, ii = names.length; i < ii; i++) {
-      if ((value = jqLite.data(element, names[i])) !== undefined) return value;
+      if (isDefined(value = jqLite.data(element, names[i]))) return value;
     }
 
     // If dealing with a document fragment node with a host element, and no parent, use the host
@@ -12031,9 +12098,8 @@ function getBooleanAttrName(element, name) {
   return booleanAttr && BOOLEAN_ELEMENTS[nodeName_(element)] && booleanAttr;
 }
 
-function getAliasedAttrName(element, name) {
-  var nodeName = element.nodeName;
-  return (nodeName === 'INPUT' || nodeName === 'TEXTAREA') && ALIASED_ATTR[name];
+function getAliasedAttrName(name) {
+  return ALIASED_ATTR[name];
 }
 
 forEach({
@@ -12170,7 +12236,7 @@ forEach({
     // in a way that survives minification.
     // jqLiteEmpty takes no arguments but is a setter.
     if (fn !== jqLiteEmpty &&
-        (((fn.length == 2 && (fn !== jqLiteHasClass && fn !== jqLiteController)) ? arg1 : arg2) === undefined)) {
+        (isUndefined((fn.length == 2 && (fn !== jqLiteHasClass && fn !== jqLiteController)) ? arg1 : arg2))) {
       if (isObject(arg1)) {
 
         // we are a write, but the object properties are the key/values
@@ -12191,7 +12257,7 @@ forEach({
         // TODO: do we still need this?
         var value = fn.$dv;
         // Only if we have $dv do we iterate over all, otherwise it is just the first element.
-        var jj = (value === undefined) ? Math.min(nodeCount, 1) : nodeCount;
+        var jj = (isUndefined(value)) ? Math.min(nodeCount, 1) : nodeCount;
         for (var j = 0; j < jj; j++) {
           var nodeValue = fn(this[j], arg1, arg2);
           value = value ? value + nodeValue : nodeValue;
@@ -13830,61 +13896,66 @@ var $$CoreAnimateQueueProvider = function() {
       }
     };
 
-    function addRemoveClassesPostDigest(element, add, remove) {
-      var classVal, data = postDigestQueue.get(element);
 
-      if (!data) {
-        postDigestQueue.put(element, data = {});
-        postDigestElements.push(element);
-      }
-
-      var updateData = function(classes, value) {
-        var changed = false;
-        if (classes) {
-          classes = isString(classes) ? classes.split(' ') :
-                    isArray(classes) ? classes : [];
-          forEach(classes, function(className) {
-            if (className) {
-              changed = true;
-              data[className] = value;
-            }
-          });
-        }
-        return changed;
-      };
-
-      var classesAdded = updateData(add, true);
-      var classesRemoved = updateData(remove, false);
-      if ((!classesAdded && !classesRemoved) || postDigestElements.length > 1) return;
-
-      $rootScope.$$postDigest(function() {
-        forEach(postDigestElements, function(element) {
-          var data = postDigestQueue.get(element);
-          if (data) {
-            var existing = splitClasses(element.attr('class'));
-            var toAdd = '';
-            var toRemove = '';
-            forEach(data, function(status, className) {
-              var hasClass = !!existing[className];
-              if (status !== hasClass) {
-                if (status) {
-                  toAdd += (toAdd.length ? ' ' : '') + className;
-                } else {
-                  toRemove += (toRemove.length ? ' ' : '') + className;
-                }
-              }
-            });
-
-            forEach(element, function(elm) {
-              toAdd    && jqLiteAddClass(elm, toAdd);
-              toRemove && jqLiteRemoveClass(elm, toRemove);
-            });
-            postDigestQueue.remove(element);
+    function updateData(data, classes, value) {
+      var changed = false;
+      if (classes) {
+        classes = isString(classes) ? classes.split(' ') :
+                  isArray(classes) ? classes : [];
+        forEach(classes, function(className) {
+          if (className) {
+            changed = true;
+            data[className] = value;
           }
         });
+      }
+      return changed;
+    }
 
-        postDigestElements.length = 0;
+    function handleCSSClassChanges() {
+      forEach(postDigestElements, function(element) {
+        var data = postDigestQueue.get(element);
+        if (data) {
+          var existing = splitClasses(element.attr('class'));
+          var toAdd = '';
+          var toRemove = '';
+          forEach(data, function(status, className) {
+            var hasClass = !!existing[className];
+            if (status !== hasClass) {
+              if (status) {
+                toAdd += (toAdd.length ? ' ' : '') + className;
+              } else {
+                toRemove += (toRemove.length ? ' ' : '') + className;
+              }
+            }
+          });
+
+          forEach(element, function(elm) {
+            toAdd    && jqLiteAddClass(elm, toAdd);
+            toRemove && jqLiteRemoveClass(elm, toRemove);
+          });
+          postDigestQueue.remove(element);
+        }
       });
+      postDigestElements.length = 0;
+    }
+
+
+    function addRemoveClassesPostDigest(element, add, remove) {
+      var data = postDigestQueue.get(element) || {};
+
+      var classesAdded = updateData(data, add, true);
+      var classesRemoved = updateData(data, remove, false);
+
+      if (classesAdded || classesRemoved) {
+
+        postDigestQueue.put(element, data);
+        postDigestElements.push(element);
+
+        if (postDigestElements.length === 1) {
+          $rootScope.$$postDigest(handleCSSClassChanges);
+        }
+      }
     }
   }];
 };
@@ -14485,7 +14556,7 @@ function Browser(window, document, $log, $sniffer) {
   var cachedState, lastHistoryState,
       lastBrowserUrl = location.href,
       baseElement = document.find('base'),
-      reloadLocation = null;
+      pendingLocation = null;
 
   cacheState();
   lastHistoryState = cachedState;
@@ -14545,8 +14616,8 @@ function Browser(window, document, $log, $sniffer) {
         // Do the assignment again so that those two variables are referentially identical.
         lastHistoryState = cachedState;
       } else {
-        if (!sameBase || reloadLocation) {
-          reloadLocation = url;
+        if (!sameBase || pendingLocation) {
+          pendingLocation = url;
         }
         if (replace) {
           location.replace(url);
@@ -14555,14 +14626,18 @@ function Browser(window, document, $log, $sniffer) {
         } else {
           location.hash = getHash(url);
         }
+        if (location.href !== url) {
+          pendingLocation = url;
+        }
       }
       return self;
     // getter
     } else {
-      // - reloadLocation is needed as browsers don't allow to read out
-      //   the new location.href if a reload happened.
+      // - pendingLocation is needed as browsers don't allow to read out
+      //   the new location.href if a reload happened or if there is a bug like in iOS 9 (see
+      //   https://openradar.appspot.com/22186109).
       // - the replacement is a workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=407172
-      return reloadLocation || location.href.replace(/%27/g,"'");
+      return pendingLocation || location.href.replace(/%27/g,"'");
     }
   };
 
@@ -14584,6 +14659,7 @@ function Browser(window, document, $log, $sniffer) {
       urlChangeInit = false;
 
   function cacheStateAndFireUrlChange() {
+    pendingLocation = null;
     cacheState();
     fireUrlChange();
   }
@@ -14819,10 +14895,10 @@ function $BrowserProvider() {
            $scope.keys = [];
            $scope.cache = $cacheFactory('cacheId');
            $scope.put = function(key, value) {
-             if ($scope.cache.get(key) === undefined) {
+             if (isUndefined($scope.cache.get(key))) {
                $scope.keys.push(key);
              }
-             $scope.cache.put(key, value === undefined ? null : value);
+             $scope.cache.put(key, isUndefined(value) ? null : value);
            };
          }]);
      </file>
@@ -15298,18 +15374,24 @@ function $TemplateCacheProvider() {
  * and other directives used in the directive's template will also be excluded from execution.
  *
  * #### `scope`
- * **If set to `true`,** then a new scope will be created for this directive. If multiple directives on the
- * same element request a new scope, only one new scope is created. The new scope rule does not
- * apply for the root of the template since the root of the template always gets a new scope.
+ * The scope property can be `true`, an object or a falsy value:
  *
- * **If set to `{}` (object hash),** then a new "isolate" scope is created. The 'isolate' scope differs from
- * normal scope in that it does not prototypically inherit from the parent scope. This is useful
- * when creating reusable components, which should not accidentally read or modify data in the
- * parent scope.
+ * * **falsy:** No scope will be created for the directive. The directive will use its parent's scope.
  *
- * The 'isolate' scope takes an object hash which defines a set of local scope properties
- * derived from the parent scope. These local properties are useful for aliasing values for
- * templates. Locals definition is a hash of local scope property to its source:
+ * * **`true`:** A new child scope that prototypically inherits from its parent will be created for
+ * the directive's element. If multiple directives on the same element request a new scope,
+ * only one new scope is created. The new scope rule does not apply for the root of the template
+ * since the root of the template always gets a new scope.
+ *
+ * * **`{...}` (an object hash):** A new "isolate" scope is created for the directive's element. The
+ * 'isolate' scope differs from normal scope in that it does not prototypically inherit from its parent
+ * scope. This is useful when creating reusable components, which should not accidentally read or modify
+ * data in the parent scope.
+ *
+ * The 'isolate' scope object hash defines a set of local scope properties derived from attributes on the
+ * directive's element. These local properties are useful for aliasing values for templates. The keys in
+ * the object hash map to the name of the property on the isolate scope; the values define how the property
+ * is bound to the parent scope, via matching attributes on the directive's element:
  *
  * * `@` or `@attr` - bind a local scope property to the value of DOM attribute. The result is
  *   always a string since DOM attributes are strings. If no `attr` name is specified  then the
@@ -15342,6 +15424,20 @@ function $TemplateCacheProvider() {
  *   For example, if the expression is `increment(amount)` then we can specify the amount value
  *   by calling the `localFn` as `localFn({amount: 22})`.
  *
+ * In general it's possible to apply more than one directive to one element, but there might be limitations
+ * depending on the type of scope required by the directives. The following points will help explain these limitations.
+ * For simplicity only two directives are taken into account, but it is also applicable for several directives:
+ *
+ * * **no scope** + **no scope** => Two directives which don't require their own scope will use their parent's scope
+ * * **child scope** + **no scope** =>  Both directives will share one single child scope
+ * * **child scope** + **child scope** =>  Both directives will share one single child scope
+ * * **isolated scope** + **no scope** =>  The isolated directive will use it's own created isolated scope. The other directive will use
+ * its parent's scope
+ * * **isolated scope** + **child scope** =>  **Won't work!** Only one scope can be related to one element. Therefore these directives cannot
+ * be applied to the same element.
+ * * **isolated scope** + **isolated scope**  =>  **Won't work!** Only one scope can be related to one element. Therefore these directives
+ * cannot be applied to the same element.
+ *
  *
  * #### `bindToController`
  * When an isolate scope is used for a component (see above), and `controllerAs` is used, `bindToController: true` will
@@ -15350,7 +15446,7 @@ function $TemplateCacheProvider() {
  *
  * #### `controller`
  * Controller constructor function. The controller is instantiated before the
- * pre-linking phase and it is shared with other directives (see
+ * pre-linking phase and can be accessed by other directives (see
  * `require` attribute). This allows the directives to communicate with each other and augment
  * each other's behavior. The controller is injectable (and supports bracket notation) with the following locals:
  *
@@ -15390,9 +15486,10 @@ function $TemplateCacheProvider() {
  *
  * #### `controllerAs`
  * Identifier name for a reference to the controller in the directive's scope.
- * This allows the controller to be referenced from the directive template. The directive
- * needs to define a scope for this configuration to be used. Useful in the case when
- * directive is used as component.
+ * This allows the controller to be referenced from the directive template. This is especially
+ * useful when a directive is used as component, i.e. with an `isolate` scope. It's also possible
+ * to use it in a directive without an `isolate` / `new` scope, but you need to be aware that the
+ * `controllerAs` reference might overwrite a property that already exists on the parent scope.
  *
  *
  * #### `restrict`
@@ -16229,7 +16326,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
         var node = this.$$element[0],
             booleanKey = getBooleanAttrName(node, key),
-            aliasedKey = getAliasedAttrName(node, key),
+            aliasedKey = getAliasedAttrName(key),
             observer = key,
             nodeName;
 
@@ -16296,7 +16393,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         }
 
         if (writeAttr !== false) {
-          if (value === null || value === undefined) {
+          if (value === null || isUndefined(value)) {
             this.$$element.removeAttr(attrName);
           } else {
             this.$$element.attr(attrName, value);
@@ -17262,7 +17359,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             i = 0, ii = directives.length; i < ii; i++) {
           try {
             directive = directives[i];
-            if ((maxPriority === undefined || maxPriority > directive.priority) &&
+            if ((isUndefined(maxPriority) || maxPriority > directive.priority) &&
                  directive.restrict.indexOf(location) != -1) {
               if (startAttrName) {
                 directive = inherit(directive, {$$start: startAttrName, $$end: endAttrName});
@@ -19474,8 +19571,8 @@ function $HttpProvider() {
        * Resolves the raw $http promise.
        */
       function resolvePromise(response, status, headers, statusText) {
-        // normalize internal statuses to 0
-        status = Math.max(status, 0);
+        //status: HTTP response status code, 0, -1 (aborted by timeout / promise)
+        status = status >= -1 ? status : 0;
 
         (isSuccess(status) ? deferred.resolve : deferred.reject)({
           data: response,
@@ -19615,7 +19712,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
         }
       }
 
-      xhr.send(post);
+      xhr.send(isUndefined(post) ? null : post);
     }
 
     if (timeout > 0) {
@@ -19632,7 +19729,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
 
     function completeRequest(callback, status, response, headersString, statusText) {
       // cancel timeout and subsequent timeout promise resolution
-      if (timeoutId !== undefined) {
+      if (isDefined(timeoutId)) {
         $browserDefer.cancel(timeoutId);
       }
       jsonpDone = xhr = null;
@@ -19818,7 +19915,7 @@ function $InterpolateProvider() {
      * ```js
      *   var $interpolate = ...; // injected
      *   var exp = $interpolate('Hello {{name | uppercase}}!');
-     *   expect(exp({name:'Angular'}).toEqual('Hello ANGULAR!');
+     *   expect(exp({name:'Angular'})).toEqual('Hello ANGULAR!');
      * ```
      *
      * `$interpolate` takes an optional fourth argument, `allOrNothing`. If `allOrNothing` is
@@ -20371,14 +20468,14 @@ function LocationHtml5Url(appBase, appBaseNoFile, basePrefix) {
     var appUrl, prevAppUrl;
     var rewrittenUrl;
 
-    if ((appUrl = beginsWith(appBase, url)) !== undefined) {
+    if (isDefined(appUrl = beginsWith(appBase, url))) {
       prevAppUrl = appUrl;
-      if ((appUrl = beginsWith(basePrefix, appUrl)) !== undefined) {
+      if (isDefined(appUrl = beginsWith(basePrefix, appUrl))) {
         rewrittenUrl = appBaseNoFile + (beginsWith('/', appUrl) || appUrl);
       } else {
         rewrittenUrl = appBase + prevAppUrl;
       }
-    } else if ((appUrl = beginsWith(appBaseNoFile, url)) !== undefined) {
+    } else if (isDefined(appUrl = beginsWith(appBaseNoFile, url))) {
       rewrittenUrl = appBaseNoFile + appUrl;
     } else if (appBaseNoFile == url + '/') {
       rewrittenUrl = appBaseNoFile;
@@ -21421,6 +21518,15 @@ var $parseMinErr = minErr('$parse');
 
 
 function ensureSafeMemberName(name, fullExpression) {
+  // From the JavaScript docs:
+  // Property names must be strings. This means that non-string objects cannot be used
+  // as keys in an object. Any non-string object, including a number, is typecasted
+  // into a string via the toString method.
+  //
+  // So, to ensure that we are checking the same `name` that JavaScript would use,
+  // we cast it to a string, if possible
+  name =  (isObject(name) && name.toString) ? name.toString() : name;
+
   if (name === "__defineGetter__" || name === "__defineSetter__"
       || name === "__lookupGetter__" || name === "__lookupSetter__"
       || name === "__proto__") {
@@ -22157,6 +22263,7 @@ ASTCompiler.prototype = {
       this.state.computing = 'assign';
       var result = this.nextId();
       this.recurse(assignable, result);
+      this.return_(result);
       extra = 'fn.assign=' + this.generateFunction('assign', 's,v,l');
     }
     var toWatch = getInputs(ast.body);
@@ -24147,10 +24254,10 @@ function $RootScopeProvider() {
        * Registers a `listener` callback to be executed whenever the `watchExpression` changes.
        *
        * - The `watchExpression` is called on every call to {@link ng.$rootScope.Scope#$digest
-       *   $digest()} and should return the value that will be watched. (Since
-       *   {@link ng.$rootScope.Scope#$digest $digest()} reruns when it detects changes the
-       *   `watchExpression` can execute multiple times per
-       *   {@link ng.$rootScope.Scope#$digest $digest()} and should be idempotent.)
+       *   $digest()} and should return the value that will be watched. (`watchExpression` should not change
+       *   its value when executed multiple times with the same input because it may be executed multiple
+       *   times by {@link ng.$rootScope.Scope#$digest $digest()}. That is, `watchExpression` should be
+       *   [idempotent](http://en.wikipedia.org/wiki/Idempotence).
        * - The `listener` is called only when the value from the current `watchExpression` and the
        *   previous call to `watchExpression` are not equal (with the exception of the initial run,
        *   see below). Inequality is determined according to reference inequality,
@@ -24499,7 +24606,7 @@ function $RootScopeProvider() {
             // copy the items to oldValue and look for changes.
             newLength = 0;
             for (key in newValue) {
-              if (newValue.hasOwnProperty(key)) {
+              if (hasOwnProperty.call(newValue, key)) {
                 newLength++;
                 newItem = newValue[key];
                 oldItem = oldValue[key];
@@ -24521,7 +24628,7 @@ function $RootScopeProvider() {
               // we used to have more keys, need to find them and destroy them.
               changeDetected++;
               for (key in oldValue) {
-                if (!newValue.hasOwnProperty(key)) {
+                if (!hasOwnProperty.call(newValue, key)) {
                   oldLength--;
                   delete oldValue[key];
                 }
@@ -25606,7 +25713,7 @@ function $SceDelegateProvider() {
             'Attempted to trust a value in invalid context. Context: {0}; Value: {1}',
             type, trustedValue);
       }
-      if (trustedValue === null || trustedValue === undefined || trustedValue === '') {
+      if (trustedValue === null || isUndefined(trustedValue) || trustedValue === '') {
         return trustedValue;
       }
       // All the current contexts in SCE_CONTEXTS happen to be strings.  In order to avoid trusting
@@ -25661,7 +25768,7 @@ function $SceDelegateProvider() {
      *     `$sceDelegate.trustAs`} if valid in this context.  Otherwise, throws an exception.
      */
     function getTrusted(type, maybeTrusted) {
-      if (maybeTrusted === null || maybeTrusted === undefined || maybeTrusted === '') {
+      if (maybeTrusted === null || isUndefined(maybeTrusted) || maybeTrusted === '') {
         return maybeTrusted;
       }
       var constructor = (byType.hasOwnProperty(type) ? byType[type] : null);
@@ -26922,7 +27029,7 @@ function $$CookieReader($document) {
           // the first value that is seen for a cookie is the most
           // specific one.  values for the same cookie name that
           // follow are for less specific paths.
-          if (lastCookies[name] === undefined) {
+          if (isUndefined(lastCookies[name])) {
             lastCookies[name] = safeDecodeURIComponent(cookie.substring(index + 1));
           }
         }
@@ -28868,6 +28975,7 @@ function nullFormRenameControl(control, name) {
  * @property {boolean} $dirty True if user has already interacted with the form.
  * @property {boolean} $valid True if all of the containing forms and controls are valid.
  * @property {boolean} $invalid True if at least one containing control or form is invalid.
+ * @property {boolean} $pending True if at least one containing control or form is pending.
  * @property {boolean} $submitted True if user has submitted the form even if its invalid.
  *
  * @property {Object} $error Is an object hash, containing references to controls or
@@ -28907,8 +29015,6 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
   var form = this,
       controls = [];
 
-  var parentForm = form.$$parentForm = element.parent().controller('form') || nullFormCtrl;
-
   // init state
   form.$error = {};
   form.$$success = {};
@@ -28919,8 +29025,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
   form.$valid = true;
   form.$invalid = false;
   form.$submitted = false;
-
-  parentForm.$addControl(form);
+  form.$$parentForm = nullFormCtrl;
 
   /**
    * @ngdoc method
@@ -28959,11 +29064,23 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
   /**
    * @ngdoc method
    * @name form.FormController#$addControl
+   * @param {object} control control object, either a {@link form.FormController} or an
+   * {@link ngModel.NgModelController}
    *
    * @description
-   * Register a control with the form.
+   * Register a control with the form. Input elements using ngModelController do this automatically
+   * when they are linked.
    *
-   * Input elements using ngModelController do this automatically when they are linked.
+   * Note that the current state of the control will not be reflected on the new parent form. This
+   * is not an issue with normal use, as freshly compiled and linked controls are in a `$pristine`
+   * state.
+   *
+   * However, if the method is used programmatically, for example by adding dynamically created controls,
+   * or controls that have been previously removed without destroying their corresponding DOM element,
+   * it's the developers responsiblity to make sure the current state propagates to the parent form.
+   *
+   * For example, if an input control is added that is already `$dirty` and has `$error` properties,
+   * calling `$setDirty()` and `$validate()` afterwards will propagate the state to the parent form.
    */
   form.$addControl = function(control) {
     // Breaking change - before, inputs whose name was "hasOwnProperty" were quietly ignored
@@ -28974,6 +29091,8 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
     if (control.$name) {
       form[control.$name] = control;
     }
+
+    control.$$parentForm = form;
   };
 
   // Private API: rename a form control
@@ -28990,11 +29109,18 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
   /**
    * @ngdoc method
    * @name form.FormController#$removeControl
+   * @param {object} control control object, either a {@link form.FormController} or an
+   * {@link ngModel.NgModelController}
    *
    * @description
    * Deregister a control from the form.
    *
    * Input elements using ngModelController do this automatically when they are destroyed.
+   *
+   * Note that only the removed control's validation state (`$errors`etc.) will be removed from the
+   * form. `$dirty`, `$submitted` states will not be changed, because the expected behavior can be
+   * different from case to case. For example, removing the only `$dirty` control from a form may or
+   * may not mean that the form is still `$dirty`.
    */
   form.$removeControl = function(control) {
     if (control.$name && form[control.$name] === control) {
@@ -29011,6 +29137,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
     });
 
     arrayRemove(controls, control);
+    control.$$parentForm = nullFormCtrl;
   };
 
 
@@ -29047,7 +29174,6 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
         delete object[property];
       }
     },
-    parentForm: parentForm,
     $animate: $animate
   });
 
@@ -29066,7 +29192,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
     $animate.addClass(element, DIRTY_CLASS);
     form.$dirty = true;
     form.$pristine = false;
-    parentForm.$setDirty();
+    form.$$parentForm.$setDirty();
   };
 
   /**
@@ -29122,7 +29248,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
   form.$setSubmitted = function() {
     $animate.addClass(element, SUBMITTED_CLASS);
     form.$submitted = true;
-    parentForm.$setSubmitted();
+    form.$$parentForm.$setSubmitted();
   };
 }
 
@@ -29172,6 +29298,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
  * # CSS classes
  *  - `ng-valid` is set if the form is valid.
  *  - `ng-invalid` is set if the form is invalid.
+ *  - `ng-pending` is set if the form is pending.
  *  - `ng-pristine` is set if the form is pristine.
  *  - `ng-dirty` is set if the form is dirty.
  *  - `ng-submitted` is set if the form was submitted.
@@ -29295,6 +29422,7 @@ var formDirectiveFactory = function(isNgForm) {
     var formDirective = {
       name: 'form',
       restrict: isNgForm ? 'EAC' : 'E',
+      require: ['form', '^^?form'], //first is the form's own ctrl, second is an optional parent form
       controller: FormController,
       compile: function ngFormCompile(formElement, attr) {
         // Setup initial state of the control
@@ -29303,7 +29431,9 @@ var formDirectiveFactory = function(isNgForm) {
         var nameAttr = attr.name ? 'name' : (isNgForm && attr.ngForm ? 'ngForm' : false);
 
         return {
-          pre: function ngFormPreLink(scope, formElement, attr, controller) {
+          pre: function ngFormPreLink(scope, formElement, attr, ctrls) {
+            var controller = ctrls[0];
+
             // if `action` attr is not present on the form, prevent the default action (submission)
             if (!('action' in attr)) {
               // we can't use jq events because if a form is destroyed during submission the default
@@ -29332,7 +29462,9 @@ var formDirectiveFactory = function(isNgForm) {
               });
             }
 
-            var parentFormCtrl = controller.$$parentForm;
+            var parentFormCtrl = ctrls[1] || controller.$$parentForm;
+            parentFormCtrl.$addControl(controller);
+
             var setter = nameAttr ? getSetter(controller.$name) : noop;
 
             if (nameAttr) {
@@ -29340,13 +29472,13 @@ var formDirectiveFactory = function(isNgForm) {
               attr.$observe(nameAttr, function(newValue) {
                 if (controller.$name === newValue) return;
                 setter(scope, undefined);
-                parentFormCtrl.$$renameControl(controller, newValue);
+                controller.$$parentForm.$$renameControl(controller, newValue);
                 setter = getSetter(controller.$name);
                 setter(scope, controller);
               });
             }
             formElement.on('$destroy', function() {
-              parentFormCtrl.$removeControl(controller);
+              controller.$$parentForm.$removeControl(controller);
               setter(scope, undefined);
               extend(controller, nullFormCtrl); //stop propagating child destruction handlers upwards
             });
@@ -29508,9 +29640,17 @@ var inputType = {
      * @param {string} ngModel Assignable angular expression to data-bind to.
      * @param {string=} name Property name of the form under which the control is published.
      * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`. This must be a
-     * valid ISO date string (yyyy-MM-dd).
+     *   valid ISO date string (yyyy-MM-dd). You can also use interpolation inside this attribute
+     *   (e.g. `min="{{minDate | date:'yyyy-MM-dd'}}"`). Note that `min` will also add native HTML5
+     *   constraint validation.
      * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`. This must be
-     * a valid ISO date string (yyyy-MM-dd).
+     *   a valid ISO date string (yyyy-MM-dd). You can also use interpolation inside this attribute
+     *   (e.g. `max="{{maxDate | date:'yyyy-MM-dd'}}"`). Note that `max` will also add native HTML5
+     *   constraint validation.
+     * @param {(date|string)=} ngMin Sets the `min` validation constraint to the Date / ISO date string
+     *   the `ngMin` expression evaluates to. Note that it does not set the `min` attribute.
+     * @param {(date|string)=} ngMax Sets the `max` validation constraint to the Date / ISO date string
+     *   the `ngMax` expression evaluates to. Note that it does not set the `max` attribute.
      * @param {string=} required Sets `required` validation error key if the value is not entered.
      * @param {string=} ngRequired Adds `required` attribute and `required` validation constraint to
      *    the element when the ngRequired expression evaluates to true. Use `ngRequired` instead of
@@ -29602,10 +29742,18 @@ var inputType = {
     *
     * @param {string} ngModel Assignable angular expression to data-bind to.
     * @param {string=} name Property name of the form under which the control is published.
-    * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`. This must be a
-    * valid ISO datetime format (yyyy-MM-ddTHH:mm:ss).
-    * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`. This must be
-    * a valid ISO datetime format (yyyy-MM-ddTHH:mm:ss).
+    * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`.
+    *   This must be a valid ISO datetime format (yyyy-MM-ddTHH:mm:ss). You can also use interpolation
+    *   inside this attribute (e.g. `min="{{minDatetimeLocal | date:'yyyy-MM-ddTHH:mm:ss'}}"`).
+    *   Note that `min` will also add native HTML5 constraint validation.
+    * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`.
+    *   This must be a valid ISO datetime format (yyyy-MM-ddTHH:mm:ss). You can also use interpolation
+    *   inside this attribute (e.g. `max="{{maxDatetimeLocal | date:'yyyy-MM-ddTHH:mm:ss'}}"`).
+    *   Note that `max` will also add native HTML5 constraint validation.
+    * @param {(date|string)=} ngMin Sets the `min` validation error key to the Date / ISO datetime string
+    *   the `ngMin` expression evaluates to. Note that it does not set the `min` attribute.
+    * @param {(date|string)=} ngMax Sets the `max` validation error key to the Date / ISO datetime string
+    *   the `ngMax` expression evaluates to. Note that it does not set the `max` attribute.
     * @param {string=} required Sets `required` validation error key if the value is not entered.
     * @param {string=} ngRequired Adds `required` attribute and `required` validation constraint to
     *    the element when the ngRequired expression evaluates to true. Use `ngRequired` instead of
@@ -29698,10 +29846,18 @@ var inputType = {
    *
    * @param {string} ngModel Assignable angular expression to data-bind to.
    * @param {string=} name Property name of the form under which the control is published.
-   * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`. This must be a
-   * valid ISO time format (HH:mm:ss).
-   * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`. This must be a
-   * valid ISO time format (HH:mm:ss).
+   * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`.
+   *   This must be a valid ISO time format (HH:mm:ss). You can also use interpolation inside this
+   *   attribute (e.g. `min="{{minTime | date:'HH:mm:ss'}}"`). Note that `min` will also add
+   *   native HTML5 constraint validation.
+   * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`.
+   *   This must be a valid ISO time format (HH:mm:ss). You can also use interpolation inside this
+   *   attribute (e.g. `max="{{maxTime | date:'HH:mm:ss'}}"`). Note that `max` will also add
+   *   native HTML5 constraint validation.
+   * @param {(date|string)=} ngMin Sets the `min` validation constraint to the Date / ISO time string the
+   *   `ngMin` expression evaluates to. Note that it does not set the `min` attribute.
+   * @param {(date|string)=} ngMax Sets the `max` validation constraint to the Date / ISO time string the
+   *   `ngMax` expression evaluates to. Note that it does not set the `max` attribute.
    * @param {string=} required Sets `required` validation error key if the value is not entered.
    * @param {string=} ngRequired Adds `required` attribute and `required` validation constraint to
    *    the element when the ngRequired expression evaluates to true. Use `ngRequired` instead of
@@ -29793,10 +29949,18 @@ var inputType = {
     *
     * @param {string} ngModel Assignable angular expression to data-bind to.
     * @param {string=} name Property name of the form under which the control is published.
-    * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`. This must be a
-    * valid ISO week format (yyyy-W##).
-    * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`. This must be
-    * a valid ISO week format (yyyy-W##).
+    * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`.
+    *   This must be a valid ISO week format (yyyy-W##). You can also use interpolation inside this
+    *   attribute (e.g. `min="{{minWeek | date:'yyyy-Www'}}"`). Note that `min` will also add
+    *   native HTML5 constraint validation.
+    * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`.
+    *   This must be a valid ISO week format (yyyy-W##). You can also use interpolation inside this
+    *   attribute (e.g. `max="{{maxWeek | date:'yyyy-Www'}}"`). Note that `max` will also add
+    *   native HTML5 constraint validation.
+    * @param {(date|string)=} ngMin Sets the `min` validation constraint to the Date / ISO week string
+    *   the `ngMin` expression evaluates to. Note that it does not set the `min` attribute.
+    * @param {(date|string)=} ngMax Sets the `max` validation constraint to the Date / ISO week string
+    *   the `ngMax` expression evaluates to. Note that it does not set the `max` attribute.
     * @param {string=} required Sets `required` validation error key if the value is not entered.
     * @param {string=} ngRequired Adds `required` attribute and `required` validation constraint to
     *    the element when the ngRequired expression evaluates to true. Use `ngRequired` instead of
@@ -29890,10 +30054,19 @@ var inputType = {
    *
    * @param {string} ngModel Assignable angular expression to data-bind to.
    * @param {string=} name Property name of the form under which the control is published.
-   * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`. This must be
-   * a valid ISO month format (yyyy-MM).
-   * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`. This must
-   * be a valid ISO month format (yyyy-MM).
+   * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`.
+   *   This must be a valid ISO month format (yyyy-MM). You can also use interpolation inside this
+   *   attribute (e.g. `min="{{minMonth | date:'yyyy-MM'}}"`). Note that `min` will also add
+   *   native HTML5 constraint validation.
+   * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`.
+   *   This must be a valid ISO month format (yyyy-MM). You can also use interpolation inside this
+   *   attribute (e.g. `max="{{maxMonth | date:'yyyy-MM'}}"`). Note that `max` will also add
+   *   native HTML5 constraint validation.
+   * @param {(date|string)=} ngMin Sets the `min` validation constraint to the Date / ISO week string
+   *   the `ngMin` expression evaluates to. Note that it does not set the `min` attribute.
+   * @param {(date|string)=} ngMax Sets the `max` validation constraint to the Date / ISO week string
+   *   the `ngMax` expression evaluates to. Note that it does not set the `max` attribute.
+
    * @param {string=} required Sets `required` validation error key if the value is not entered.
    * @param {string=} ngRequired Adds `required` attribute and `required` validation constraint to
    *    the element when the ngRequired expression evaluates to true. Use `ngRequired` instead of
@@ -30655,7 +30828,7 @@ function createDateInputType(type, regexp, parseDate, format) {
     }
 
     function parseObservedDateValue(val) {
-      return isDefined(val) ? (isDate(val) ? val : parseDate(val)) : undefined;
+      return isDefined(val) && !isDate(val) ? parseDate(val) || undefined : val;
     }
   };
 }
@@ -31150,7 +31323,7 @@ var ngBindDirective = ['$compile', function($compile) {
         $compile.$$addBindingInfo(element, attr.ngBind);
         element = element[0];
         scope.$watch(attr.ngBind, function ngBindWatchAction(value) {
-          element.textContent = value === undefined ? '' : value;
+          element.textContent = isUndefined(value) ? '' : value;
         });
       };
     }
@@ -31218,7 +31391,7 @@ var ngBindTemplateDirective = ['$interpolate', '$compile', function($interpolate
         $compile.$$addBindingInfo(element, interpolateFn.expressions);
         element = element[0];
         attr.$observe('ngBindTemplate', function(value) {
-          element.textContent = value === undefined ? '' : value;
+          element.textContent = isUndefined(value) ? '' : value;
         });
       };
     }
@@ -33175,16 +33348,18 @@ var ngIncludeFillContentDirective = ['$compile',
  * current scope.
  *
  * <div class="alert alert-danger">
- * The only appropriate use of `ngInit` is for aliasing special properties of
- * {@link ng.directive:ngRepeat `ngRepeat`}, as seen in the demo below. Besides this case, you
- * should use {@link guide/controller controllers} rather than `ngInit`
- * to initialize values on a scope.
+ * This directive can be abused to add unnecessary amounts of logic into your templates.
+ * There are only a few appropriate uses of `ngInit`, such as for aliasing special properties of
+ * {@link ng.directive:ngRepeat `ngRepeat`}, as seen in the demo below; and for injecting data via
+ * server side scripting. Besides these few cases, you should use {@link guide/controller controllers}
+ * rather than `ngInit` to initialize values on a scope.
  * </div>
+ *
  * <div class="alert alert-warning">
- * **Note**: If you have assignment in `ngInit` along with {@link ng.$filter `$filter`}, make
- * sure you have parenthesis for correct precedence:
+ * **Note**: If you have assignment in `ngInit` along with a {@link ng.$filter `filter`}, make
+ * sure you have parentheses to ensure correct operator precedence:
  * <pre class="prettyprint">
- * `<div ng-init="test1 = (data | orderBy:'name')"></div>`
+ * `<div ng-init="test1 = ($index | toString)"></div>`
  * </pre>
  * </div>
  *
@@ -33596,7 +33771,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   this.$$success = {}; // keep valid keys here
   this.$pending = undefined; // keep pending keys here
   this.$name = $interpolate($attr.name || '', false)($scope);
-
+  this.$$parentForm = nullFormCtrl;
 
   var parsedNgModel = $parse($attr.ngModel),
       parsedNgModelAssign = parsedNgModel.assign,
@@ -33676,8 +33851,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     return isUndefined(value) || value === '' || value === null || value !== value;
   };
 
-  var parentForm = $element.inheritedData('$formController') || nullFormCtrl,
-      currentValidationRunId = 0;
+  var currentValidationRunId = 0;
 
   /**
    * @ngdoc method
@@ -33710,7 +33884,6 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     unset: function(object, property) {
       delete object[property];
     },
-    parentForm: parentForm,
     $animate: $animate
   });
 
@@ -33748,7 +33921,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     ctrl.$pristine = false;
     $animate.removeClass($element, PRISTINE_CLASS);
     $animate.addClass($element, DIRTY_CLASS);
-    parentForm.$setDirty();
+    ctrl.$$parentForm.$setDirty();
   };
 
   /**
@@ -33918,7 +34091,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
     function processParseErrors() {
       var errorKey = ctrl.$$parserName || 'parse';
-      if (parserValid === undefined) {
+      if (isUndefined(parserValid)) {
         setValidity(errorKey, null);
       } else {
         if (!parserValid) {
@@ -34088,37 +34261,47 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @description
    * Update the view value.
    *
-   * This method should be called when an input directive want to change the view value; typically,
-   * this is done from within a DOM event handler.
+   * This method should be called when a control wants to change the view value; typically,
+   * this is done from within a DOM event handler. For example, the {@link ng.directive:input input}
+   * directive calls it when the value of the input changes and {@link ng.directive:select select}
+   * calls it when an option is selected.
    *
-   * For example {@link ng.directive:input input} calls it when the value of the input changes and
-   * {@link ng.directive:select select} calls it when an option is selected.
-   *
-   * If the new `value` is an object (rather than a string or a number), we should make a copy of the
-   * object before passing it to `$setViewValue`.  This is because `ngModel` does not perform a deep
-   * watch of objects, it only looks for a change of identity. If you only change the property of
-   * the object then ngModel will not realise that the object has changed and will not invoke the
-   * `$parsers` and `$validators` pipelines.
-   *
-   * For this reason, you should not change properties of the copy once it has been passed to
-   * `$setViewValue`. Otherwise you may cause the model value on the scope to change incorrectly.
-   *
-   * When this method is called, the new `value` will be staged for committing through the `$parsers`
+   * When `$setViewValue` is called, the new `value` will be staged for committing through the `$parsers`
    * and `$validators` pipelines. If there are no special {@link ngModelOptions} specified then the staged
    * value sent directly for processing, finally to be applied to `$modelValue` and then the
-   * **expression** specified in the `ng-model` attribute.
-   *
-   * Lastly, all the registered change listeners, in the `$viewChangeListeners` list, are called.
+   * **expression** specified in the `ng-model` attribute. Lastly, all the registered change listeners,
+   * in the `$viewChangeListeners` list, are called.
    *
    * In case the {@link ng.directive:ngModelOptions ngModelOptions} directive is used with `updateOn`
    * and the `default` trigger is not listed, all those actions will remain pending until one of the
    * `updateOn` events is triggered on the DOM element.
    * All these actions will be debounced if the {@link ng.directive:ngModelOptions ngModelOptions}
    * directive is used with a custom debounce for this particular event.
+   * Note that a `$digest` is only triggered once the `updateOn` events are fired, or if `debounce`
+   * is specified, once the timer runs out.
    *
-   * Note that calling this function does not trigger a `$digest`.
+   * When used with standard inputs, the view value will always be a string (which is in some cases
+   * parsed into another type, such as a `Date` object for `input[date]`.)
+   * However, custom controls might also pass objects to this method. In this case, we should make
+   * a copy of the object before passing it to `$setViewValue`. This is because `ngModel` does not
+   * perform a deep watch of objects, it only looks for a change of identity. If you only change
+   * the property of the object then ngModel will not realise that the object has changed and
+   * will not invoke the `$parsers` and `$validators` pipelines. For this reason, you should
+   * not change properties of the copy once it has been passed to `$setViewValue`.
+   * Otherwise you may cause the model value on the scope to change incorrectly.
    *
-   * @param {string} value Value from the view.
+   * <div class="alert alert-info">
+   * In any case, the value passed to the method should always reflect the current value
+   * of the control. For example, if you are calling `$setViewValue` for an input element,
+   * you should pass the input DOM value. Otherwise, the control and the scope model become
+   * out of sync. It's also important to note that `$setViewValue` does not call `$render` or change
+   * the control's DOM value in any way. If we want to change the control's DOM value
+   * programmatically, we should update the `ngModel` scope expression. Its new value will be
+   * picked up by the model controller, which will run it through the `$formatters`, `$render` it
+   * to update the DOM, and finally call `$validate` on it.
+   * </div>
+   *
+   * @param {*} value value from the view.
    * @param {string} trigger Event that triggered the update.
    */
   this.$setViewValue = function(value, trigger) {
@@ -34381,7 +34564,7 @@ var ngModelDirective = ['$rootScope', function($rootScope) {
       return {
         pre: function ngModelPreLink(scope, element, attr, ctrls) {
           var modelCtrl = ctrls[0],
-              formCtrl = ctrls[1] || nullFormCtrl;
+              formCtrl = ctrls[1] || modelCtrl.$$parentForm;
 
           modelCtrl.$$setOptions(ctrls[2] && ctrls[2].$options);
 
@@ -34390,12 +34573,12 @@ var ngModelDirective = ['$rootScope', function($rootScope) {
 
           attr.$observe('name', function(newValue) {
             if (modelCtrl.$name !== newValue) {
-              formCtrl.$$renameControl(modelCtrl, newValue);
+              modelCtrl.$$parentForm.$$renameControl(modelCtrl, newValue);
             }
           });
 
           scope.$on('$destroy', function() {
-            formCtrl.$removeControl(modelCtrl);
+            modelCtrl.$$parentForm.$removeControl(modelCtrl);
           });
         },
         post: function ngModelPostLink(scope, element, attr, ctrls) {
@@ -34590,7 +34773,7 @@ var ngModelOptionsDirective = function() {
       var that = this;
       this.$options = copy($scope.$eval($attrs.ngModelOptions));
       // Allow adding/overriding bound events
-      if (this.$options.updateOn !== undefined) {
+      if (isDefined(this.$options.updateOn)) {
         this.$options.updateOnDefault = false;
         // extract "default" pseudo-event from list of events that can trigger a model update
         this.$options.updateOn = trim(this.$options.updateOn.replace(DEFAULT_REGEXP, function() {
@@ -34613,7 +34796,6 @@ function addSetValidityMethod(context) {
       classCache = {},
       set = context.set,
       unset = context.unset,
-      parentForm = context.parentForm,
       $animate = context.$animate;
 
   classCache[INVALID_CLASS] = !(classCache[VALID_CLASS] = $element.hasClass(VALID_CLASS));
@@ -34621,7 +34803,7 @@ function addSetValidityMethod(context) {
   ctrl.$setValidity = setValidity;
 
   function setValidity(validationErrorKey, state, controller) {
-    if (state === undefined) {
+    if (isUndefined(state)) {
       createAndSet('$pending', validationErrorKey, controller);
     } else {
       unsetAndCleanup('$pending', validationErrorKey, controller);
@@ -34665,7 +34847,7 @@ function addSetValidityMethod(context) {
     }
 
     toggleValidationCss(validationErrorKey, combinedState);
-    parentForm.$setValidity(validationErrorKey, combinedState, ctrl);
+    ctrl.$$parentForm.$setValidity(validationErrorKey, combinedState, ctrl);
   }
 
   function createAndSet(name, value, controller) {
@@ -35733,8 +35915,10 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
  * | `$even`   | {@type boolean} | true if the iterator position `$index` is even (otherwise false).           |
  * | `$odd`    | {@type boolean} | true if the iterator position `$index` is odd (otherwise false).            |
  *
- * Creating aliases for these properties is possible with {@link ng.directive:ngInit `ngInit`}.
- * This may be useful when, for instance, nesting ngRepeats.
+ * <div class="alert alert-info">
+ *   Creating aliases for these properties is possible with {@link ng.directive:ngInit `ngInit`}.
+ *   This may be useful when, for instance, nesting ngRepeats.
+ * </div>
  *
  *
  * # Iterating over object properties
@@ -36139,7 +36323,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
             // if object, extract keys, in enumeration order, unsorted
             collectionKeys = [];
             for (var itemKey in collection) {
-              if (collection.hasOwnProperty(itemKey) && itemKey.charAt(0) !== '$') {
+              if (hasOwnProperty.call(collection, itemKey) && itemKey.charAt(0) !== '$') {
                 collectionKeys.push(itemKey);
               }
             }
@@ -37352,9 +37536,12 @@ var optionDirective = ['$interpolate', function($interpolate) {
     priority: 100,
     compile: function(element, attr) {
 
-      // If the value attribute is not defined then we fall back to the
-      // text content of the option element, which may be interpolated
-      if (isUndefined(attr.value)) {
+      if (isDefined(attr.value)) {
+        // If the value attribute is defined, check if it contains an interpolation
+        var valueInterpolated = $interpolate(attr.value, true);
+      } else {
+        // If the value attribute is not defined then we fall back to the
+        // text content of the option element, which may be interpolated
         var interpolateFn = $interpolate(element.text(), true);
         if (!interpolateFn) {
           attr.$set('value', element.text());
@@ -37370,24 +37557,38 @@ var optionDirective = ['$interpolate', function($interpolate) {
             selectCtrl = parent.data(selectCtrlName) ||
               parent.parent().data(selectCtrlName); // in case we are in optgroup
 
+        function addOption(optionValue) {
+          selectCtrl.addOption(optionValue, element);
+          selectCtrl.ngModelCtrl.$render();
+          chromeHack(element);
+        }
+
         // Only update trigger option updates if this is an option within a `select`
         // that also has `ngModel` attached
         if (selectCtrl && selectCtrl.ngModelCtrl) {
 
-          if (interpolateFn) {
+          if (valueInterpolated) {
+            // The value attribute is interpolated
+            var oldVal;
+            attr.$observe('value', function valueAttributeObserveAction(newVal) {
+              if (isDefined(oldVal)) {
+                selectCtrl.removeOption(oldVal);
+              }
+              oldVal = newVal;
+              addOption(newVal);
+            });
+          } else if (interpolateFn) {
+            // The text content is interpolated
             scope.$watch(interpolateFn, function interpolateWatchAction(newVal, oldVal) {
               attr.$set('value', newVal);
               if (oldVal !== newVal) {
                 selectCtrl.removeOption(oldVal);
               }
-              selectCtrl.addOption(newVal, element);
-              selectCtrl.ngModelCtrl.$render();
-              chromeHack(element);
+              addOption(newVal);
             });
           } else {
-            selectCtrl.addOption(attr.value, element);
-            selectCtrl.ngModelCtrl.$render();
-            chromeHack(element);
+            // The value attribute is static
+            addOption(attr.value);
           }
 
           element.on('$destroy', function() {
@@ -37643,13 +37844,13 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],20:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":19}],21:[function(require,module,exports){
+},{"./angular":23}],25:[function(require,module,exports){
 
-},{}],22:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -37714,7 +37915,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],23:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 (function (global){
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.jade = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
@@ -37969,7 +38170,7 @@ exports.DebugItem = function DebugItem(lineno, filename) {
 },{}]},{},[1])(1)
 });
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"fs":21}],24:[function(require,module,exports){
+},{"fs":25}],28:[function(require,module,exports){
 /*! ladda-angular - v1.0.0 - 2015-03-07
 * https://github.com/sachinchoolur/ladda-angular
 * Copyright (c) 2015 Sachin; Licensed MIT */
@@ -38001,7 +38202,7 @@ exports.DebugItem = function DebugItem(lineno, filename) {
         };
     });
 }());
-},{}],25:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -50356,7 +50557,265 @@ exports.DebugItem = function DebugItem(lineno, filename) {
 }.call(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],26:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
+(function() {
+
+    'use strict';
+
+    /**
+     * @desc Datepicker directive
+     * @example <ng-datepicker></ng-datepicker>
+     */
+
+    angular
+        .module('ngFlatDatepicker', [])
+        .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
+
+    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            scope: {
+                config: '=datepickerConfig'
+            },
+            link: function(scope, element, attrs, ngModel) {
+
+                var template     = angular.element($templateCache.get('datepicker.html'));
+                var dateSelected = '';
+                var today        = moment.utc();
+
+                // Default options
+                var defaultConfig = {
+                    allowFuture: true,
+                    dateFormat: null,
+                    minDate: null,
+                    maxDate: null
+                };
+
+                // Apply and init options
+                scope.config = angular.extend(defaultConfig, scope.config);
+                if (angular.isDefined(scope.config.minDate)) moment.utc(scope.config.minDate).subtract(1, 'day');
+                if (angular.isDefined(scope.config.maxDate)) moment.utc(scope.config.maxDate).add(1, 'day');
+
+                // Data
+                scope.calendarCursor  = today;
+                scope.currentWeeks    = [];
+                scope.daysNameList    = datesCalculator.getDaysNames();
+                scope.monthsList      = moment.months();
+                scope.yearsList       = datesCalculator.getYearsList();
+
+                // Display
+                scope.pickerDisplayed = false;
+
+                scope.$watch(function(){ return ngModel.$modelValue; }, function(value){
+                    if (value) {
+                        dateSelected = scope.calendarCursor = moment.utc(value, scope.config.dateFormat);
+                    }
+                });
+
+                scope.$watch('calendarCursor', function(val){
+                    scope.currentWeeks = getWeeks(val);
+                });
+
+                /**
+                 * ClickOutside, handle all clicks outside the DatePicker when visible
+                 */
+                element.bind('click', function(e) {
+                    scope.$apply(function(){
+                        scope.pickerDisplayed = true;
+                        $document.on('click', onDocumentClick);
+                    });
+                });
+
+                function onDocumentClick(e) {
+                    if (template !== e.target && !template[0].contains(e.target) && e.target !== element[0]) {
+                        $document.off('click', onDocumentClick);
+                        scope.$apply(function () {
+                            scope.calendarCursor = dateSelected ? dateSelected : today;
+                            scope.pickerDisplayed = scope.showMonthsList = scope.showYearsList = false;
+                        });
+                     }
+                }
+
+                init();
+
+                /**
+                 * Display the previous month in the datepicker
+                 * @return {}
+                 */
+                scope.prevMonth = function() {
+                    scope.calendarCursor = moment(scope.calendarCursor).subtract(1, 'months');
+                };
+
+                /**
+                 * Display the next month in the datepicker
+                 * @return {}
+                 */
+                scope.nextMonth = function nextMonth() {
+                    scope.calendarCursor = moment(scope.calendarCursor).add(1, 'months');
+                };
+
+                /**
+                 * Select a month and display it in the datepicker
+                 * @param  {string} month The month selected in the select element
+                 * @return {}
+                 */
+                scope.selectMonth = function selectMonth(month) {
+                    scope.showMonthsList = false;
+                    scope.calendarCursor = moment(scope.calendarCursor).month(month);
+                };
+
+                /**
+                 * Select a year and display it in the datepicker depending on the current month
+                 * @param  {string} year The year selected in the select element
+                 * @return {}
+                 */
+                scope.selectYear = function selectYear(year) {
+                    scope.showYearsList = false;
+                    scope.calendarCursor = moment(scope.calendarCursor).year(year);
+                };
+
+                /**
+                 * Select a day
+                 * @param  {[type]} day [description]
+                 * @return {[type]}     [description]
+                 */
+                scope.selectDay = function(day) {
+                    if (!day.isFuture || (scope.config.allowFuture && day.isFuture)) {
+                        resetSelectedDays();
+                        day.isSelected = true;
+                        ngModel.$setViewValue(moment.utc(day.date).format(scope.config.dateFormat));
+                        ngModel.$render();
+                        scope.pickerDisplayed = false;
+                    }
+                };
+
+                /**
+                 * Init the directive
+                 * @return {}
+                 */
+                function init() {
+
+                    element.wrap('<div class="ng-flat-datepicker-wrapper"></div>');
+
+                    $compile(template)(scope);
+                    element.after(template);
+
+                    if (angular.isDefined(ngModel.$modelValue) && moment.isDate(ngModel.$modelValue)) {
+                        scope.calendarCursor = ngModel.$modelValue;
+                    }
+                }
+
+                /**
+                 * Get all weeks needed to display a month on the Datepicker
+                 * @return {array} list of weeks objects
+                 */
+                function getWeeks (date) {
+
+                    var weeks = [];
+                    var date = moment.utc(date);
+                    var firstDayOfMonth = moment(date).date(1);
+                    var lastDayOfMonth  = moment(date).date(date.daysInMonth());
+
+                    var startDay = moment(firstDayOfMonth);
+                    var endDay   = moment(lastDayOfMonth);
+                    // NB: We use weekday() to get a locale aware weekday
+                    startDay = firstDayOfMonth.weekday() === 0 ? startDay : startDay.weekday(0);
+                    endDay   = lastDayOfMonth.weekday()  === 6 ? endDay   : endDay.weekday(6);
+
+                    var currentWeek = [];
+
+                    for (var start = moment(startDay); start.isBefore(moment(endDay).add(1, 'days')); start.add(1, 'days')) {
+
+                        var afterMinDate  = !scope.config.minDate || start.isAfter(scope.config.minDate, 'day');
+                        var beforeMaxDate = !scope.config.maxDate || start.isBefore(scope.config.maxDate, 'day');
+                        var isFuture      = start.isAfter(today);
+                        var beforeFuture  = scope.config.allowFuture || !isFuture;
+
+                        var day = {
+                            date: moment(start).toDate(),
+                            isToday: start.isSame(today, 'day'),
+                            isInMonth: start.isSame(firstDayOfMonth, 'month'),
+                            isSelected: start.isSame(dateSelected, 'day'),
+                            isSelectable: afterMinDate && beforeMaxDate && beforeFuture
+                        };
+
+                        currentWeek.push(day);
+
+                        if (start.weekday() === 6 || start === endDay) {
+                            weeks.push(currentWeek);
+                            currentWeek = [];
+                        }
+                    }
+
+                    return weeks;
+                }
+
+                /**
+                 * Reset all selected days
+                 */
+                function resetSelectedDays () {
+                    scope.currentWeeks.forEach(function(week, wIndex){
+                        week.forEach(function(day, dIndex){
+                            scope.currentWeeks[wIndex][dIndex].isSelected = false;
+                        });
+                    });
+                }
+            }
+        };
+    }
+    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
+
+})();
+
+(function(){
+
+    'use strict';
+
+    /**
+     * @desc Dates calculator factory
+     */
+
+     angular
+         .module('ngFlatDatepicker')
+         .factory('datesCalculator', datesCalculator);
+
+    function datesCalculator () {
+
+        /**
+         * List all years for the select
+         * @return {[type]} [description]
+         */
+        function getYearsList() {
+            var yearsList = [];
+            for (var i = 2005; i <= moment().year(); i++) {
+                yearsList.push(i);
+            }
+            return yearsList;
+        }
+
+        /**
+         * List all days name in the current locale
+         * @return {[type]} [description]
+         */
+        function getDaysNames () {
+            var daysNameList = [];
+            for (var i = 0; i < 7 ; i++) {
+                daysNameList.push(moment().weekday(i).format('ddd'));
+            }
+            return daysNameList;
+        }
+
+        return {
+            getYearsList: getYearsList,
+            getDaysNames: getDaysNames
+        };
+    }
+
+})();
+
+angular.module("ngFlatDatepicker").run(["$templateCache", function($templateCache) {$templateCache.put("datepicker.html","<div class=\"ng-flat-datepicker\" ng-show=\"pickerDisplayed\">\n    <div class=\"ng-flat-datepicker-table-header-bckgrnd\"></div>\n    <table>\n        <caption>\n            <div class=\"ng-flat-datepicker-header-wrapper\">\n                <span class=\"ng-flat-datepicker-arrow ng-flat-datepicker-arrow-left\" ng-click=\"prevMonth()\">\n                    <svg version=\"1.0\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"50\" y=\"50\" viewBox=\"0 0 100 100\" xml:space=\"preserve\">\n                        <polygon points=\"64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1\" />\n                    </svg>\n                </span>\n                <div class=\"ng-flat-datepicker-header-year\">\n                    <div class=\"ng-flat-datepicker-custom-select-box\" outside-click=\"showMonthsList = false\">\n                        <span class=\"ng-flat-datepicker-custom-select-title ng-flat-datepicker-month-name\" ng-click=\"showMonthsList = !showMonthsList; showYearsList = false\" ng-class=\"{selected: showMonthsList }\">{{ calendarCursor.isValid() ? calendarCursor.format(\'MMMM\') : \"\" }}</span>\n                        <div class=\"ng-flat-datepicker-custom-select\" ng-show=\"showMonthsList\">\n                            <span ng-repeat=\"monthName in monthsList\" ng-click=\"selectMonth(monthName); showMonthsList = false\">{{ monthName }}</span>\n                        </div>\n                    </div>\n                    <div class=\"ng-flat-datepicker-custom-select-box\" outside-click=\"showYearsList = false\">\n                        <span class=\"ng-flat-datepicker-custom-select-title\" ng-click=\"showYearsList = !showYearsList; showMonthsList = false\" ng-class=\"{selected: showYearsList }\">{{ calendarCursor.isValid() ? calendarCursor.format(\'YYYY\') : \"\" }}</span>\n                        <div class=\"ng-flat-datepicker-custom-select\" ng-show=\"showYearsList\">\n                            <span ng-repeat=\"yearNumber in yearsList\" ng-click=\"selectYear(yearNumber)\">{{ yearNumber }}</span>\n                        </div>\n                    </div>\n                </div>\n                <span class=\"ng-flat-datepicker-arrow ng-flat-datepicker-arrow-right\" ng-click=\"nextMonth()\">\n                    <svg version=\"1.0\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"50\" y=\"50\" viewBox=\"0 0 100 100\" xml:space=\"preserve\">\n                        <polygon points=\"64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1\" />\n                    </svg>\n                </span>\n            </div>\n        </caption>\n        <tbody>\n            <tr class=\"days-head\">\n                <td class=\"day-head\" ng-repeat=\"dayName in daysNameList\">{{ dayName }}</td>\n            </tr>\n            <tr class=\"days\" ng-repeat=\"week in currentWeeks\">\n                <td ng-repeat=\"day in week\" ng-click=\"selectDay(day)\" ng-class=\"[\'day-item\', { \'isToday\': day.isToday, \'isInMonth\': day.isInMonth, \'isDisabled\': !day.isSelectable, \'isSelected\': day.isSelected }]\">{{ day.date | date:\'dd\' }}</td>\n            </tr>\n        </tbody>\n    </table>\n</div>\n");}]);
+},{}],31:[function(require,module,exports){
 angular.module('ngMap', []);
 
 /**
@@ -50437,6 +50896,10 @@ angular.module('ngMap', []);
               return new google.maps.LatLng(output[0], output[1]);
             }
           }
+          else if (output === Object(output)) { // JSON is an object (not array or null)
+            // check for nested hashes and convert to Google API options
+            output = getOptions(output, options);
+          }
         } catch(err2) {
           // 3. Object Expression. i.e. LatLng(80,-49)
           if (input.match(/^[A-Z][a-zA-Z0-9]+\(.*\)$/)) {
@@ -50464,6 +50927,13 @@ angular.module('ngMap', []);
               } else {
                 output = google.maps[capitalizedKey][input];
               }
+            } catch(e) {
+              output = input;
+            }
+          // 6. Date Object as ISO String i.e. "2015-08-12T06:12:40.858Z"
+          } else if (input.match(/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/)) {
+            try {
+              output = new Date(input);
             } catch(e) {
               output = input;
             }
@@ -50533,7 +51003,12 @@ angular.module('ngMap', []);
           } else if (key.match(/ControlOptions$/)) { // skip controlOptions
             continue;
           } else {
-            options[key] = toOptionValue(attrs[key], {scope:scope, key: key});
+            // nested conversions need to be typechecked (non-strings are fully converted)
+            if (typeof attrs[key] !== 'string') {
+              options[key] = attrs[key];
+            } else {
+              options[key] = toOptionValue(attrs[key], {scope:scope, key: key});
+            }
           }
         } // if (attrs[key])
       } // for(var key in attrs)
@@ -50836,7 +51311,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name bicycling-layer
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -50887,7 +51362,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name cloud-layer
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -50937,8 +51412,8 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name custom-control
- * @requires Attr2Options 
- * @requires $compile
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param $compile {service} AngularJS $compile service
  * @description 
  *   Build custom control and set to the map with position
  *   
@@ -50946,9 +51421,9 @@ angular.module('ngMap', []);
  *
  *   Restrict To:  Element
  *
- * @param {String} position position of this control
+ * @attr {String} position position of this control
  *        i.e. TOP_RIGHT
- * @param {Number} index index of the control
+ * @attr {Number} index index of the control
  * @example
  *
  * Example: 
@@ -51003,6 +51478,178 @@ angular.module('ngMap', []);
 
 /**
  * @ngdoc directive
+ * @memberof ngmap
+ * @name custom-marker
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param $compile {service} AngularJS $compile service
+ * @param $timeout {service} AngularJS $timeout
+ * @description 
+ *   Marker with html
+ *   Requires:  map directive
+ *   Restrict To:  Element
+ *
+ * @attr {String} position required, position on map
+ * @attr {Number} z-index optional
+ * @attr {Boolean} visible optional
+ * @example
+ *
+ * Example: 
+ *   <map center="41.850033,-87.6500523" zoom="3">
+ *     <custom-marker position="41.850033,-87.6500523">
+ *       <div>
+ *         <b>Home</b>
+ *       </div>
+ *     </custom-marker>
+ *   </map>
+ *
+ */
+(function() {
+  'use strict';
+  var parser, $compile, $timeout;
+
+  var cAbortEvent = function (e) {
+    e.preventDefault && e.preventDefault();
+    e.cancelBubble = true;
+    e.stopPropagation && e.stopPropagation();
+  }; 
+
+  var CustomMarker = function(options) {
+    options = options || {};
+
+    this.el = document.createElement('div');
+    this.el.style.display = 'inline-block';
+    this.visible = true; for (var key in options) {
+     this[key] = options[key];
+    }
+  };
+
+  var setCustomMarker = function() {
+
+    CustomMarker.prototype = new google.maps.OverlayView();
+
+    CustomMarker.prototype.setContent = function(html, scope) {
+      this.html = html;
+      if (scope) {
+        var compiledEl = $compile(html)(scope);
+        var customMarkerEl = compiledEl[0];
+        var me = this;
+        $timeout(function() {
+          me.content = customMarkerEl.innerHTML;
+          me.el.innerHTML = me.content;
+        });
+      } else {
+        this.content = html;
+        this.el.innerHTML = this.content;
+      }
+      this.el.style.position = 'relative';
+      this.el.className = 'custom-marker';
+    };
+
+    CustomMarker.prototype.setPosition = function(position) {
+      position && (this.position = position);
+      if (this.getProjection() && typeof this.position.lng == 'function') {
+        var posPixel = this.getProjection().fromLatLngToDivPixel(this.position);
+        var x = Math.round(posPixel.x - (this.el.offsetWidth/2));
+        var y = Math.round(posPixel.y - this.el.offsetHeight - 10); // 10px for anchor
+        this.el.style.left = x + "px";
+        this.el.style.top = y + "px";
+      }
+    };
+
+    CustomMarker.prototype.setZIndex = function(zIndex) {
+      zIndex && (this.zIndex = zIndex);
+      this.el.style.zIndex = this.zIndex;
+    };
+
+    CustomMarker.prototype.setVisible = function(visible) {
+      this.el.style.display = visible ? 'inline-block' : 'none';
+      this.visible = visible;
+    };
+
+    CustomMarker.prototype.addClass = function(className) {
+      var classNames = this.el.className.split(' ');
+      (classNames.indexOf(className) == -1) && classNames.push(className);
+      this.el.className = classNames.join(' ');
+    };
+    
+    CustomMarker.prototype.removeClass = function(className) {
+      var classNames = this.el.className.split(' ');
+      var index = classNames.indexOf(className);
+      (index > -1) && classNames.splice(index, 1);
+      this.el.className = classNames.join(' ');
+    };
+
+    CustomMarker.prototype.onAdd = function() {
+      this.getPanes().overlayMouseTarget.appendChild(this.el);
+    };
+    
+    CustomMarker.prototype.draw = function() {
+      this.setPosition();
+      this.setZIndex(this.zIndex);
+      this.setVisible(this.visible);
+    };
+    
+    CustomMarker.prototype.onRemove = function() {
+      this.el.parentNode.removeChild(this.el);
+      this.el = null;
+    };
+  };
+
+  var customMarkerDirective = function(Attr2Options, _$compile_, _$timeout_)  {
+    parser = Attr2Options;
+    $compile = _$compile_;
+    $timeout = _$timeout_;
+    setCustomMarker();
+
+    return {
+      restrict: 'E',
+      require: '^map',
+      link: function(scope, element, attrs, mapController) {
+
+        var orgAttrs = parser.orgAttributes(element);
+        var filtered = parser.filter(attrs);
+        var options = parser.getOptions(filtered, scope);
+        var events = parser.getEvents(scope, filtered);
+
+        /**
+         * build a custom marker element
+         */
+        var removedEl = element[0].parentElement.removeChild(element[0]);
+        void 0;
+        var customMarker = new CustomMarker(options);
+        customMarker.setContent(removedEl.innerHTML, scope);
+        void 0;
+
+        void 0;
+        for (var eventName in events) {
+          google.maps.event.addDomListener(
+            customMarker.el, eventName, events[eventName]);
+        }
+        mapController.addObject('customMarkers', customMarker);
+
+        if (!(options.position instanceof google.maps.LatLng)) {
+          mapController.getGeoLocation(options.position).then(
+            function(latlng) {
+              customMarker.setPosition(latlng);
+            }
+          );
+        }
+
+        element.bind('$destroy', function() {
+          //Is it required to remove event listeners when DOM is removed?
+          mapController.deleteObject('customMarkers', marker);
+        });
+
+      } //link
+    }; // return
+  };// function
+  customMarkerDirective.$inject = ['Attr2Options', '$compile', '$timeout'];
+
+  angular.module('ngMap').directive('customMarker', customMarkerDirective);
+})();
+
+/**
+ * @ngdoc directive
  * @name directions
  * @description 
  *   Enable directions on map. e.g., origin, destination, draggable, waypoints, etc
@@ -51011,10 +51658,8 @@ angular.module('ngMap', []);
  *
  *   Restrict To:  Element 
  *
- * @param {String} &lt;DirectionsRendererOptions> Any DirectionsRendererOptions, 
- *   https://developers.google.com/maps/documentation/javascript/reference#DirectionsRendererOptions
- * @param {String} &lt;DirectionsRequest Options> Any DirectionsRequest options, 
- *   https://developers.google.com/maps/documentation/javascript/reference#DirectionsRequest
+ * @attr {String} DirectionsRendererOptions [Any DirectionsRendererOptions](https://developers.google.com/maps/documentation/javascript/reference#DirectionsRendererOptions)
+ * @attr {String} DirectionsRequestOptions [Any DirectionsRequest options](https://developers.google.com/maps/documentation/javascript/reference#DirectionsRequest)
  * @example
  * Example: 
  *   <map zoom="14" center="37.7699298, -122.4469157">
@@ -51043,7 +51688,7 @@ angular.module('ngMap', []);
     return renderer;
   };
 
-  var directions = function(Attr2Options, $timeout) {
+  var directions = function(Attr2Options, $timeout, NavigatorGeolocation) {
     var parser = Attr2Options;
     var directionsService = new google.maps.DirectionsService();
 
@@ -51060,7 +51705,12 @@ angular.module('ngMap', []);
         (validKeys.indexOf(key) === -1) && (delete request[key]);
       }
 
-      if (request.origin && request.destination) {
+      if(request.waypoints) {
+        // Check fo valid values
+        if(request.waypoints == "[]" || request.waypoints == "")  delete request.waypoints;
+      }
+
+      var showDirections = function(request) {
         void 0;
         directionsService.route(request, function(response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
@@ -51069,6 +51719,22 @@ angular.module('ngMap', []);
             });
           }
         });
+      };
+
+      if (request.origin && request.destination) {
+        if (request.origin == 'current-location') {
+          NavigatorGeolocation.getCurrentPosition().then(function(ll) {
+            request.origin = new google.maps.LatLng(ll.coords.latitude, ll.coords.longitude);
+            showDirections(request);
+          });
+        } else if (request.destination == 'current-location') {
+          NavigatorGeolocation.getCurrentPosition().then(function(ll) {
+            request.destination = new google.maps.LatLng(ll.coords.latitude, ll.coords.longitude);
+            showDirections(request);
+          });
+        } else {
+          showDirections(request);
+        }
       } 
     };
 
@@ -51085,7 +51751,13 @@ angular.module('ngMap', []);
       attrsToObserve.forEach(function(attrName) {
         (function(attrName) {
           attrs.$observe(attrName, function(val) {
-            if (options[attrName] !== val) { //apply only if changed
+            if (attrName == 'panel') {
+              $timeout(function(){
+                var panel = document.getElementById(val) || document.querySelector(val);
+                void 0;
+                panel && renderer.setPanel(panel);
+              });
+            } else if (options[attrName] !== val) { //apply only if changed
               var optionValue = parser.toOptionValue(val, {key: attrName});
               void 0;
               options[attrName] = optionValue;
@@ -51109,7 +51781,7 @@ angular.module('ngMap', []);
       link: linkFunc
     }
   }; // var directions
-  directions.$inject = ['Attr2Options', '$timeout'];
+  directions.$inject = ['Attr2Options', '$timeout', 'NavigatorGeolocation'];
 
   angular.module('ngMap').directive('directions', directions);
 })();
@@ -51118,7 +51790,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name drawing-manager
- * @requires Attr2Options
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -51281,7 +51953,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name heatmap-layer
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -51333,8 +52005,8 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name info-window
- * @requires Attr2Options
- * @requires $compile
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param $compile {service} $compile service
  * @description
  *   Defines infoWindow and provides compile method
  *
@@ -51342,12 +52014,12 @@ angular.module('ngMap', []);
  *
  *   Restrict To:  Element
  *
- * @param {Boolean} visible Indicates to show it when map is initialized
- * @param {Boolean} visible-on-marker Indicates to show it on a marker when map is initialized
- * @param {Expression} geo-callback if position is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback="showDetail()"
- * @param {String} &lt;InfoWindowOption> Any InfoWindow options,
- *        https://developers.google.com/maps/documentation/javascript/reference?csw=1#InfoWindowOptions
- * @param {String} &lt;InfoWindowEvent> Any InfoWindow events, https://developers.google.com/maps/documentation/javascript/reference
+ * @attr {Boolean} visible Indicates to show it when map is initialized
+ * @attr {Boolean} visible-on-marker Indicates to show it on a marker when map is initialized
+ * @attr {Expression} geo-callback if position is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback="showDetail()"
+ * @attr {String} &lt;InfoWindowOption> Any InfoWindow options,
+ *       https://developers.google.com/maps/documentation/javascript/reference?csw=1#InfoWindowOptions
+ * @attr {String} &lt;InfoWindowEvent> Any InfoWindow events, https://developers.google.com/maps/documentation/javascript/reference
  * @example
  * Usage:
  *   <map MAP_ATTRIBUTES>
@@ -51500,16 +52172,16 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name kml-layer
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   renders Kml layer on a map
  *   Requires:  map directive
  *   Restrict To:  Element
  *
- * @param {Url} url url of the kml layer
- * @param {KmlLayerOptions} KmlLayerOptions
+ * @attr {Url} url url of the kml layer
+ * @attr {KmlLayerOptions} KmlLayerOptions
  *   (https://developers.google.com/maps/documentation/javascript/reference#KmlLayerOptions)  
- * @param {String} &lt;KmlLayerEvent> Any KmlLayer events, https://developers.google.com/maps/documentation/javascript/reference
+ * @attr {String} &lt;KmlLayerEvent> Any KmlLayer events, https://developers.google.com/maps/documentation/javascript/reference
  * @example
  * Usage: 
  *   <map MAP_ATTRIBUTES>
@@ -51561,12 +52233,13 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name map-data
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   set map data
  *   Requires:  map directive
  *   Restrict To:  Element
  *
- * @param {String} method-name, run map.data[method-name] with attribute value
+ * @wn {String} method-name, run map.data[method-name] with attribute value
  * @example
  * Example: 
  *
@@ -51621,21 +52294,33 @@ angular.module('ngMap', []);
 
 /**
  * @ngdoc directive
- * @name lazy-load
- * @requires Attr2Options 
+ * @name map-lazy-load
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
- *   Requires: Delay the initialization of directive until required .js loads
+ *   Requires: Delay the initialization of map directive until the map is ready to be rendered
  *   Restrict To: Attribute 
  *
- * @param {String} lazy-load
-      script source file location
- *    example:  
- *      'http://maps.googlecom/maps/api/js'   
+ * @attr {String} map-lazy-load
+      Maps api script source file location.
+ *    Example:  
+ *      'https://maps.google.com/maps/api/js'   
+ * @attr {String} map-lazy-load-params
+     Maps api script source file location via angular scope variable.
+     Also requires the map-lazy-load attribute to be present in the directive.
+     Example: In your controller, set 
+       $scope.googleMapsURL = 'https://maps.google.com/maps/api/js?v=3.20&client=XXXXXenter-api-key-hereXXXX'
 
  * @example
  * Example: 
  *
  *   <div map-lazy-load="http://maps.google.com/maps/api/js">
+ *     <map center="Brampton" zoom="10">
+ *       <marker position="Brampton"></marker>
+ *     </map>
+ *   </div>
+ *
+ *   <div map-lazy-load="http://maps.google.com/maps/api/js" 
+ *        map-lazy-load-params="{{googleMapsUrl}}">
  *     <map center="Brampton" zoom="10">
  *       <marker position="Brampton"></marker>
  *     </map>
@@ -51646,6 +52331,8 @@ angular.module('ngMap', []);
   var $timeout, $compile, src, savedHtml;
 
   var preLinkFunc = function(scope, element, attrs) {
+    var mapsUrl = attrs.mapLazyLoadParams || attrs.mapLazyLoad;    
+    
     window.lazyLoadCallback = function() {
       void 0;
       $timeout(function() { /* give some time to load */
@@ -51656,7 +52343,8 @@ angular.module('ngMap', []);
 
     if(window.google === undefined || window.google.maps === undefined) {
       var scriptEl = document.createElement('script');
-      scriptEl.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'callback=lazyLoadCallback';
+      void 0;
+      scriptEl.src = mapsUrl + (mapsUrl.indexOf('?') > -1 ? '&' : '?') + 'callback=lazyLoadCallback';
       document.body.appendChild(scriptEl);
     } else {
       element.html(savedHtml);
@@ -51673,7 +52361,7 @@ angular.module('ngMap', []);
     /**
      * if already loaded, stop processing it
      */
-    if (document.querySelector('script[src="'+src+'?callback=lazyLoadCallback"]')) {
+    if (document.querySelector('script[src="'+src+(src.indexOf('?') > -1 ? '&' : '?')+'callback=lazyLoadCallback"]')) {
       return false;
     }
 
@@ -51697,7 +52385,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name map-type
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -51746,8 +52434,9 @@ angular.module('ngMap', []);
 
 /**
  * @ngdoc directive
+ * @memberof ngMap
  * @name map
- * @requires Attr2Options
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description
  *   Implementation of {@link MapController}
  *   Initialize a Google map within a `<div>` tag with given options and register events
@@ -51760,27 +52449,27 @@ angular.module('ngMap', []);
  *   Restrict To:
  *     Element
  *
- * @param {Expression} geo-callback if center is an address or current location, the expression is will be executed when geo-lookup is successful. e.g., geo-callback="showMyStoreInfo()"
- * @param {Array} geo-fallback-center 
+ * @attr {Expression} geo-callback if center is an address or current location, the expression is will be executed when geo-lookup is successful. e.g., geo-callback="showMyStoreInfo()"
+ * @attr {Array} geo-fallback-center
  *    The center of map incase geolocation failed. i.e. [0,0]
- * @param {Boolean} zoom-to-include-markers
+ * @attr {Boolean} zoom-to-include-markers
  *    When true, map boundary will be changed automatially to include all markers when initialized
- * @param {Boolean} default-style
+ * @attr {Boolean} default-style
  *    When false, the default styling, `display:block;height:300px`, will be ignored.
- * @param {String} init-event The name of event to initialize this map. 
+ * @attr {String} init-event The name of event to initialize this map.
  *    If this option is given, the map won't be initialized until the event is received.
- *    To invoke the event, use $scope.$emit or $scope.$broacast. 
+ *    To invoke the event, use $scope.$emit or $scope.$broacast.
  *    i.e. <map init-event="init-map" ng-click="$emit('init-map')" center=... ></map>
- * @param {String} &lt;MapOption> Any Google map options, 
+ * @attr {String} &lt;MapOption> Any Google map options,
  *    https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions
- * @param {String} &lt;MapEvent> Any Google map events, 
+ * @attr {String} &lt;MapEvent> Any Google map events,
  *    https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/map_events.html
  * @example
  * Usage:
  *   <map MAP_OPTIONS_OR_MAP_EVENTS ..>
  *     ... Any children directives
  *   </map>
- * 
+ *
  * Example:
  *   <map center="[40.74, -74.18]" on-click="doThat()">
  *   </map>
@@ -51789,20 +52478,20 @@ angular.module('ngMap', []);
  *   </map>
  */
 /* global google */
-(function() {
+(function () {
   'use strict';
 
-  function getStyle(el,styleProp) {
+  function getStyle(el, styleProp) {
     var y;
     if (el.currentStyle) {
       y = el.currentStyle[styleProp];
     } else if (window.getComputedStyle) {
-      y = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+      y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
     }
     return y;
   }
 
-  var mapDirective = function(Attr2Options, $timeout, $parse) {
+  var mapDirective = function (Attr2Options, $timeout, $parse) {
     var parser = Attr2Options;
 
     /**
@@ -51813,7 +52502,7 @@ angular.module('ngMap', []);
      * @param {Hash} attrs
      * @ctrl {MapController} ctrl
      */
-    var linkFunc = function(scope, element, attrs, ctrl) {
+    var linkFunc = function (scope, element, attrs, ctrl) {
       var orgAttrs = parser.orgAttributes(element);
 
       scope.google = google;  //used by $scope.eval in Attr2Options to avoid eval()
@@ -51832,17 +52521,17 @@ angular.module('ngMap', []);
        */
       if (attrs.defaultStyle !== 'false') {
         if (getStyle(element[0], 'display') != "block") {
-          element.css('display','block');
+          element.css('display', 'block');
         }
         if (getStyle(element[0], 'height').match(/^(0|auto)/)) {
-          element.css('height','300px');
+          element.css('height', '300px');
         }
       }
 
       /**
        * disable drag event
        */
-      element[0].addEventListener('dragstart', function(event) {
+      element[0].addEventListener('dragstart', function (event) {
         event.preventDefault();
         return false;
       });
@@ -51850,15 +52539,15 @@ angular.module('ngMap', []);
       /**
        * initialize function
        */
-      var initializeMap = function(mapOptions, mapEvents) {
+      var initializeMap = function (mapOptions, mapEvents) {
         var map = new google.maps.Map(el, {});
         map.markers = {};
         map.shapes = {};
-       
+
         /**
          * resize the map to prevent showing partially, in case intialized too early
          */
-        $timeout(function() {
+        $timeout(function () {
           google.maps.event.trigger(map, "resize");
         });
 
@@ -51868,14 +52557,14 @@ angular.module('ngMap', []);
         mapOptions.zoom = mapOptions.zoom || 15;
         var center = mapOptions.center;
         if (!center) {
-          mapOptions.center = new google.maps.LatLng(0,0);
+          mapOptions.center = new google.maps.LatLng(0, 0);
         } else if (!(center instanceof google.maps.LatLng)) {
           delete mapOptions.center;
-          ctrl.getGeoLocation(center).then(function(latlng) {
+          ctrl.getGeoLocation(center).then(function (latlng) {
             map.setCenter(latlng);
             var geoCallback = attrs.geoCallback;
             geoCallback && $parse(geoCallback)(scope);
-          }, function(error) {
+          }, function (error) {
             map.setCenter(options.geoFallbackCenter);
           });
         }
@@ -51897,10 +52586,11 @@ angular.module('ngMap', []);
 
         /**
          * set controller and set objects
-         * so that map can be used by other directives; marker or shape 
+         * so that map can be used by other directives; marker or shape
          * ctrl._objects are gathered when marker and shape are initialized before map is set
          */
-        ctrl.map = map;   /* so that map can be used by other directives; marker or shape */
+        ctrl.map = map;
+        /* so that map can be used by other directives; marker or shape */
         ctrl.addObjects(ctrl._objects);
 
         // /* providing method to add a marker used by user scope */
@@ -51914,16 +52604,15 @@ angular.module('ngMap', []);
          */
         scope.map = map;
         scope.map.scope = scope;
-        google.maps.event.addListenerOnce(map, "idle", function() {
-          scope.$emit('mapInitialized', map);  
-          if (attrs.zoomToIncludeMarkers == 'auto') {
-            scope.$on('objectChanged', function(evt, msg) {
-              void 0;
-              msg[0] == 'markers' && ctrl.zoomToIncludeMarkers();
-            });
-          }else if (attrs.zoomToIncludeMarkers) {
-            void 0;
+        google.maps.event.addListenerOnce(map, "idle", function () {
+          scope.$emit('mapInitialized', map);
+          if (attrs.zoomToIncludeMarkers) {
             ctrl.zoomToIncludeMarkers();
+            if (attrs.zoomToIncludeMarkers == 'auto') {
+              scope.$on('objectChanged', function (evt, msg) {
+                msg[0] == 'markers' && ctrl.zoomToIncludeMarkers();
+              });
+            }
           }
         });
       }; // function initializeMap()
@@ -51939,7 +52628,7 @@ angular.module('ngMap', []);
       void 0;
 
       if (attrs.initEvent) { // allows controlled initialization
-        scope.$on(attrs.initEvent, function() {
+        scope.$on(attrs.initEvent, function () {
           !ctrl.map && initializeMap(mapOptions, mapEvents); // init if not done
         });
       } else {
@@ -51951,7 +52640,7 @@ angular.module('ngMap', []);
       restrict: 'AE',
       controller: 'MapController',
       link: linkFunc
-    }; 
+    };
   };
 
   angular.module('ngMap').directive('map', ['Attr2Options', '$timeout', '$parse', mapDirective]);
@@ -51964,7 +52653,11 @@ angular.module('ngMap', []);
   /**
    * @ngdoc controller
    * @name MapController
-   * @requires $scope
+   * @param $scope {service}
+   * @param $q {service} promise Q
+   * @param NavigatorGeolocation {service}
+   * @param GeoCoder {service}
+   * @param Attr2Options {service} convert html attribute to Gogole map api options
    * @property {Hash} controls collection of Controls initiated within `map` directive
    * @property {Hash} markers collection of Markers initiated within `map` directive
    * @property {Hash} shapes collection of shapes initiated within `map` directive
@@ -52192,8 +52885,8 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name marker
- * @requires Attr2Options 
- * @requires NavigatorGeolocation
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param NavigatorGeolocation It is used to find the current location
  * @description 
  *   Draw a Google map marker on a map with given options and register events  
  *   
@@ -52201,15 +52894,15 @@ angular.module('ngMap', []);
  *
  *   Restrict To:  Element 
  *
- * @param {String} position address, 'current', or [latitude, longitude]  
+ * @attr {String} position address, 'current', or [latitude, longitude]  
  *    example:  
  *      '1600 Pennsylvania Ave, 20500  Washingtion DC',   
  *      'current position',  
  *      '[40.74, -74.18]'  
- * @param {Boolean} centered if set, map will be centered with this marker
- * @param {Expression} geo-callback if position is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback="showStoreInfo()"
- * @param {String} &lt;MarkerOption> Any Marker options, https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions  
- * @param {String} &lt;MapEvent> Any Marker events, https://developers.google.com/maps/documentation/javascript/reference
+ * @attr {Boolean} centered if set, map will be centered with this marker
+ * @attr {Expression} geo-callback if position is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback="showStoreInfo()"
+ * @attr {String} &lt;MarkerOption> [Any Marker options](https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions) 
+ * @attr {String} &lt;MapEvent> [Any Marker events](https://developers.google.com/maps/documentation/javascript/reference)
  * @example
  * Usage: 
  *   <map MAP_ATTRIBUTES>
@@ -52316,7 +53009,8 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name overlay-map-type
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
+ * @param $window {service} 
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -52369,19 +53063,18 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name places-auto-complete
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Provides address auto complete feature to an input element
  *   Requires: input tag
  *   Restrict To: Attribute
  *
- * @param {AutoCompleteOptions} Any AutocompleteOptions
- *    https://developers.google.com/maps/documentation/javascript/3.exp/reference#AutocompleteOptions
+ * @attr {AutoCompleteOptions} [Any AutocompleteOptions](https://developers.google.com/maps/documentation/javascript/3.exp/reference#AutocompleteOptions)
  *
  * @example
  * Example: 
  *   <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
- *   <input places-auto-complete types="['geocode']" />
+ *   <input places-auto-complete types="['geocode']" on-place-changed="myCallback(place)" />
  */
 /* global google */
 (function() {
@@ -52399,11 +53092,14 @@ angular.module('ngMap', []);
       for (var eventName in events) {
         google.maps.event.addListener(autocomplete, eventName, events[eventName]);
       }
-      element[0].addEventListener('change', function() {
+
+      var updateModel = function() {
         $timeout(function(){
           ngModelCtrl && ngModelCtrl.$setViewValue(element.val());
         },100);
-      });
+      }
+      google.maps.event.addListener(autocomplete, 'place_changed', updateModel);
+      element[0].addEventListener('change', updateModel);
 
       attrs.$observe('types', function(val) {
         if (val) {
@@ -52430,7 +53126,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name shape
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Initialize a Google map shape in map with given options and register events  
  *   The shapes are:
@@ -52444,15 +53140,15 @@ angular.module('ngMap', []);
  *
  *   Restrict To:  Element
  *
- * @param {Boolean} centered if set, map will be centered with this marker
- * @param {Expression} geo-callback if shape is a circle and the center is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback="showDetail()"
- * @param {String} &lt;OPTIONS>
+ * @attr {Boolean} centered if set, map will be centered with this marker
+ * @attr {Expression} geo-callback if shape is a circle and the center is an address, the expression is will be performed when geo-lookup is successful. e.g., geo-callback="showDetail()"
+ * @attr {String} &lt;OPTIONS>
  *   For circle, [any circle options](https://developers.google.com/maps/documentation/javascript/reference#CircleOptions)  
  *   For polygon, [any polygon options](https://developers.google.com/maps/documentation/javascript/reference#PolygonOptions)  
  *   For polyline, [any polyline options](https://developers.google.com/maps/documentation/javascript/reference#PolylineOptions)   
  *   For rectangle, [any rectangle options](https://developers.google.com/maps/documentation/javascript/reference#RectangleOptions)   
  *   For image, [any groundOverlay options](https://developers.google.com/maps/documentation/javascript/reference#GroundOverlayOptions)   
- * @param {String} &lt;MapEvent> Any Shape events, https://developers.google.com/maps/documentation/javascript/reference
+ * @attr {String} &lt;MapEvent> [Any Shape events](https://developers.google.com/maps/documentation/javascript/reference)
  * @example
  * Usage: 
  *   <map MAP_ATTRIBUTES>
@@ -52604,16 +53300,14 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name streetview-panorama
- * @requires Attr2Options
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description
  *   Requires:  map directive
  *   Restrict To:  Element
  *
- * @param container Optional, id or css selector, if given, streetview will be in the given html element
- * @param {String} &lt;StreetViewPanoramaOption> Any Google StreetViewPanorama options, 
- *        https://developers.google.com/maps/documentation/javascript/reference?csw=1#StreetViewPanoramaOptions
- * @param {String} &lt;StreetViewPanoramaEvent> Any Google StreetViewPanorama events, 
- *        https://developers.google.com/maps/documentation/javascript/reference#StreetViewPanorama 
+ * @attr container Optional, id or css selector, if given, streetview will be in the given html element
+ * @attr {String} &lt;StreetViewPanoramaOption> [Any Google StreetViewPanorama options](https://developers.google.com/maps/documentation/javascript/reference?csw=1#StreetViewPanoramaOptions)
+ * @attr {String} &lt;StreetViewPanoramaEvent> [Any Google StreetViewPanorama events](https://developers.google.com/maps/documentation/javascript/reference#StreetViewPanorama)
  *
  * @example
  *   <map zoom="11" center="[40.688738,-74.043871]" >
@@ -52701,7 +53395,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name traffic-layer
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -52752,7 +53446,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name transit-layer
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -52803,7 +53497,7 @@ angular.module('ngMap', []);
 /**
  * @ngdoc directive
  * @name weather-layer
- * @requires Attr2Options 
+ * @param Attr2Options {service} convert html attribute to Gogole map api options
  * @description 
  *   Requires:  map directive
  *   Restrict To:  Element
@@ -52852,18 +53546,18 @@ angular.module('ngMap', []);
   }]);
 })();
 
-},{}],27:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /**
- * Satellizer 0.12.4
+ * Satellizer 0.12.5
  * (c) 2014-2015 Sahat Yalkabov
  * License: MIT
  */
-!function(e,t,n){"use strict";t.module("satellizer",[]).constant("SatellizerConfig",{httpInterceptor:!0,withCredentials:!0,tokenRoot:null,cordova:!1,baseUrl:"/",loginUrl:"/auth/login",signupUrl:"/auth/signup",unlinkUrl:"/auth/unlink/",tokenName:"token",tokenPrefix:"satellizer",authHeader:"Authorization",authToken:"Bearer",storageType:"localStorage",providers:{facebook:{name:"facebook",url:"/auth/facebook",authorizationEndpoint:"https://www.facebook.com/v2.3/dialog/oauth",redirectUri:(e.location.origin||e.location.protocol+"//"+e.location.host)+"/",requiredUrlParams:["display","scope"],scope:["email"],scopeDelimiter:",",display:"popup",type:"2.0",popupOptions:{width:580,height:400}},google:{name:"google",url:"/auth/google",authorizationEndpoint:"https://accounts.google.com/o/oauth2/auth",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["scope"],optionalUrlParams:["display"],scope:["profile","email"],scopePrefix:"openid",scopeDelimiter:" ",display:"popup",type:"2.0",popupOptions:{width:452,height:633}},github:{name:"github",url:"/auth/github",authorizationEndpoint:"https://github.com/login/oauth/authorize",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,optionalUrlParams:["scope"],scope:["user:email"],scopeDelimiter:" ",type:"2.0",popupOptions:{width:1020,height:618}},linkedin:{name:"linkedin",url:"/auth/linkedin",authorizationEndpoint:"https://www.linkedin.com/uas/oauth2/authorization",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["state"],scope:["r_emailaddress"],scopeDelimiter:" ",state:"STATE",type:"2.0",popupOptions:{width:527,height:582}},twitter:{name:"twitter",url:"/auth/twitter",authorizationEndpoint:"https://api.twitter.com/oauth/authenticate",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,type:"1.0",popupOptions:{width:495,height:645}},twitch:{name:"twitch",url:"/auth/twitch",authorizationEndpoint:"https://api.twitch.tv/kraken/oauth2/authorize",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["scope"],scope:["user_read"],scopeDelimiter:" ",display:"popup",type:"2.0",popupOptions:{width:500,height:560}},live:{name:"live",url:"/auth/live",authorizationEndpoint:"https://login.live.com/oauth20_authorize.srf",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["display","scope"],scope:["wl.emails"],scopeDelimiter:" ",display:"popup",type:"2.0",popupOptions:{width:500,height:560}},yahoo:{name:"yahoo",url:"/auth/yahoo",authorizationEndpoint:"https://api.login.yahoo.com/oauth2/request_auth",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,scope:[],scopeDelimiter:",",type:"2.0",popupOptions:{width:559,height:519}}}}).provider("$auth",["SatellizerConfig",function(e){Object.defineProperties(this,{httpInterceptor:{get:function(){return e.httpInterceptor},set:function(t){e.httpInterceptor=t}},baseUrl:{get:function(){return e.baseUrl},set:function(t){e.baseUrl=t}},loginUrl:{get:function(){return e.loginUrl},set:function(t){e.loginUrl=t}},signupUrl:{get:function(){return e.signupUrl},set:function(t){e.signupUrl=t}},tokenRoot:{get:function(){return e.tokenRoot},set:function(t){e.tokenRoot=t}},tokenName:{get:function(){return e.tokenName},set:function(t){e.tokenName=t}},tokenPrefix:{get:function(){return e.tokenPrefix},set:function(t){e.tokenPrefix=t}},unlinkUrl:{get:function(){return e.unlinkUrl},set:function(t){e.unlinkUrl=t}},authHeader:{get:function(){return e.authHeader},set:function(t){e.authHeader=t}},authToken:{get:function(){return e.authToken},set:function(t){e.authToken=t}},withCredentials:{get:function(){return e.withCredentials},set:function(t){e.withCredentials=t}},cordova:{get:function(){return e.cordova},set:function(t){e.cordova=t}},storageType:{get:function(){return e.storageType},set:function(t){e.storageType=t}}}),t.forEach(Object.keys(e.providers),function(n){this[n]=function(o){return t.extend(e.providers[n],o)}},this);var n=function(n){e.providers[n.name]=e.providers[n.name]||{},t.extend(e.providers[n.name],n)};this.oauth1=function(t){n(t),e.providers[t.name].type="1.0"},this.oauth2=function(t){n(t),e.providers[t.name].type="2.0"},this.$get=["$q","SatellizerShared","SatellizerLocal","SatellizerOauth",function(e,t,n,o){var r={};return r.login=function(e,t){return n.login(e,t)},r.signup=function(e,t){return n.signup(e,t)},r.logout=function(){return t.logout()},r.authenticate=function(e,t){return o.authenticate(e,t)},r.link=function(e,t){return o.authenticate(e,t)},r.unlink=function(e,t){return o.unlink(e,t)},r.isAuthenticated=function(){return t.isAuthenticated()},r.getToken=function(){return t.getToken()},r.setToken=function(e){t.setToken({access_token:e})},r.removeToken=function(){return t.removeToken()},r.getPayload=function(){return t.getPayload()},r.setStorageType=function(e){return t.setStorageType(e)},r}]}]).factory("SatellizerShared",["$q","$window","SatellizerConfig","SatellizerStorage",function(n,o,r,i){var a={},u=r.tokenPrefix?[r.tokenPrefix,r.tokenName].join("_"):r.tokenName;return a.getToken=function(){return i.get(u)},a.getPayload=function(){var t=i.get(u);if(t&&3===t.split(".").length){var n=t.split(".")[1],o=n.replace("-","+").replace("_","/");return JSON.parse(decodeURIComponent(escape(e.atob(o))))}},a.setToken=function(e){var n,o=e&&e.access_token;if(o&&(t.isObject(o)&&t.isObject(o.data)?e=o:t.isString(o)&&(n=o)),!n&&e){var a=r.tokenRoot&&r.tokenRoot.split(".").reduce(function(e,t){return e[t]},e.data);n=a?a[r.tokenName]:e.data[r.tokenName]}if(!n){var l=r.tokenRoot?r.tokenRoot+"."+r.tokenName:r.tokenName;throw new Error('Expecting a token named "'+l+'" but instead got: '+JSON.stringify(e.data))}i.set(u,n)},a.removeToken=function(){i.remove(u)},a.isAuthenticated=function(){var e=i.get(u);if(e){if(3===e.split(".").length){var t=e.split(".")[1],n=t.replace("-","+").replace("_","/"),r=JSON.parse(o.atob(n)).exp;if(r){var a=Math.round((new Date).getTime()/1e3)>=r;return a?(i.remove(u),!1):!0}return!0}return!0}return!1},a.logout=function(){return i.remove(u),n.when()},a.setStorageType=function(e){r.storageType=e},a}]).factory("SatellizerOauth",["$q","$http","SatellizerConfig","SatellizerUtils","SatellizerShared","SatellizerOauth1","SatellizerOauth2",function(e,t,n,o,r,i,a){var u={};return u.authenticate=function(t,o){var u="1.0"===n.providers[t].type?new i:new a,l=e.defer();return u.open(n.providers[t],o||{}).then(function(e){r.setToken(e,!1),l.resolve(e)})["catch"](function(e){l.reject(e)}),l.promise},u.unlink=function(e,r){return r=r||{},r.url=n.baseUrl?o.joinUrl(n.baseUrl,n.unlinkUrl):n.unlinkUrl,r.data={provider:e}||r.data,r.method=r.method||"POST",t(r)},u}]).factory("SatellizerLocal",["$http","SatellizerUtils","SatellizerShared","SatellizerConfig",function(e,t,n,o){var r={};return r.login=function(r,i){return i=i||{},i.url=o.baseUrl?t.joinUrl(o.baseUrl,o.loginUrl):o.loginUrl,i.data=r||i.data,i.method=i.method||"POST",e(i).then(function(e){return n.setToken(e),e})},r.signup=function(n,r){return r=r||{},r.url=o.baseUrl?t.joinUrl(o.baseUrl,o.signupUrl):o.signupUrl,r.data=n||r.data,r.method=r.method||"POST",e(r)},r}]).factory("SatellizerOauth2",["$q","$http","$window","SatellizerPopup","SatellizerUtils","SatellizerConfig","SatellizerStorage",function(e,n,o,r,i,a,u){return function(){var o={},l={defaultUrlParams:["response_type","client_id","redirect_uri"],responseType:"code",responseParams:{code:"code",clientId:"clientId",redirectUri:"redirectUri"}};return o.open=function(n,p){l=i.merge(n,l);var c,s,h=l.name+"_state";return t.isFunction(l.state)?u.set(h,l.state()):t.isString(l.state)&&u.set(h,l.state),c=[l.authorizationEndpoint,o.buildQueryString()].join("?"),s=a.cordova?r.open(c,l.name,l.popupOptions,l.redirectUri).eventListener(l.redirectUri):r.open(c,l.name,l.popupOptions,l.redirectUri).pollPopup(),s.then(function(t){return"token"===l.responseType?t:t.state&&t.state!==u.get(h)?e.reject('OAuth "state" mismatch'):o.exchangeForToken(t,p)})},o.exchangeForToken=function(e,o){var r=t.extend({},o);t.forEach(l.responseParams,function(t,n){switch(n){case"code":r[t]=e.code;break;case"clientId":r[t]=l.clientId;break;case"redirectUri":r[t]=l.redirectUri;break;default:r[t]=e[n]}}),e.state&&(r.state=e.state);var u=a.baseUrl?i.joinUrl(a.baseUrl,l.url):l.url;return n.post(u,r,{withCredentials:a.withCredentials})},o.buildQueryString=function(){var e=[],n=["defaultUrlParams","requiredUrlParams","optionalUrlParams"];return t.forEach(n,function(n){t.forEach(l[n],function(n){var o=i.camelCase(n),r=t.isFunction(l[n])?l[n]():l[o];if("state"===n){var a=l.name+"_state";r=encodeURIComponent(u.get(a))}"scope"===n&&Array.isArray(r)&&(r=r.join(l.scopeDelimiter),l.scopePrefix&&(r=[l.scopePrefix,r].join(l.scopeDelimiter))),e.push([n,r])})}),e.map(function(e){return e.join("=")}).join("&")},o}}]).factory("SatellizerOauth1",["$q","$http","SatellizerPopup","SatellizerConfig","SatellizerUtils",function(e,n,o,r,i){return function(){var e={},a={url:null,name:null,popupOptions:null,redirectUri:null,authorizationEndpoint:null};return e.open=function(u,l){t.extend(a,u);var p,c=r.baseUrl?i.joinUrl(r.baseUrl,a.url):a.url;return r.cordova||(p=o.open("",a.name,a.popupOptions,a.redirectUri)),n.post(c,a).then(function(t){r.cordova?p=o.open([a.authorizationEndpoint,e.buildQueryString(t.data)].join("?"),a.name,a.popupOptions,a.redirectUri):p.popupWindow.location=[a.authorizationEndpoint,e.buildQueryString(t.data)].join("?");var n=r.cordova?p.eventListener(a.redirectUri):p.pollPopup();return n.then(function(t){return e.exchangeForToken(t,l)})})},e.exchangeForToken=function(e,o){var u=t.extend({},o,e),l=r.baseUrl?i.joinUrl(r.baseUrl,a.url):a.url;return n.post(l,u,{withCredentials:r.withCredentials})},e.buildQueryString=function(e){var n=[];return t.forEach(e,function(e,t){n.push(encodeURIComponent(t)+"="+encodeURIComponent(e))}),n.join("&")},e}}]).factory("SatellizerPopup",["$q","$interval","$window","SatellizerConfig","SatellizerUtils",function(o,r,i,a,u){var l={};return l.url="",l.popupWindow=null,l.open=function(t,n,o){l.url=t;var r=l.stringifyOptions(l.prepareOptions(o)),i=a.cordova?"_blank":n;return l.popupWindow=e.open(t,i,r),e.popup=l.popupWindow,l.popupWindow&&l.popupWindow.focus&&l.popupWindow.focus(),l},l.eventListener=function(e){var n=o.defer();return l.popupWindow.addEventListener("loadstart",function(o){if(0===o.url.indexOf(e)){var r=document.createElement("a");if(r.href=o.url,r.search||r.hash){var i=r.search.substring(1).replace(/\/$/,""),a=r.hash.substring(1).replace(/\/$/,""),p=u.parseQueryString(a),c=u.parseQueryString(i);t.extend(c,p),c.error||n.resolve(c),l.popupWindow.close()}}}),l.popupWindow.addEventListener("loaderror",function(){n.reject("Authorization Failed")}),n.promise},l.pollPopup=function(){var e=o.defer(),i=r(function(){try{var o=document.location.host,a=l.popupWindow.location.host;if(a===o&&(l.popupWindow.location.search||l.popupWindow.location.hash)){var p=l.popupWindow.location.search.substring(1).replace(/\/$/,""),c=l.popupWindow.location.hash.substring(1).replace(/[\/$]/,""),s=u.parseQueryString(c),h=u.parseQueryString(p);t.extend(h,s),h.error||e.resolve(h),l.popupWindow.close(),r.cancel(i)}}catch(d){}(!l.popupWindow||l.popupWindow.closed||l.popupWindow.closed===n)&&r.cancel(i)},50);return e.promise},l.prepareOptions=function(e){e=e||{};var n=e.width||500,o=e.height||500;return t.extend({width:n,height:o,left:i.screenX+(i.outerWidth-n)/2,top:i.screenY+(i.outerHeight-o)/2.5},e)},l.stringifyOptions=function(e){var n=[];return t.forEach(e,function(e,t){n.push(t+"="+e)}),n.join(",")},l}]).service("SatellizerUtils",function(){this.camelCase=function(e){return e.replace(/([\:\-\_]+(.))/g,function(e,t,n,o){return o?n.toUpperCase():n})},this.parseQueryString=function(e){var n,o,r={};return t.forEach((e||"").split("&"),function(e){e&&(o=e.split("="),n=decodeURIComponent(o[0]),r[n]=t.isDefined(o[1])?decodeURIComponent(o[1]):!0)}),r},this.joinUrl=function(e,t){if(/^(?:[a-z]+:)?\/\//i.test(t))return t;var n=[e,t].join("/"),o=function(e){return e.replace(/[\/]+/g,"/").replace(/\/\?/g,"?").replace(/\/\#/g,"#").replace(/\:\//g,"://")};return o(n)},this.merge=function(e,t){var n={};for(var o in e)e.hasOwnProperty(o)&&(n[o]=o in t&&"object"==typeof e[o]&&null!==o?this.merge(e[o],t[o]):e[o]);for(o in t)if(t.hasOwnProperty(o)){if(o in n)continue;n[o]=t[o]}return n}}).factory("SatellizerStorage",["$window","SatellizerConfig",function(e,t){var o=function(){try{var n=t.storageType in e&&null!==e[t.storageType];if(n){var o=Math.random().toString(36).substring(7);e[t.storageType].setItem(o,""),e[t.storageType].removeItem(o)}return n}catch(r){return!1}}();return o||console.warn("Satellizer Warning: "+t.storageType+" is not available."),{get:function(r){return o?e[t.storageType].getItem(r):n},set:function(r,i){return o?e[t.storageType].setItem(r,i):n},remove:function(r){return o?e[t.storageType].removeItem(r):n}}}]).factory("SatellizerInterceptor",["$q","SatellizerConfig","SatellizerStorage","SatellizerShared",function(e,t,n,o){return{request:function(e){if(e.skipAuthorization)return e;if(o.isAuthenticated()&&t.httpInterceptor){var r=t.tokenPrefix?t.tokenPrefix+"_"+t.tokenName:t.tokenName,i=n.get(r);t.authHeader&&t.authToken&&(i=t.authToken+" "+i),e.headers[t.authHeader]=i}return e},responseError:function(t){return e.reject(t)}}}]).config(["$httpProvider",function(e){e.interceptors.push("SatellizerInterceptor")}])}(window,window.angular);
-},{}],28:[function(require,module,exports){
+!function(e,t,n){"use strict";t.module("satellizer",[]).constant("SatellizerConfig",{httpInterceptor:!0,withCredentials:!0,tokenRoot:null,cordova:!1,baseUrl:"/",loginUrl:"/auth/login",signupUrl:"/auth/signup",unlinkUrl:"/auth/unlink/",tokenName:"token",tokenPrefix:"satellizer",authHeader:"Authorization",authToken:"Bearer",storageType:"localStorage",providers:{facebook:{name:"facebook",url:"/auth/facebook",authorizationEndpoint:"https://www.facebook.com/v2.3/dialog/oauth",redirectUri:(e.location.origin||e.location.protocol+"//"+e.location.host)+"/",requiredUrlParams:["display","scope"],scope:["email"],scopeDelimiter:",",display:"popup",type:"2.0",popupOptions:{width:580,height:400}},google:{name:"google",url:"/auth/google",authorizationEndpoint:"https://accounts.google.com/o/oauth2/auth",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["scope"],optionalUrlParams:["display"],scope:["profile","email"],scopePrefix:"openid",scopeDelimiter:" ",display:"popup",type:"2.0",popupOptions:{width:452,height:633}},github:{name:"github",url:"/auth/github",authorizationEndpoint:"https://github.com/login/oauth/authorize",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,optionalUrlParams:["scope"],scope:["user:email"],scopeDelimiter:" ",type:"2.0",popupOptions:{width:1020,height:618}},instagram:{name:"instagram",url:"/auth/instagram",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["scope"],scope:["basic"],scopeDelimiter:"+",authorizationEndpoint:"https://api.instagram.com/oauth/authorize"},linkedin:{name:"linkedin",url:"/auth/linkedin",authorizationEndpoint:"https://www.linkedin.com/uas/oauth2/authorization",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["state"],scope:["r_emailaddress"],scopeDelimiter:" ",state:"STATE",type:"2.0",popupOptions:{width:527,height:582}},twitter:{name:"twitter",url:"/auth/twitter",authorizationEndpoint:"https://api.twitter.com/oauth/authenticate",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,type:"1.0",popupOptions:{width:495,height:645}},twitch:{name:"twitch",url:"/auth/twitch",authorizationEndpoint:"https://api.twitch.tv/kraken/oauth2/authorize",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["scope"],scope:["user_read"],scopeDelimiter:" ",display:"popup",type:"2.0",popupOptions:{width:500,height:560}},live:{name:"live",url:"/auth/live",authorizationEndpoint:"https://login.live.com/oauth20_authorize.srf",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["display","scope"],scope:["wl.emails"],scopeDelimiter:" ",display:"popup",type:"2.0",popupOptions:{width:500,height:560}},yahoo:{name:"yahoo",url:"/auth/yahoo",authorizationEndpoint:"https://api.login.yahoo.com/oauth2/request_auth",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,scope:[],scopeDelimiter:",",type:"2.0",popupOptions:{width:559,height:519}}}}).provider("$auth",["SatellizerConfig",function(e){Object.defineProperties(this,{httpInterceptor:{get:function(){return e.httpInterceptor},set:function(t){e.httpInterceptor=t}},baseUrl:{get:function(){return e.baseUrl},set:function(t){e.baseUrl=t}},loginUrl:{get:function(){return e.loginUrl},set:function(t){e.loginUrl=t}},signupUrl:{get:function(){return e.signupUrl},set:function(t){e.signupUrl=t}},tokenRoot:{get:function(){return e.tokenRoot},set:function(t){e.tokenRoot=t}},tokenName:{get:function(){return e.tokenName},set:function(t){e.tokenName=t}},tokenPrefix:{get:function(){return e.tokenPrefix},set:function(t){e.tokenPrefix=t}},unlinkUrl:{get:function(){return e.unlinkUrl},set:function(t){e.unlinkUrl=t}},authHeader:{get:function(){return e.authHeader},set:function(t){e.authHeader=t}},authToken:{get:function(){return e.authToken},set:function(t){e.authToken=t}},withCredentials:{get:function(){return e.withCredentials},set:function(t){e.withCredentials=t}},cordova:{get:function(){return e.cordova},set:function(t){e.cordova=t}},storageType:{get:function(){return e.storageType},set:function(t){e.storageType=t}}}),t.forEach(Object.keys(e.providers),function(n){this[n]=function(o){return t.extend(e.providers[n],o)}},this);var n=function(n){e.providers[n.name]=e.providers[n.name]||{},t.extend(e.providers[n.name],n)};this.oauth1=function(t){n(t),e.providers[t.name].type="1.0"},this.oauth2=function(t){n(t),e.providers[t.name].type="2.0"},this.$get=["$q","SatellizerShared","SatellizerLocal","SatellizerOauth",function(e,t,n,o){var r={};return r.login=function(e,t){return n.login(e,t)},r.signup=function(e,t){return n.signup(e,t)},r.logout=function(){return t.logout()},r.authenticate=function(e,t){return o.authenticate(e,t)},r.link=function(e,t){return o.authenticate(e,t)},r.unlink=function(e,t){return o.unlink(e,t)},r.isAuthenticated=function(){return t.isAuthenticated()},r.getToken=function(){return t.getToken()},r.setToken=function(e){t.setToken({access_token:e})},r.removeToken=function(){return t.removeToken()},r.getPayload=function(){return t.getPayload()},r.setStorageType=function(e){return t.setStorageType(e)},r}]}]).factory("SatellizerShared",["$q","$window","SatellizerConfig","SatellizerStorage",function(n,o,r,i){var a={},u=r.tokenPrefix?[r.tokenPrefix,r.tokenName].join("_"):r.tokenName;return a.getToken=function(){return i.get(u)},a.getPayload=function(){var t=i.get(u);if(t&&3===t.split(".").length){var n=t.split(".")[1],o=n.replace(/-/g,"+").replace(/_/g,"/");return JSON.parse(decodeURIComponent(escape(e.atob(o))))}},a.setToken=function(e){var n,o=e&&e.access_token;if(o&&(t.isObject(o)&&t.isObject(o.data)?e=o:t.isString(o)&&(n=o)),!n&&e){var a=r.tokenRoot&&r.tokenRoot.split(".").reduce(function(e,t){return e[t]},e.data);n=a?a[r.tokenName]:e.data[r.tokenName]}if(!n){var l=r.tokenRoot?r.tokenRoot+"."+r.tokenName:r.tokenName;throw new Error('Expecting a token named "'+l+'" but instead got: '+JSON.stringify(e.data))}i.set(u,n)},a.removeToken=function(){i.remove(u)},a.isAuthenticated=function(){var e=i.get(u);if(e){if(3===e.split(".").length){var t=e.split(".")[1],n=t.replace(/-/g,"+").replace(/_/g,"/"),r=JSON.parse(o.atob(n)).exp;if(r){var a=Math.round((new Date).getTime()/1e3)>=r;return a?(i.remove(u),!1):!0}return!0}return!0}return!1},a.logout=function(){return i.remove(u),n.when()},a.setStorageType=function(e){r.storageType=e},a}]).factory("SatellizerOauth",["$q","$http","SatellizerConfig","SatellizerUtils","SatellizerShared","SatellizerOauth1","SatellizerOauth2",function(e,t,n,o,r,i,a){var u={};return u.authenticate=function(t,o){var u="1.0"===n.providers[t].type?new i:new a,l=e.defer();return u.open(n.providers[t],o||{}).then(function(e){r.setToken(e,!1),l.resolve(e)})["catch"](function(e){l.reject(e)}),l.promise},u.unlink=function(e,r){return r=r||{},r.url=n.baseUrl?o.joinUrl(n.baseUrl,n.unlinkUrl):n.unlinkUrl,r.data={provider:e}||r.data,r.method=r.method||"POST",t(r)},u}]).factory("SatellizerLocal",["$http","SatellizerUtils","SatellizerShared","SatellizerConfig",function(e,t,n,o){var r={};return r.login=function(r,i){return i=i||{},i.url=o.baseUrl?t.joinUrl(o.baseUrl,o.loginUrl):o.loginUrl,i.data=r||i.data,i.method=i.method||"POST",e(i).then(function(e){return n.setToken(e),e})},r.signup=function(n,r){return r=r||{},r.url=o.baseUrl?t.joinUrl(o.baseUrl,o.signupUrl):o.signupUrl,r.data=n||r.data,r.method=r.method||"POST",e(r)},r}]).factory("SatellizerOauth2",["$q","$http","$window","SatellizerPopup","SatellizerUtils","SatellizerConfig","SatellizerStorage",function(e,n,o,r,i,a,u){return function(){var o={},l={defaultUrlParams:["response_type","client_id","redirect_uri"],responseType:"code",responseParams:{code:"code",clientId:"clientId",redirectUri:"redirectUri"}};return o.open=function(n,p){l=i.merge(n,l);var c,s,h=l.name+"_state";return t.isFunction(l.state)?u.set(h,l.state()):t.isString(l.state)&&u.set(h,l.state),c=[l.authorizationEndpoint,o.buildQueryString()].join("?"),s=a.cordova?r.open(c,l.name,l.popupOptions,l.redirectUri).eventListener(l.redirectUri):r.open(c,l.name,l.popupOptions,l.redirectUri).pollPopup(),s.then(function(t){return"token"===l.responseType?t:t.state&&t.state!==u.get(h)?e.reject('OAuth "state" mismatch'):o.exchangeForToken(t,p)})},o.exchangeForToken=function(e,o){var r=t.extend({},o);t.forEach(l.responseParams,function(t,n){switch(n){case"code":r[t]=e.code;break;case"clientId":r[t]=l.clientId;break;case"redirectUri":r[t]=l.redirectUri;break;default:r[t]=e[n]}}),e.state&&(r.state=e.state);var u=a.baseUrl?i.joinUrl(a.baseUrl,l.url):l.url;return n.post(u,r,{withCredentials:a.withCredentials})},o.buildQueryString=function(){var e=[],n=["defaultUrlParams","requiredUrlParams","optionalUrlParams"];return t.forEach(n,function(n){t.forEach(l[n],function(n){var o=i.camelCase(n),r=t.isFunction(l[n])?l[n]():l[o];if("state"===n){var a=l.name+"_state";r=encodeURIComponent(u.get(a))}"scope"===n&&Array.isArray(r)&&(r=r.join(l.scopeDelimiter),l.scopePrefix&&(r=[l.scopePrefix,r].join(l.scopeDelimiter))),e.push([n,r])})}),e.map(function(e){return e.join("=")}).join("&")},o}}]).factory("SatellizerOauth1",["$q","$http","SatellizerPopup","SatellizerConfig","SatellizerUtils",function(e,n,o,r,i){return function(){var e={},a={url:null,name:null,popupOptions:null,redirectUri:null,authorizationEndpoint:null};return e.open=function(u,l){t.extend(a,u);var p,c=r.baseUrl?i.joinUrl(r.baseUrl,a.url):a.url;return r.cordova||(p=o.open("",a.name,a.popupOptions,a.redirectUri)),n.post(c,a).then(function(t){r.cordova?p=o.open([a.authorizationEndpoint,e.buildQueryString(t.data)].join("?"),a.name,a.popupOptions,a.redirectUri):p.popupWindow.location=[a.authorizationEndpoint,e.buildQueryString(t.data)].join("?");var n=r.cordova?p.eventListener(a.redirectUri):p.pollPopup();return n.then(function(t){return e.exchangeForToken(t,l)})})},e.exchangeForToken=function(e,o){var u=t.extend({},o,e),l=r.baseUrl?i.joinUrl(r.baseUrl,a.url):a.url;return n.post(l,u,{withCredentials:r.withCredentials})},e.buildQueryString=function(e){var n=[];return t.forEach(e,function(e,t){n.push(encodeURIComponent(t)+"="+encodeURIComponent(e))}),n.join("&")},e}}]).factory("SatellizerPopup",["$q","$interval","$window","SatellizerConfig","SatellizerUtils",function(o,r,i,a,u){var l={};return l.url="",l.popupWindow=null,l.open=function(t,n,o){l.url=t;var r=l.stringifyOptions(l.prepareOptions(o)),i=a.cordova?"_blank":n;return l.popupWindow=e.open(t,i,r),e.popup=l.popupWindow,l.popupWindow&&l.popupWindow.focus&&l.popupWindow.focus(),l},l.eventListener=function(e){var n=o.defer();return l.popupWindow.addEventListener("loadstart",function(o){if(0===o.url.indexOf(e)){var r=document.createElement("a");if(r.href=o.url,r.search||r.hash){var i=r.search.substring(1).replace(/\/$/,""),a=r.hash.substring(1).replace(/\/$/,""),p=u.parseQueryString(a),c=u.parseQueryString(i);t.extend(c,p),c.error||n.resolve(c),l.popupWindow.close()}}}),l.popupWindow.addEventListener("loaderror",function(){n.reject("Authorization Failed")}),n.promise},l.pollPopup=function(){var e=o.defer(),i=r(function(){try{var o=document.location.host,a=l.popupWindow.location.host;if(a===o&&(l.popupWindow.location.search||l.popupWindow.location.hash)){var p=l.popupWindow.location.search.substring(1).replace(/\/$/,""),c=l.popupWindow.location.hash.substring(1).replace(/[\/$]/,""),s=u.parseQueryString(c),h=u.parseQueryString(p);t.extend(h,s),h.error||e.resolve(h),l.popupWindow.close(),r.cancel(i)}}catch(d){}(!l.popupWindow||l.popupWindow.closed||l.popupWindow.closed===n)&&r.cancel(i)},50);return e.promise},l.prepareOptions=function(e){e=e||{};var n=e.width||500,o=e.height||500;return t.extend({width:n,height:o,left:i.screenX+(i.outerWidth-n)/2,top:i.screenY+(i.outerHeight-o)/2.5},e)},l.stringifyOptions=function(e){var n=[];return t.forEach(e,function(e,t){n.push(t+"="+e)}),n.join(",")},l}]).service("SatellizerUtils",function(){this.camelCase=function(e){return e.replace(/([\:\-\_]+(.))/g,function(e,t,n,o){return o?n.toUpperCase():n})},this.parseQueryString=function(e){var n,o,r={};return t.forEach((e||"").split("&"),function(e){e&&(o=e.split("="),n=decodeURIComponent(o[0]),r[n]=t.isDefined(o[1])?decodeURIComponent(o[1]):!0)}),r},this.joinUrl=function(e,t){if(/^(?:[a-z]+:)?\/\//i.test(t))return t;var n=[e,t].join("/"),o=function(e){return e.replace(/[\/]+/g,"/").replace(/\/\?/g,"?").replace(/\/\#/g,"#").replace(/\:\//g,"://")};return o(n)},this.merge=function(e,t){var n={};for(var o in e)e.hasOwnProperty(o)&&(o in t&&"object"==typeof e[o]&&null!==o?n[o]=this.merge(e[o],t[o]):n[o]=e[o]);for(o in t)if(t.hasOwnProperty(o)){if(o in n)continue;n[o]=t[o]}return n}}).factory("SatellizerStorage",["$window","SatellizerConfig",function(e,t){var o=function(){try{var n=t.storageType in e&&null!==e[t.storageType];if(n){var o=Math.random().toString(36).substring(7);e[t.storageType].setItem(o,""),e[t.storageType].removeItem(o)}return n}catch(r){return!1}}();return o||console.warn("Satellizer Warning: "+t.storageType+" is not available."),{get:function(r){return o?e[t.storageType].getItem(r):n},set:function(r,i){return o?e[t.storageType].setItem(r,i):n},remove:function(r){return o?e[t.storageType].removeItem(r):n}}}]).factory("SatellizerInterceptor",["$q","SatellizerConfig","SatellizerStorage","SatellizerShared",function(e,t,n,o){return{request:function(e){if(e.skipAuthorization)return e;if(o.isAuthenticated()&&t.httpInterceptor){var r=t.tokenPrefix?t.tokenPrefix+"_"+t.tokenName:t.tokenName,i=n.get(r);t.authHeader&&t.authToken&&(i=t.authToken+" "+i),e.headers[t.authHeader]=i}return e},responseError:function(t){return e.reject(t)}}}]).config(["$httpProvider",function(e){e.interceptors.push("SatellizerInterceptor")}])}(window,window.angular);
+},{}],33:[function(require,module,exports){
 
 module.exports = require('./lib/');
 
-},{"./lib/":29}],29:[function(require,module,exports){
+},{"./lib/":34}],34:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -52952,7 +53646,7 @@ exports.connect = lookup;
 exports.Manager = require('./manager');
 exports.Socket = require('./socket');
 
-},{"./manager":30,"./socket":32,"./url":33,"debug":37,"socket.io-parser":73}],30:[function(require,module,exports){
+},{"./manager":35,"./socket":37,"./url":38,"debug":42,"socket.io-parser":76}],35:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -53457,7 +54151,7 @@ Manager.prototype.onreconnect = function(){
   this.emitAll('reconnect', attempt);
 };
 
-},{"./on":31,"./socket":32,"./url":33,"backo2":34,"component-bind":35,"component-emitter":36,"debug":37,"engine.io-client":38,"indexof":69,"object-component":70,"socket.io-parser":73}],31:[function(require,module,exports){
+},{"./on":36,"./socket":37,"./url":38,"backo2":39,"component-bind":40,"component-emitter":41,"debug":42,"engine.io-client":43,"indexof":72,"object-component":73,"socket.io-parser":76}],36:[function(require,module,exports){
 
 /**
  * Module exports.
@@ -53483,7 +54177,7 @@ function on(obj, ev, fn) {
   };
 }
 
-},{}],32:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -53870,7 +54564,7 @@ Socket.prototype.disconnect = function(){
   return this;
 };
 
-},{"./on":31,"component-bind":35,"component-emitter":36,"debug":37,"has-binary":67,"socket.io-parser":73,"to-array":77}],33:[function(require,module,exports){
+},{"./on":36,"component-bind":40,"component-emitter":41,"debug":42,"has-binary":70,"socket.io-parser":76,"to-array":80}],38:[function(require,module,exports){
 (function (global){
 
 /**
@@ -53947,7 +54641,7 @@ function url(uri, loc){
 }
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"debug":37,"parseuri":71}],34:[function(require,module,exports){
+},{"debug":42,"parseuri":74}],39:[function(require,module,exports){
 
 /**
  * Expose `Backoff`.
@@ -54034,7 +54728,7 @@ Backoff.prototype.setJitter = function(jitter){
 };
 
 
-},{}],35:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 /**
  * Slice reference.
  */
@@ -54059,7 +54753,7 @@ module.exports = function(obj, fn){
   }
 };
 
-},{}],36:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 
 /**
  * Expose `Emitter`.
@@ -54225,7 +54919,7 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{}],37:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 
 /**
  * Expose `debug()` as the module.
@@ -54364,11 +55058,11 @@ try {
   if (window.localStorage) debug.enable(localStorage.debug);
 } catch(e){}
 
-},{}],38:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 
 module.exports =  require('./lib/');
 
-},{"./lib/":39}],39:[function(require,module,exports){
+},{"./lib/":44}],44:[function(require,module,exports){
 
 module.exports = require('./socket');
 
@@ -54380,7 +55074,7 @@ module.exports = require('./socket');
  */
 module.exports.parser = require('engine.io-parser');
 
-},{"./socket":40,"engine.io-parser":52}],40:[function(require,module,exports){
+},{"./socket":45,"engine.io-parser":57}],45:[function(require,module,exports){
 (function (global){
 /**
  * Module dependencies.
@@ -55089,7 +55783,7 @@ Socket.prototype.filterUpgrades = function (upgrades) {
 };
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./transport":41,"./transports":42,"component-emitter":36,"debug":49,"engine.io-parser":52,"indexof":69,"parsejson":63,"parseqs":64,"parseuri":65}],41:[function(require,module,exports){
+},{"./transport":46,"./transports":47,"component-emitter":41,"debug":54,"engine.io-parser":57,"indexof":72,"parsejson":66,"parseqs":67,"parseuri":68}],46:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -55250,7 +55944,7 @@ Transport.prototype.onClose = function () {
   this.emit('close');
 };
 
-},{"component-emitter":36,"engine.io-parser":52}],42:[function(require,module,exports){
+},{"component-emitter":41,"engine.io-parser":57}],47:[function(require,module,exports){
 (function (global){
 /**
  * Module dependencies
@@ -55307,7 +56001,7 @@ function polling(opts){
 }
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./polling-jsonp":43,"./polling-xhr":44,"./websocket":46,"xmlhttprequest":47}],43:[function(require,module,exports){
+},{"./polling-jsonp":48,"./polling-xhr":49,"./websocket":51,"xmlhttprequest":52}],48:[function(require,module,exports){
 (function (global){
 
 /**
@@ -55544,7 +56238,7 @@ JSONPPolling.prototype.doWrite = function (data, fn) {
 };
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./polling":45,"component-inherit":48}],44:[function(require,module,exports){
+},{"./polling":50,"component-inherit":53}],49:[function(require,module,exports){
 (function (global){
 /**
  * Module requirements.
@@ -55932,7 +56626,7 @@ function unloadHandler() {
 }
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./polling":45,"component-emitter":36,"component-inherit":48,"debug":49,"xmlhttprequest":47}],45:[function(require,module,exports){
+},{"./polling":50,"component-emitter":41,"component-inherit":53,"debug":54,"xmlhttprequest":52}],50:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -56179,7 +56873,7 @@ Polling.prototype.uri = function(){
   return schema + '://' + this.hostname + port + this.path + query;
 };
 
-},{"../transport":41,"component-inherit":48,"debug":49,"engine.io-parser":52,"parseqs":64,"xmlhttprequest":47}],46:[function(require,module,exports){
+},{"../transport":46,"component-inherit":53,"debug":54,"engine.io-parser":57,"parseqs":67,"xmlhttprequest":52}],51:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -56419,7 +57113,7 @@ WS.prototype.check = function(){
   return !!WebSocket && !('__initialize' in WebSocket && this.name === WS.prototype.name);
 };
 
-},{"../transport":41,"component-inherit":48,"debug":49,"engine.io-parser":52,"parseqs":64,"ws":66}],47:[function(require,module,exports){
+},{"../transport":46,"component-inherit":53,"debug":54,"engine.io-parser":57,"parseqs":67,"ws":69}],52:[function(require,module,exports){
 // browser shim for xmlhttprequest module
 var hasCORS = require('has-cors');
 
@@ -56457,7 +57151,7 @@ module.exports = function(opts) {
   }
 }
 
-},{"has-cors":61}],48:[function(require,module,exports){
+},{"has-cors":64}],53:[function(require,module,exports){
 
 module.exports = function(a, b){
   var fn = function(){};
@@ -56465,7 +57159,7 @@ module.exports = function(a, b){
   a.prototype = new fn;
   a.prototype.constructor = a;
 };
-},{}],49:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 
 /**
  * This is the web browser implementation of `debug()`.
@@ -56614,7 +57308,7 @@ function load() {
 
 exports.enable(load());
 
-},{"./debug":50}],50:[function(require,module,exports){
+},{"./debug":55}],55:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -56813,7 +57507,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":51}],51:[function(require,module,exports){
+},{"ms":56}],56:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -56926,7 +57620,7 @@ function plural(ms, n, name) {
   return Math.ceil(ms / n) + ' ' + name + 's';
 }
 
-},{}],52:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 (function (global){
 /**
  * Module dependencies.
@@ -57524,7 +58218,7 @@ exports.decodePayloadAsBinary = function (data, binaryType, callback) {
 };
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./keys":53,"after":54,"arraybuffer.slice":55,"base64-arraybuffer":56,"blob":57,"has-binary":58,"utf8":60}],53:[function(require,module,exports){
+},{"./keys":58,"after":59,"arraybuffer.slice":60,"base64-arraybuffer":61,"blob":62,"has-binary":70,"utf8":63}],58:[function(require,module,exports){
 
 /**
  * Gets the keys for an object.
@@ -57545,7 +58239,7 @@ module.exports = Object.keys || function keys (obj){
   return arr;
 };
 
-},{}],54:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 module.exports = after
 
 function after(count, callback, err_cb) {
@@ -57575,7 +58269,7 @@ function after(count, callback, err_cb) {
 
 function noop() {}
 
-},{}],55:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 /**
  * An abstraction for slicing an arraybuffer even when
  * ArrayBuffer.prototype.slice is not supported
@@ -57606,7 +58300,7 @@ module.exports = function(arraybuffer, start, end) {
   return result.buffer;
 };
 
-},{}],56:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 /*
  * base64-arraybuffer
  * https://github.com/niklasvh/base64-arraybuffer
@@ -57667,7 +58361,7 @@ module.exports = function(arraybuffer, start, end) {
   };
 })("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
 
-},{}],57:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 (function (global){
 /**
  * Create a blob builder even when vendor prefixes exist
@@ -57684,8 +58378,22 @@ var BlobBuilder = global.BlobBuilder
 
 var blobSupported = (function() {
   try {
-    var b = new Blob(['hi']);
-    return b.size == 2;
+    var a = new Blob(['hi']);
+    return a.size === 2;
+  } catch(e) {
+    return false;
+  }
+})();
+
+/**
+ * Check if Blob constructor supports ArrayBufferViews
+ * Fails in Safari 6, so we need to map to ArrayBuffers there.
+ */
+
+var blobSupportsArrayBufferView = blobSupported && (function() {
+  try {
+    var b = new Blob([new Uint8Array([1,2])]);
+    return b.size === 2;
   } catch(e) {
     return false;
   }
@@ -57699,19 +58407,52 @@ var blobBuilderSupported = BlobBuilder
   && BlobBuilder.prototype.append
   && BlobBuilder.prototype.getBlob;
 
+/**
+ * Helper function that maps ArrayBufferViews to ArrayBuffers
+ * Used by BlobBuilder constructor and old browsers that didn't
+ * support it in the Blob constructor.
+ */
+
+function mapArrayBufferViews(ary) {
+  for (var i = 0; i < ary.length; i++) {
+    var chunk = ary[i];
+    if (chunk.buffer instanceof ArrayBuffer) {
+      var buf = chunk.buffer;
+
+      // if this is a subarray, make a copy so we only
+      // include the subarray region from the underlying buffer
+      if (chunk.byteLength !== buf.byteLength) {
+        var copy = new Uint8Array(chunk.byteLength);
+        copy.set(new Uint8Array(buf, chunk.byteOffset, chunk.byteLength));
+        buf = copy.buffer;
+      }
+
+      ary[i] = buf;
+    }
+  }
+}
+
 function BlobBuilderConstructor(ary, options) {
   options = options || {};
 
   var bb = new BlobBuilder();
+  mapArrayBufferViews(ary);
+
   for (var i = 0; i < ary.length; i++) {
     bb.append(ary[i]);
   }
+
   return (options.type) ? bb.getBlob(options.type) : bb.getBlob();
+};
+
+function BlobConstructor(ary, options) {
+  mapArrayBufferViews(ary);
+  return new Blob(ary, options || {});
 };
 
 module.exports = (function() {
   if (blobSupported) {
-    return global.Blob;
+    return blobSupportsArrayBufferView ? global.Blob : BlobConstructor;
   } else if (blobBuilderSupported) {
     return BlobBuilderConstructor;
   } else {
@@ -57720,76 +58461,9 @@ module.exports = (function() {
 })();
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],58:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 (function (global){
-
-/*
- * Module requirements.
- */
-
-var isArray = require('isarray');
-
-/**
- * Module exports.
- */
-
-module.exports = hasBinary;
-
-/**
- * Checks for binary data.
- *
- * Right now only Buffer and ArrayBuffer are supported..
- *
- * @param {Object} anything
- * @api public
- */
-
-function hasBinary(data) {
-
-  function _hasBinary(obj) {
-    if (!obj) return false;
-
-    if ( (global.Buffer && global.Buffer.isBuffer(obj)) ||
-         (global.ArrayBuffer && obj instanceof ArrayBuffer) ||
-         (global.Blob && obj instanceof Blob) ||
-         (global.File && obj instanceof File)
-        ) {
-      return true;
-    }
-
-    if (isArray(obj)) {
-      for (var i = 0; i < obj.length; i++) {
-          if (_hasBinary(obj[i])) {
-              return true;
-          }
-      }
-    } else if (obj && 'object' == typeof obj) {
-      if (obj.toJSON) {
-        obj = obj.toJSON();
-      }
-
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key) && _hasBinary(obj[key])) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
-  return _hasBinary(data);
-}
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"isarray":59}],59:[function(require,module,exports){
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
-
-},{}],60:[function(require,module,exports){
-(function (global){
-/*! http://mths.be/utf8js v2.0.0 by @mathias */
+/*! https://mths.be/utf8js v2.0.0 by @mathias */
 ;(function(root) {
 
 	// Detect free variables `exports`
@@ -57810,7 +58484,7 @@ module.exports = Array.isArray || function (arr) {
 
 	var stringFromCharCode = String.fromCharCode;
 
-	// Taken from http://mths.be/punycode
+	// Taken from https://mths.be/punycode
 	function ucs2decode(string) {
 		var output = [];
 		var counter = 0;
@@ -57837,7 +58511,7 @@ module.exports = Array.isArray || function (arr) {
 		return output;
 	}
 
-	// Taken from http://mths.be/punycode
+	// Taken from https://mths.be/punycode
 	function ucs2encode(array) {
 		var length = array.length;
 		var index = -1;
@@ -57855,6 +58529,14 @@ module.exports = Array.isArray || function (arr) {
 		return output;
 	}
 
+	function checkScalarValue(codePoint) {
+		if (codePoint >= 0xD800 && codePoint <= 0xDFFF) {
+			throw Error(
+				'Lone surrogate U+' + codePoint.toString(16).toUpperCase() +
+				' is not a scalar value'
+			);
+		}
+	}
 	/*--------------------------------------------------------------------------*/
 
 	function createByte(codePoint, shift) {
@@ -57870,6 +58552,7 @@ module.exports = Array.isArray || function (arr) {
 			symbol = stringFromCharCode(((codePoint >> 6) & 0x1F) | 0xC0);
 		}
 		else if ((codePoint & 0xFFFF0000) == 0) { // 3-byte sequence
+			checkScalarValue(codePoint);
 			symbol = stringFromCharCode(((codePoint >> 12) & 0x0F) | 0xE0);
 			symbol += createByte(codePoint, 6);
 		}
@@ -57884,11 +58567,6 @@ module.exports = Array.isArray || function (arr) {
 
 	function utf8encode(string) {
 		var codePoints = ucs2decode(string);
-
-		// console.log(JSON.stringify(codePoints.map(function(x) {
-		// 	return 'U+' + x.toString(16).toUpperCase();
-		// })));
-
 		var length = codePoints.length;
 		var index = -1;
 		var codePoint;
@@ -57959,6 +58637,7 @@ module.exports = Array.isArray || function (arr) {
 			byte3 = readContinuationByte();
 			codePoint = ((byte1 & 0x0F) << 12) | (byte2 << 6) | byte3;
 			if (codePoint >= 0x0800) {
+				checkScalarValue(codePoint);
 				return codePoint;
 			} else {
 				throw Error('Invalid continuation byte');
@@ -58030,7 +58709,7 @@ module.exports = Array.isArray || function (arr) {
 }(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],61:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -58055,7 +58734,7 @@ try {
   module.exports = false;
 }
 
-},{"global":62}],62:[function(require,module,exports){
+},{"global":65}],65:[function(require,module,exports){
 
 /**
  * Returns `this`. Execute this without a "context" (i.e. without it being
@@ -58065,7 +58744,7 @@ try {
 
 module.exports = (function () { return this; })();
 
-},{}],63:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 (function (global){
 /**
  * JSON parse.
@@ -58100,7 +58779,7 @@ module.exports = function parsejson(data) {
   }
 };
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],64:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 /**
  * Compiles a querystring
  * Returns string representation of the object
@@ -58139,7 +58818,7 @@ exports.decode = function(qs){
   return qry;
 };
 
-},{}],65:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 /**
  * Parses an URI
  *
@@ -58180,7 +58859,7 @@ module.exports = function parseuri(str) {
     return uri;
 };
 
-},{}],66:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -58225,7 +58904,7 @@ function ws(uri, protocols, opts) {
 
 if (WebSocket) ws.prototype = WebSocket.prototype;
 
-},{}],67:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 (function (global){
 
 /*
@@ -58287,9 +58966,12 @@ function hasBinary(data) {
 }
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"isarray":68}],68:[function(require,module,exports){
-module.exports=require(59)
-},{}],69:[function(require,module,exports){
+},{"isarray":71}],71:[function(require,module,exports){
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+},{}],72:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -58300,7 +58982,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],70:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 
 /**
  * HOP ref.
@@ -58385,7 +59067,7 @@ exports.length = function(obj){
 exports.isEmpty = function(obj){
   return 0 == exports.length(obj);
 };
-},{}],71:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 /**
  * Parses an URI
  *
@@ -58412,7 +59094,7 @@ module.exports = function parseuri(str) {
   return uri;
 };
 
-},{}],72:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 (function (global){
 /*global Blob,File*/
 
@@ -58557,7 +59239,7 @@ exports.removeBlobs = function(data, callback) {
 };
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./is-buffer":74,"isarray":75}],73:[function(require,module,exports){
+},{"./is-buffer":77,"isarray":78}],76:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -58959,7 +59641,7 @@ function error(data){
   };
 }
 
-},{"./binary":72,"./is-buffer":74,"component-emitter":36,"debug":37,"isarray":75,"json3":76}],74:[function(require,module,exports){
+},{"./binary":75,"./is-buffer":77,"component-emitter":41,"debug":42,"isarray":78,"json3":79}],77:[function(require,module,exports){
 (function (global){
 
 module.exports = isBuf;
@@ -58976,9 +59658,9 @@ function isBuf(obj) {
 }
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],75:[function(require,module,exports){
-module.exports=require(59)
-},{}],76:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
+module.exports=require(71)
+},{}],79:[function(require,module,exports){
 /*! JSON v3.2.6 | http://bestiejs.github.io/json3 | Copyright 2012-2013, Kit Cambridge | http://kit.mit-license.org */
 ;(function (window) {
   // Convenience aliases.
@@ -59841,7 +60523,7 @@ module.exports=require(59)
   }
 }(this));
 
-},{}],77:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 module.exports = toArray
 
 function toArray(list, index) {
@@ -59856,6 +60538,6 @@ function toArray(list, index) {
     return array
 }
 
-},{}],78:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 !function(e,t,n){"use strict";!function o(e,t,n){function a(s,l){if(!t[s]){if(!e[s]){var i="function"==typeof require&&require;if(!l&&i)return i(s,!0);if(r)return r(s,!0);var u=new Error("Cannot find module '"+s+"'");throw u.code="MODULE_NOT_FOUND",u}var c=t[s]={exports:{}};e[s][0].call(c.exports,function(t){var n=e[s][1][t];return a(n?n:t)},c,c.exports,o,e,t,n)}return t[s].exports}for(var r="function"==typeof require&&require,s=0;s<n.length;s++)a(n[s]);return a}({1:[function(o){var a,r,s,l,i=function(e){return e&&e.__esModule?e:{"default":e}},u=o("./modules/handle-dom"),c=o("./modules/utils"),d=o("./modules/handle-swal-dom"),f=o("./modules/handle-click"),p=o("./modules/handle-key"),m=i(p),v=o("./modules/default-params"),y=i(v),h=o("./modules/set-params"),g=i(h);s=l=function(){function o(e){var t=s;return t[e]===n?y["default"][e]:t[e]}var s=arguments[0];if(u.addClass(t.body,"stop-scrolling"),d.resetInput(),s===n)return c.logStr("SweetAlert expects at least 1 attribute!"),!1;var i=c.extend({},y["default"]);switch(typeof s){case"string":i.title=s,i.text=arguments[1]||"",i.type=arguments[2]||"";break;case"object":if(s.title===n)return c.logStr('Missing "title" argument!'),!1;i.title=s.title;for(var p in y["default"])i[p]=o(p);i.confirmButtonText=i.showCancelButton?"Confirm":y["default"].confirmButtonText,i.confirmButtonText=o("confirmButtonText"),i.doneFunction=arguments[1]||null;break;default:return c.logStr('Unexpected type of argument! Expected "string" or "object", got '+typeof s),!1}g["default"](i),d.fixVerticalPosition(),d.openModal(arguments[1]);for(var v=d.getModal(),h=v.querySelectorAll("button"),b=["onclick","onmouseover","onmouseout","onmousedown","onmouseup","onfocus"],w=function(e){return f.handleButton(e,i,v)},C=0;C<h.length;C++)for(var S=0;S<b.length;S++){var x=b[S];h[C][x]=w}d.getOverlay().onclick=w,a=e.onkeydown;var k=function(e){return m["default"](e,i,v)};e.onkeydown=k,e.onfocus=function(){setTimeout(function(){r!==n&&(r.focus(),r=n)},0)},l.enableButtons()},s.setDefaults=l.setDefaults=function(e){if(!e)throw new Error("userParams is required");if("object"!=typeof e)throw new Error("userParams has to be a object");c.extend(y["default"],e)},s.close=l.close=function(){var o=d.getModal();u.fadeOut(d.getOverlay(),5),u.fadeOut(o,5),u.removeClass(o,"showSweetAlert"),u.addClass(o,"hideSweetAlert"),u.removeClass(o,"visible");var s=o.querySelector(".sa-icon.sa-success");u.removeClass(s,"animate"),u.removeClass(s.querySelector(".sa-tip"),"animateSuccessTip"),u.removeClass(s.querySelector(".sa-long"),"animateSuccessLong");var l=o.querySelector(".sa-icon.sa-error");u.removeClass(l,"animateErrorIcon"),u.removeClass(l.querySelector(".sa-x-mark"),"animateXMark");var i=o.querySelector(".sa-icon.sa-warning");return u.removeClass(i,"pulseWarning"),u.removeClass(i.querySelector(".sa-body"),"pulseWarningIns"),u.removeClass(i.querySelector(".sa-dot"),"pulseWarningIns"),setTimeout(function(){var e=o.getAttribute("data-custom-class");u.removeClass(o,e)},300),u.removeClass(t.body,"stop-scrolling"),e.onkeydown=a,e.previousActiveElement&&e.previousActiveElement.focus(),r=n,clearTimeout(o.timeout),!0},s.showInputError=l.showInputError=function(e){var t=d.getModal(),n=t.querySelector(".sa-input-error");u.addClass(n,"show");var o=t.querySelector(".sa-error-container");u.addClass(o,"show"),o.querySelector("p").innerHTML=e,setTimeout(function(){s.enableButtons()},1),t.querySelector("input").focus()},s.resetInputError=l.resetInputError=function(e){if(e&&13===e.keyCode)return!1;var t=d.getModal(),n=t.querySelector(".sa-input-error");u.removeClass(n,"show");var o=t.querySelector(".sa-error-container");u.removeClass(o,"show")},s.disableButtons=l.disableButtons=function(){var e=d.getModal(),t=e.querySelector("button.confirm"),n=e.querySelector("button.cancel");t.disabled=!0,n.disabled=!0},s.enableButtons=l.enableButtons=function(){var e=d.getModal(),t=e.querySelector("button.confirm"),n=e.querySelector("button.cancel");t.disabled=!1,n.disabled=!1},"undefined"!=typeof e?e.sweetAlert=e.swal=s:c.logStr("SweetAlert is a frontend module!")},{"./modules/default-params":2,"./modules/handle-click":3,"./modules/handle-dom":4,"./modules/handle-key":5,"./modules/handle-swal-dom":6,"./modules/set-params":8,"./modules/utils":9}],2:[function(e,t,n){Object.defineProperty(n,"__esModule",{value:!0});var o={title:"",text:"",type:null,allowOutsideClick:!1,showConfirmButton:!0,showCancelButton:!1,closeOnConfirm:!0,closeOnCancel:!0,confirmButtonText:"OK",confirmButtonColor:"#8CD4F5",cancelButtonText:"Cancel",imageUrl:null,imageSize:null,timer:null,customClass:"",html:!1,animation:!0,allowEscapeKey:!0,inputType:"text",inputPlaceholder:"",inputValue:"",showLoaderOnConfirm:!1};n["default"]=o,t.exports=n["default"]},{}],3:[function(t,n,o){Object.defineProperty(o,"__esModule",{value:!0});var a=t("./utils"),r=(t("./handle-swal-dom"),t("./handle-dom")),s=function(t,n,o){function s(e){m&&n.confirmButtonColor&&(p.style.backgroundColor=e)}var u,c,d,f=t||e.event,p=f.target||f.srcElement,m=-1!==p.className.indexOf("confirm"),v=-1!==p.className.indexOf("sweet-overlay"),y=r.hasClass(o,"visible"),h=n.doneFunction&&"true"===o.getAttribute("data-has-done-function");switch(m&&n.confirmButtonColor&&(u=n.confirmButtonColor,c=a.colorLuminance(u,-.04),d=a.colorLuminance(u,-.14)),f.type){case"mouseover":s(c);break;case"mouseout":s(u);break;case"mousedown":s(d);break;case"mouseup":s(c);break;case"focus":var g=o.querySelector("button.confirm"),b=o.querySelector("button.cancel");m?b.style.boxShadow="none":g.style.boxShadow="none";break;case"click":var w=o===p,C=r.isDescendant(o,p);if(!w&&!C&&y&&!n.allowOutsideClick)break;m&&h&&y?l(o,n):h&&y||v?i(o,n):r.isDescendant(o,p)&&"BUTTON"===p.tagName&&sweetAlert.close()}},l=function(e,t){var n=!0;r.hasClass(e,"show-input")&&(n=e.querySelector("input").value,n||(n="")),t.doneFunction(n),t.closeOnConfirm&&sweetAlert.close(),t.showLoaderOnConfirm&&sweetAlert.disableButtons()},i=function(e,t){var n=String(t.doneFunction).replace(/\s/g,""),o="function("===n.substring(0,9)&&")"!==n.substring(9,10);o&&t.doneFunction(!1),t.closeOnCancel&&sweetAlert.close()};o["default"]={handleButton:s,handleConfirm:l,handleCancel:i},n.exports=o["default"]},{"./handle-dom":4,"./handle-swal-dom":6,"./utils":9}],4:[function(n,o,a){Object.defineProperty(a,"__esModule",{value:!0});var r=function(e,t){return new RegExp(" "+t+" ").test(" "+e.className+" ")},s=function(e,t){r(e,t)||(e.className+=" "+t)},l=function(e,t){var n=" "+e.className.replace(/[\t\r\n]/g," ")+" ";if(r(e,t)){for(;n.indexOf(" "+t+" ")>=0;)n=n.replace(" "+t+" "," ");e.className=n.replace(/^\s+|\s+$/g,"")}},i=function(e){var n=t.createElement("div");return n.appendChild(t.createTextNode(e)),n.innerHTML},u=function(e){e.style.opacity="",e.style.display="block"},c=function(e){if(e&&!e.length)return u(e);for(var t=0;t<e.length;++t)u(e[t])},d=function(e){e.style.opacity="",e.style.display="none"},f=function(e){if(e&&!e.length)return d(e);for(var t=0;t<e.length;++t)d(e[t])},p=function(e,t){for(var n=t.parentNode;null!==n;){if(n===e)return!0;n=n.parentNode}return!1},m=function(e){e.style.left="-9999px",e.style.display="block";var t,n=e.clientHeight;return t="undefined"!=typeof getComputedStyle?parseInt(getComputedStyle(e).getPropertyValue("padding-top"),10):parseInt(e.currentStyle.padding),e.style.left="",e.style.display="none","-"+parseInt((n+t)/2)+"px"},v=function(e,t){if(+e.style.opacity<1){t=t||16,e.style.opacity=0,e.style.display="block";var n=+new Date,o=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){e.style.opacity=+e.style.opacity+(new Date-n)/100,n=+new Date,+e.style.opacity<1&&setTimeout(o,t)});o()}e.style.display="block"},y=function(e,t){t=t||16,e.style.opacity=1;var n=+new Date,o=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){e.style.opacity=+e.style.opacity-(new Date-n)/100,n=+new Date,+e.style.opacity>0?setTimeout(o,t):e.style.display="none"});o()},h=function(n){if("function"==typeof MouseEvent){var o=new MouseEvent("click",{view:e,bubbles:!1,cancelable:!0});n.dispatchEvent(o)}else if(t.createEvent){var a=t.createEvent("MouseEvents");a.initEvent("click",!1,!1),n.dispatchEvent(a)}else t.createEventObject?n.fireEvent("onclick"):"function"==typeof n.onclick&&n.onclick()},g=function(t){"function"==typeof t.stopPropagation?(t.stopPropagation(),t.preventDefault()):e.event&&e.event.hasOwnProperty("cancelBubble")&&(e.event.cancelBubble=!0)};a.hasClass=r,a.addClass=s,a.removeClass=l,a.escapeHtml=i,a._show=u,a.show=c,a._hide=d,a.hide=f,a.isDescendant=p,a.getTopMargin=m,a.fadeIn=v,a.fadeOut=y,a.fireClick=h,a.stopEventPropagation=g},{}],5:[function(t,o,a){Object.defineProperty(a,"__esModule",{value:!0});var r=t("./handle-dom"),s=t("./handle-swal-dom"),l=function(t,o,a){var l=t||e.event,i=l.keyCode||l.which,u=a.querySelector("button.confirm"),c=a.querySelector("button.cancel"),d=a.querySelectorAll("button[tabindex]");if(-1!==[9,13,32,27].indexOf(i)){for(var f=l.target||l.srcElement,p=-1,m=0;m<d.length;m++)if(f===d[m]){p=m;break}9===i?(f=-1===p?u:p===d.length-1?d[0]:d[p+1],r.stopEventPropagation(l),f.focus(),o.confirmButtonColor&&s.setFocusStyle(f,o.confirmButtonColor)):13===i?("INPUT"===f.tagName&&(f=u,u.focus()),f=-1===p?u:n):27===i&&o.allowEscapeKey===!0?(f=c,r.fireClick(f,l)):f=n}};a["default"]=l,o.exports=a["default"]},{"./handle-dom":4,"./handle-swal-dom":6}],6:[function(n,o,a){var r=function(e){return e&&e.__esModule?e:{"default":e}};Object.defineProperty(a,"__esModule",{value:!0});var s=n("./utils"),l=n("./handle-dom"),i=n("./default-params"),u=r(i),c=n("./injected-html"),d=r(c),f=".sweet-alert",p=".sweet-overlay",m=function(){var e=t.createElement("div");for(e.innerHTML=d["default"];e.firstChild;)t.body.appendChild(e.firstChild)},v=function(e){function t(){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(){var e=t.querySelector(f);return e||(m(),e=v()),e}),y=function(){var e=v();return e?e.querySelector("input"):void 0},h=function(){return t.querySelector(p)},g=function(e,t){var n=s.hexToRgb(t);e.style.boxShadow="0 0 2px rgba("+n+", 0.8), inset 0 0 0 1px rgba(0, 0, 0, 0.05)"},b=function(n){var o=v();l.fadeIn(h(),10),l.show(o),l.addClass(o,"showSweetAlert"),l.removeClass(o,"hideSweetAlert"),e.previousActiveElement=t.activeElement;var a=o.querySelector("button.confirm");a.focus(),setTimeout(function(){l.addClass(o,"visible")},500);var r=o.getAttribute("data-timer");if("null"!==r&&""!==r){var s=n;o.timeout=setTimeout(function(){var e=(s||null)&&"true"===o.getAttribute("data-has-done-function");e?s(null):sweetAlert.close()},r)}},w=function(){var e=v(),t=y();l.removeClass(e,"show-input"),t.value=u["default"].inputValue,t.setAttribute("type",u["default"].inputType),t.setAttribute("placeholder",u["default"].inputPlaceholder),C()},C=function(e){if(e&&13===e.keyCode)return!1;var t=v(),n=t.querySelector(".sa-input-error");l.removeClass(n,"show");var o=t.querySelector(".sa-error-container");l.removeClass(o,"show")},S=function(){var e=v();e.style.marginTop=l.getTopMargin(v())};a.sweetAlertInitialize=m,a.getModal=v,a.getOverlay=h,a.getInput=y,a.setFocusStyle=g,a.openModal=b,a.resetInput=w,a.resetInputError=C,a.fixVerticalPosition=S},{"./default-params":2,"./handle-dom":4,"./injected-html":7,"./utils":9}],7:[function(e,t,n){Object.defineProperty(n,"__esModule",{value:!0});var o='<div class="sweet-overlay" tabIndex="-1"></div><div class="sweet-alert"><div class="sa-icon sa-error">\n      <span class="sa-x-mark">\n        <span class="sa-line sa-left"></span>\n        <span class="sa-line sa-right"></span>\n      </span>\n    </div><div class="sa-icon sa-warning">\n      <span class="sa-body"></span>\n      <span class="sa-dot"></span>\n    </div><div class="sa-icon sa-info"></div><div class="sa-icon sa-success">\n      <span class="sa-line sa-tip"></span>\n      <span class="sa-line sa-long"></span>\n\n      <div class="sa-placeholder"></div>\n      <div class="sa-fix"></div>\n    </div><div class="sa-icon sa-custom"></div><h2>Title</h2>\n    <p>Text</p>\n    <fieldset>\n      <input type="text" tabIndex="3" />\n      <div class="sa-input-error"></div>\n    </fieldset><div class="sa-error-container">\n      <div class="icon">!</div>\n      <p>Not valid!</p>\n    </div><div class="sa-button-container">\n      <button class="cancel" tabIndex="2">Cancel</button>\n      <div class="sa-confirm-button-container">\n        <button class="confirm" tabIndex="1">OK</button><div class="la-ball-fall">\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </div></div>';n["default"]=o,t.exports=n["default"]},{}],8:[function(e,t,o){Object.defineProperty(o,"__esModule",{value:!0});var a=e("./utils"),r=e("./handle-swal-dom"),s=e("./handle-dom"),l=["error","warning","info","success","input","prompt"],i=function(e){var t=r.getModal(),o=t.querySelector("h2"),i=t.querySelector("p"),u=t.querySelector("button.cancel"),c=t.querySelector("button.confirm");if(o.innerHTML=e.html?e.title:s.escapeHtml(e.title).split("\n").join("<br>"),i.innerHTML=e.html?e.text:s.escapeHtml(e.text||"").split("\n").join("<br>"),e.text&&s.show(i),e.customClass)s.addClass(t,e.customClass),t.setAttribute("data-custom-class",e.customClass);else{var d=t.getAttribute("data-custom-class");s.removeClass(t,d),t.setAttribute("data-custom-class","")}if(s.hide(t.querySelectorAll(".sa-icon")),e.type&&!a.isIE8()){var f=function(){for(var o=!1,a=0;a<l.length;a++)if(e.type===l[a]){o=!0;break}if(!o)return logStr("Unknown alert type: "+e.type),{v:!1};var i=["success","error","warning","info"],u=n;-1!==i.indexOf(e.type)&&(u=t.querySelector(".sa-icon.sa-"+e.type),s.show(u));var c=r.getInput();switch(e.type){case"success":s.addClass(u,"animate"),s.addClass(u.querySelector(".sa-tip"),"animateSuccessTip"),s.addClass(u.querySelector(".sa-long"),"animateSuccessLong");break;case"error":s.addClass(u,"animateErrorIcon"),s.addClass(u.querySelector(".sa-x-mark"),"animateXMark");break;case"warning":s.addClass(u,"pulseWarning"),s.addClass(u.querySelector(".sa-body"),"pulseWarningIns"),s.addClass(u.querySelector(".sa-dot"),"pulseWarningIns");break;case"input":case"prompt":c.setAttribute("type",e.inputType),c.value=e.inputValue,c.setAttribute("placeholder",e.inputPlaceholder),s.addClass(t,"show-input"),setTimeout(function(){c.focus(),c.addEventListener("keyup",swal.resetInputError)},400)}}();if("object"==typeof f)return f.v}if(e.imageUrl){var p=t.querySelector(".sa-icon.sa-custom");p.style.backgroundImage="url("+e.imageUrl+")",s.show(p);var m=80,v=80;if(e.imageSize){var y=e.imageSize.toString().split("x"),h=y[0],g=y[1];h&&g?(m=h,v=g):logStr("Parameter imageSize expects value with format WIDTHxHEIGHT, got "+e.imageSize)}p.setAttribute("style",p.getAttribute("style")+"width:"+m+"px; height:"+v+"px")}t.setAttribute("data-has-cancel-button",e.showCancelButton),e.showCancelButton?u.style.display="inline-block":s.hide(u),t.setAttribute("data-has-confirm-button",e.showConfirmButton),e.showConfirmButton?c.style.display="inline-block":s.hide(c),e.cancelButtonText&&(u.innerHTML=s.escapeHtml(e.cancelButtonText)),e.confirmButtonText&&(c.innerHTML=s.escapeHtml(e.confirmButtonText)),e.confirmButtonColor&&(c.style.backgroundColor=e.confirmButtonColor,c.style.borderLeftColor=e.confirmLoadingButtonColor,c.style.borderRightColor=e.confirmLoadingButtonColor,r.setFocusStyle(c,e.confirmButtonColor)),t.setAttribute("data-allow-outside-click",e.allowOutsideClick);var b=e.doneFunction?!0:!1;t.setAttribute("data-has-done-function",b),e.animation?"string"==typeof e.animation?t.setAttribute("data-animation",e.animation):t.setAttribute("data-animation","pop"):t.setAttribute("data-animation","none"),t.setAttribute("data-timer",e.timer)};o["default"]=i,t.exports=o["default"]},{"./handle-dom":4,"./handle-swal-dom":6,"./utils":9}],9:[function(t,n,o){Object.defineProperty(o,"__esModule",{value:!0});var a=function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);return e},r=function(e){var t=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);return t?parseInt(t[1],16)+", "+parseInt(t[2],16)+", "+parseInt(t[3],16):null},s=function(){return e.attachEvent&&!e.addEventListener},l=function(t){e.console&&e.console.log("SweetAlert: "+t)},i=function(e,t){e=String(e).replace(/[^0-9a-f]/gi,""),e.length<6&&(e=e[0]+e[0]+e[1]+e[1]+e[2]+e[2]),t=t||0;var n,o,a="#";for(o=0;3>o;o++)n=parseInt(e.substr(2*o,2),16),n=Math.round(Math.min(Math.max(0,n+n*t),255)).toString(16),a+=("00"+n).substr(n.length);return a};o.extend=a,o.hexToRgb=r,o.isIE8=s,o.logStr=l,o.colorLuminance=i},{}]},{},[1]),"function"==typeof define&&define.amd?define(function(){return sweetAlert}):"undefined"!=typeof module&&module.exports&&(module.exports=sweetAlert)}(window,document);
 },{}]},{},[7])

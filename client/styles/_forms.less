@@ -1,13 +1,18 @@
+.ng-flat-datepicker-wrapper {
+  width: 100%
+}
+
 input, select, textarea {
   box-sizing: border-box;
   .inline-block();
   width: 100%;
   margin-bottom: @marginBottom;
-  padding: 1em 0.5em;
-  border-radius: @round;
+  padding: 0.4em .5em;
+  border-radius: 4px;
   border:2px solid darken(white, 10%);
   font-size: @textSize;
   color: @mainColor;
+  -webkit-appearance: none;
 }
 
 input, select {
@@ -15,6 +20,7 @@ input, select {
 }
 
 textarea {
+  border-radius: 4px;
   min-height: 100px;
 }
 
@@ -26,12 +32,11 @@ hr {
 }
 
 label {
-    opacity: 0.5;
-    letter-spacing: 0.2em;
-    font-weight: @bold;
-    color: darken(white, 30%);
-    text-transform: uppercase;
-    font-size: 0.8em;
-    margin-bottom: 1em;
-    display: inline-block;
+  font-weight: 600;
+  color: #A6A6A6;
+  text-transform: uppercase;
+  font-size: .6em;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  margin-bottom: 10px;
 }

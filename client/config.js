@@ -4,9 +4,7 @@ export default /*@ngInject*/ function($stateProvider, $urlRouterProvider, $authP
 
   $authProvider.loginUrl = '/api/v1/login';
   $authProvider.signupUrl = '/api/v1/signup';
-  $authProvider.loginRoute = '/';
-  $authProvider.signupRoute = '/';
-  $authProvider.tokenPrefix = 'profileApp';
+  $authProvider.tokenPrefix = 'pruposeApp';
   $authProvider.authHeader = 'Authorization';
   $authProvider.authToken = '';
 
@@ -41,17 +39,29 @@ export default /*@ngInject*/ function($stateProvider, $urlRouterProvider, $authP
         }
       }
     })
-    .state('admin.dashboard', {
-      url: "/dashboard",
+    .state('admin.jobs', {
+      url: "/jobs",
       controllerAs: 'vm',
-      controller: require('./views/dashboard.js'),
-      template: require('./views/dashboard.jade')
+      controller: require('./views/jobs.js'),
+      template: require('./views/jobs.jade')
     })
-    .state('admin.organisation', {
-      url: "/organisation",
+    .state('admin.new', {
+      url: "/new",
       controllerAs: 'vm',
-      controller: require('./views/organisation.js'),
-      template: require('./views/organisation.jade')
+      controller: require('./views/new.js'),
+      template: require('./views/new.jade')
+    })
+    .state('login', {
+      url: "/login",
+      controllerAs: 'vm',
+      controller: require('./views/login.js'),
+      template: require('./views/login.jade')
+    })
+    .state('signup', {
+      url: "/signup",
+      controllerAs: 'vm',
+      controller: require('./views/signup.js'),
+      template: require('./views/signup.jade')
     })
 }
 

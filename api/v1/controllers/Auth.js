@@ -77,7 +77,7 @@ module.exports.signup = function *() {
   if(id) this.throw(400, 'You have already signed up.');
 
   // Create user
-  var user = yield H.userCreate(body.fields);
+  var user = yield H.userCreate(body);
 
   this.body = { token: jwt.sign({ id: user.id, email: user.email, name: user.first_name }, secret)  };
   this.status = 200;

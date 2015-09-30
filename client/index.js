@@ -10,6 +10,7 @@ require('sweetalert');
 require('angular-sweetalert');
 require('ladda-angular');
 require('ngmap');
+require('ng-flat-datepicker');
 
 // App
 angular.module(name, [
@@ -19,10 +20,13 @@ angular.module(name, [
 	'ngAnimate',
 	'oitozero.ngSweetAlert',
 	'ladda',
-	'ngMap'
+	'ngMap',
+  'ngFlatDatepicker'
 ])
   .config(require('./config'))
   .run(require('./global'))
+  .constant('Categories', ['Policy & research', 'Education', 'Social Work', 'Administration', 'Project Management', 'PR', 'Campaigning', 'Fundraising', 'Legal', 'Human Resoruces', 'Finance', 'Technoloy', 'Design', 'International Development', 'Business Development'])
+  .constant('Issues', ['Social Work', 'Education', 'Environment', 'International Aid', 'Mental Health', 'Diversity', 'Drug & alcohol'])
 
 
 // App Parts
@@ -38,7 +42,7 @@ require('./bootstrap')(name)
 	        link: function(scope, element, attrs) {
 	            var model = $parse(attrs.fileModel);
 	            var modelSetter = model.assign;
-	            
+
 	            element.bind('change', function(){
 	                scope.$apply(function(){
 	                    modelSetter(scope, element[0].files[0]);

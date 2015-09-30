@@ -35,14 +35,14 @@ var formidable = require('koa-formidable')
 
 
 module.exports.image = function *() {
-  
+
   var self = this,
       thunkify = require('thunkify-wrap'),
       form = yield formidable.parse(this),
       s3 = require('s3'),
-      client = s3.createClient({ 
-        s3Options: { 
-          accessKeyId: 'AKIAITP7ZTGPG6RSZ3UA', 
+      client = s3.createClient({
+        s3Options: {
+          accessKeyId: 'AKIAITP7ZTGPG6RSZ3UA',
           secretAccessKey: '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'
         }
       }),
@@ -77,6 +77,19 @@ module.exports.find = function *() {
   var result = yield M.User.get(this.user.id).getJoin({ jobs: true }).run();
 
   this.body = result.jobs || [];
+  this.status = 200;
+}
+
+module.exports.search = function *() {
+
+  var query = this.request.body.query || {},
+      page = parseInt(this.request.body.page) || 0,
+      limit = parseInt(this.request.body.limit) || 0;
+
+  var result = M.Job.filter(query).orderBy(r.desc('createdAt')).skip(page * limit)
+  if(limit) result.limit(limit)
+
+  this.body = yield result;
   this.status = 200;
 }
 

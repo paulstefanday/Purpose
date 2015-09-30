@@ -1,0 +1,10 @@
+.container
+
+	header
+		h1 New Job
+
+	section
+		form(name="newOrgForm" ng-submit="vm.create()")
+			include jobs.form.jade
+			button(ng-disabled="newOrgForm.$invalid") Create
+

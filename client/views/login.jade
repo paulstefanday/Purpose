@@ -1,0 +1,17 @@
+section.login-section
+	.container
+
+		h1 Login
+
+		button.full(
+			ng-if="!vm.isUser()"
+			ng-click="vm.authenticate('facebook')"
+			ladda-button="vm.laddaLoading"
+			data-style="expand-right") Via Facebook
+
+		h5 or
+
+		form(name="loginForm")
+			input(type="email" ng-model="vm.user.email" placeholder="Email" required)
+			input(type="password" ng-model="vm.user.password" placeholder="Password" required)
+			button.full(ng-disable="loginForm.$invalid" ng-click="vm.login()") Login

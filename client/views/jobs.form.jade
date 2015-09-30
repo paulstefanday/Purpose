@@ -1,0 +1,75 @@
+aside
+	h5 Basic info
+	.frame.job-form
+
+		label Job role
+		input(type="text" ng-model="vm.selected.role")
+
+		label Job type
+		select(ng-model="vm.selected.type")
+			option(value="Part time") Part time
+			option(value="Full time") Full time
+			option(value="1 day a week") 1 day a week
+			option(value="2 days a week") 2 days a week
+			option(value="3 days a week") 3 days a week
+			option(value="4 days a week") 4 days a week
+
+		label Job category
+		select(ng-model="vm.selected.category")
+			option(value="{{ category }}" ng-repeat="category in vm.categories") {{ category }}
+
+		label Organisation Name
+		input(type="text" ng-model="vm.selected.organisation_name")
+
+		label Organisation Logo
+		.one(ng-if="vm.selected.organisation_logo")
+			img(src="{{ vm.selected.organisation_logo }}")
+			a(ng-click="vm.resetFile()") Delete
+		.one(ng-if="!vm.selected.organisation_logo")
+			input( type="file" file-model="vm.selectedFile" style="width:80%;" )
+			a(ng-click="vm.uploadFile()") Upload
+
+		label Application start date
+		input(type="text" ng-model="vm.selected.start" ng-flat-datepicker)
+
+		label Application end date
+		input(type="text" ng-model="vm.selected.finish" ng-flat-datepicker)
+
+		label Salery amount
+		input(type="number" ng-model="vm.selected.salery_avg")
+
+		label Country
+		input(type="text" ng-model="vm.selected.country")
+
+		label State
+		input(type="text" ng-model="vm.selected.state")
+
+article
+	h5 Descriptions
+	.frame
+		label Description
+		textarea.job-description(ng-model="vm.selected.description")
+
+		label Instructions on how to apply
+		textarea(ng-model="vm.selected.apply_instructions")
+
+
+
+//- h5 Extra Details
+//- .frame
+
+//- 		label Date when the role starts
+//- 		input(type="text" ng-model="vm.selected.begins" ng-flat-datepicker)
+
+//- label Salery amount
+//- input(type="number" ng-model="vm.selected.salery_avg")
+
+//- 		label Salery maximum
+//- 		input(type="number" ng-model="vm.selected.salery_max")
+
+//- 		label Salery minimum
+//- 		input(type="number" ng-model="vm.selected.salery_min")
+
+//- 	label Address of business
+//- 	input(type="number" ng-model="vm.selected.address")
+

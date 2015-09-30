@@ -7,16 +7,18 @@
   ul#menu
 
     //- Logged out
+    li
+      a(href='#/' ng-click="vm.hide()") Find Job
     li(ng-hide="vm.loggedIn()")
-      a(href='#/' ng-click="vm.hide()") Home
+      a(href='#/login' ng-click="vm.hide()") Login
     li(ng-hide="vm.loggedIn()")
-      a(href='' ng-click="vm.login()") Login
+      a(href='#/signup' ng-click="vm.hide()") Signup
 
     //- Logged in
     li(ng-show="vm.loggedIn()")
-      a(href='#/dashboard' ng-click="vm.hide()") Profiles
+      a(href='#/jobs' ng-click="vm.hide()") My Jobs
     li(ng-show="vm.loggedIn()")
-      a(href='#/organisation' ng-click="vm.hide()") Organisation
+      a(href='#/new' ng-click="vm.hide()") New Job
     li(ng-show="vm.loggedIn()")
       a(href='' ng-click="vm.logout()") Logout
 

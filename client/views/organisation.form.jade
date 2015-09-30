@@ -1,8 +1,0 @@
-label Organisation Name
-input(type="text" ng-model="vm.selected.name")
-
-label Organisation Logo
-img(src="{{ vm.organisation_logo }}" ng-if="vm.organisation_logo" style="width:100px;height:100px;")
-div(ng-if="!vm.organisation_logo")
-	input( type="file" file-model="vm.selectedFile" style="width:80%;" )
-	a(ng-click="vm.uploadFile()" style="width:18%;height: 36px;padding: 8px 10px;float: right;") Upload

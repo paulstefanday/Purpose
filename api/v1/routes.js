@@ -8,6 +8,8 @@ var api = new router();
 
 // Organsaiton routes
 api.get('/job', jobCtrl.find);
+api.get('/search', jobCtrl.search);
+api.post('/search', jobCtrl.search);
 api.post('/job', jobCtrl.create);
 api.put('/job/:job', jobCtrl.update);
 api.delete('/job/:job', jobCtrl.delete);
