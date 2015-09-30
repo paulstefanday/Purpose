@@ -7,7 +7,6 @@ var M = require(__base+'/models'),
 
 module.exports = {
 
-
 	userExists: function* (email) { // Check if user exists
 
 		var existingUser = yield M.User.filter({email: email }).run();
@@ -17,37 +16,37 @@ module.exports = {
 		else return false;
 	},
 
-
 	userCreate: function* (data, provider) { // Create new user
 
-		var user, doc, realPassword, password;
+		var user, result, rawPassword, password;
 
 		if(provider) {
 
 			user = new M.User({email: data.email, name: data.name, provider_id: data.id, provider: provider });
-			doc = yield user.save();
+			result = yield user.save();
 
 		} else {
 
 			// Set password if it's not set already
-			if(data.password) realPassword = data.password;
-			else realPassword = randomstring.generate(7);
+			rawPassword = this.generatePassword(data);
+			password = yield this.hashPassword(rawPassword);
 
-			password = yield this.hashPassword(realPassword);
+			console.log(rawPassword, password)
 
 			// Update record
-			user = new M.User({email: data.email, password: password, first_name: data.first_name });
-			doc = yield user.save();
+			user = new M.User({email: data.email, password: password });
+			result = yield user.save();
+
+			console.log(result)
 
 			// Send an email to user with their password
 
 		}
 
-		return doc;
+		return result;
 
 	},
 
-	// Hash password
 	hashPassword: function* (password) {
 
 		// encrypt pass - concider putting in model pre function
@@ -55,6 +54,11 @@ module.exports = {
 		var hash = yield bcrypt.hash(password, salt);
 
 		return hash;
+	},
+
+	generatePassword: function(record) {
+		if(record.password) return record.password;
+		else return randomstring.generate(7);
 	}
 
 }

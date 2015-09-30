@@ -1,5 +1,4 @@
-var   formidable = require('koa-formidable'),
-      jwt = require('jsonwebtoken'),
+var   jwt = require('jsonwebtoken'),
       bcrypt = require('co-bcryptjs'),
       config = require(__base+'/config/config'),
       M = require(__base+'/models'),
@@ -13,26 +12,24 @@ var   formidable = require('koa-formidable'),
 
 module.exports.facebook = function *(next) {
 
-  var accessTokenUrl = 'https://graph.facebook.com/v2.4/oauth/access_token';
-  var graphApiUrl = 'https://graph.facebook.com/v2.4/me?fields=id,name,email,birthday';
-  var params = {
-    code: this.request.body.code,
-    client_id: this.request.body.clientId,
-    client_secret: config.facebook.secret,
-    redirect_uri: this.request.body.redirectUri
-  };
+  var accessTokenUrl = 'https://graph.facebook.com/v2.4/oauth/access_token',
+      graphApiUrl = 'https://graph.facebook.com/v2.4/me?fields=id,name,email,birthday',
+      params = {
+        code: this.request.body.code,
+        client_id: this.request.body.clientId,
+        client_secret: config.facebook.secret,
+        redirect_uri: this.request.body.redirectUri
+      }, token, user, exists, res;
 
-  var token = yield request.get({ url: accessTokenUrl, qs: params, json: true }); // get token
-  var user = yield request.get({ url: graphApiUrl, qs: token.body, json: true }); // get user data
+  token = yield request.get({ url: accessTokenUrl, qs: params, json: true }); // get token
+  user = yield request.get({ url: graphApiUrl, qs: token.body, json: true }); // get user data
 
   exists = yield H.userExists(user.body.email); // check if user exists
   if(!exists) exists = yield H.userCreate(user.body, 'facebook'); // create user
+
   // TODO: get profile pic
 
-  var res = { token: jwt.sign({ id: exists.id, name: exists.name, email: exists.email }, secret)  };
-  console.log(res);
-
-  this.body = res;
+  this.body = { token: jwt.sign({ id: exists.id, name: exists.name, email: exists.email }, secret)  };
   this.status = 200;
 
 }
@@ -67,19 +64,19 @@ module.exports.facebook = function *(next) {
 
 module.exports.signup = function *() {
 
-  var body = this.request.body;
+  var body = this.request.body, id, user;
 
   // Make sure password is entered
   if(!body.password) this.throw(403, 'You must fill out all fields to signup.');
 
   // check for existing user
-  var id = yield H.userExists(body.email);
+  id = yield H.userExists(body.email);
   if(id) this.throw(400, 'You have already signed up.');
 
   // Create user
-  var user = yield H.userCreate(body);
+  user = yield H.userCreate(body);
 
-  this.body = { token: jwt.sign({ id: user.id, email: user.email, name: user.first_name }, secret)  };
+  this.body = { token: jwt.sign({ id: user.id, email: user.email }, secret)  };
   this.status = 200;
 
 };
@@ -112,14 +109,14 @@ module.exports.signup = function *() {
 
 module.exports.login = function *() {
 
-  var body = this.request.body;
-  var user = yield M.User.filter({email: body.email}).run();
+  var body = this.request.body, user, compare;
+  user = yield M.User.filter({email: body.email}).run();
 
   // Error is user doesn't exist
   if(user.length < 1) this.throw(404, "If you don't have an account, Please sign up.");
 
   // Error is password is incorrect
-  var compare = yield bcrypt.compare(body.password, user[0].password);
+  compare = yield bcrypt.compare(body.password, user[0].password);
   if (!compare) this.throw(401, "Incorrect details.");
 
   this.body = { token: jwt.sign({id: user[0].id, email: user[0].email, name: user[0].first_name }, secret)  };
@@ -156,25 +153,26 @@ module.exports.login = function *() {
 
  module.exports.reset = function *() {
 
-  var body = this.request.body;
-  var email = body.email;
+  var body = this.request.body, email, id, realPassword, salt, password, record;
+  
+  email = body.email;
 
   // Check if email was passed as param
   if(!email) this.throw(403, 'The email field is required');
 
   // check for existing user
-  var id = yield H.userExists(email);
+  id = yield H.userExists(email);
   if(!id) this.throw(404, 'This account does not exist. Please sign up.');
 
   // Generate password
-  var realPassword = randomstring.generate(7);
+  realPassword = randomstring.generate(7);
 
   // encrypt pass - concider putting in model pre function
-  var salt = yield bcrypt.genSalt(10);
-  var password = yield bcrypt.hash(realPassword, salt);
+  salt = yield bcrypt.genSalt(10);
+  password = yield bcrypt.hash(realPassword, salt);
 
   // Update record
-  var record = yield r.db(config.db.db).table(M.User.getTableName()).filter({email: email }).update({ password: password });
+  record = yield r.db(config.db.db).table(M.User.getTableName()).filter({email: email }).update({ password: password });
 
   // Send password email with realPassword
 

@@ -3,8 +3,6 @@ var   config = require(__base+'/config/config'),
 	  thinky = require(__base+'/config/thinky.js'),
 	  r = thinky.r;
 
-var formidable = require('koa-formidable')
-
 /**
  * @api {get} /v1/activity Create
  * @apiName Create
@@ -21,14 +19,14 @@ var formidable = require('koa-formidable')
 
  module.exports.create = function *() {
 
- 	var body = this.request.body, record, result, relation;
+ 	var body = this.request.body, record;
 
   body.user_id = this.user.id;
 
  	record = new M.Job(body);
- 	result = yield record.save();
+ 	record = yield record.save();
 
- 	this.body = result;
+ 	this.body = record;
  	this.status = 200;
 
  }
@@ -38,6 +36,7 @@ module.exports.image = function *() {
 
   var self = this,
       thunkify = require('thunkify-wrap'),
+      formidable = require('koa-formidable'),
       form = yield formidable.parse(this),
       s3 = require('s3'),
       client = s3.createClient({

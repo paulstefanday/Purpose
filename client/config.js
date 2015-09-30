@@ -4,7 +4,7 @@ export default /*@ngInject*/ function($stateProvider, $urlRouterProvider, $authP
 
   $authProvider.loginUrl = '/api/v1/login';
   $authProvider.signupUrl = '/api/v1/signup';
-  $authProvider.tokenPrefix = 'pruposeApp';
+  $authProvider.tokenPrefix = 'purposeApp';
   $authProvider.authHeader = 'Authorization';
   $authProvider.authToken = '';
 
