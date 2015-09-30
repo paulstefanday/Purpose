@@ -23,4 +23,6 @@ Allows you to do advanced demographic querying outputting unique id's which can 
 3. <a href="https://github.com/apidoc/apidoc">apiDoc</a>
 
 ### TODO
-- 
+- get fb to pull more demographic data
+- get profile working
+- make change of category also change route

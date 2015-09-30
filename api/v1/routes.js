@@ -8,6 +8,7 @@ var api = new router();
 
 // Organsaiton routes
 api.get('/job', jobCtrl.find);
+api.get('/job/:job', jobCtrl.findOne);
 api.get('/search', jobCtrl.search);
 api.post('/search', jobCtrl.search);
 api.post('/job', jobCtrl.create);

@@ -13,7 +13,7 @@ var   jwt = require('jsonwebtoken'),
 module.exports.facebook = function *(next) {
 
   var accessTokenUrl = 'https://graph.facebook.com/v2.4/oauth/access_token',
-      graphApiUrl = 'https://graph.facebook.com/v2.4/me?fields=id,name,email,birthday',
+      graphApiUrl = 'https://graph.facebook.com/v2.4/me?fields=id,name,email',
       params = {
         code: this.request.body.code,
         client_id: this.request.body.clientId,

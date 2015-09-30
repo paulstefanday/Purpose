@@ -26,6 +26,7 @@
 a.frame {
   padding: 0;
   text-decoration: none;
+  position:relative;
   width: 30%;
   margin: 0px 1% 20px;
   height: 300px;
@@ -34,6 +35,10 @@ a.frame {
   float: left;
   box-shadow: 0 0px 0px 3px @mainColor;
   border-bottom: 4px solid #DBDADA;
+
+  .app-close {
+    position:absolute;bottom:4px;opacity:0.4;font-size:12px;
+  }
 
   .image {
     width: 100%;

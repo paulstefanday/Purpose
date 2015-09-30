@@ -12,20 +12,14 @@ section.section-header
 				option(value="") Select a category here...
 				option(value="{{ category }}" ng-repeat="category in vm.categories") {{ category }}
 
-		//- If not logged in
-		//- button(ng-if="!vm.isUser()" ng-click="vm.authenticate('facebook')" ladda-button="vm.laddaLoading" data-style="expand-right")
-		//- 	| Get started via Facebook
-
-		//- a.button(ng-if="vm.isUser()" href="/#/dashboard") View Dashboard
-
 section.section-body.clearfix
 	.container
 
-		a.frame(href="#/job/{{ job.id }}" ng-repeat="job in vm.jobs" style="position:relative;")
+		a.frame(href="#/preview/{{ job.id }}" ng-repeat="job in vm.jobs")
 			.image(style="background-image: url('{{ job.organisation_logo }}')")
 			.padding
 				h3.dark {{ job.role }}
 				p {{ job.type }} at {{ job.organisation_name }} in {{ job.state }}
-				p(style="position:absolute;bottom:4px;opacity:0.4;font-size:12px;") Applications close {{ job.finish | date }}
+				p.app-close Applications close {{ job.finish | date }}
 
 

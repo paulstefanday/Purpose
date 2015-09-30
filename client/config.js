@@ -13,7 +13,7 @@ export default /*@ngInject*/ function($stateProvider, $urlRouterProvider, $authP
     clientId: process.env.ENV === 'production' ? "535096706647433" : "535124743311296",
     url: '/api/v1/facebook',
     authorizationEndpoint: 'https://www.facebook.com/v2.4/dialog/oauth',
-    scope: ["public_profile", "email", "user_birthday"],
+    scope: ["public_profile", "email"],
     type: '2.4'
   });
 
@@ -62,6 +62,12 @@ export default /*@ngInject*/ function($stateProvider, $urlRouterProvider, $authP
       controllerAs: 'vm',
       controller: require('./views/signup.js'),
       template: require('./views/signup.jade')
+    })
+    .state('preview', {
+      url: "/preview/:id",
+      controllerAs: 'vm',
+      controller: require('./views/preview.js'),
+      template: require('./views/preview.jade')
     })
 }
 

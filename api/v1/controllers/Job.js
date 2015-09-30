@@ -71,6 +71,16 @@ module.exports.image = function *() {
  *
  */
 
+module.exports.findOne = function *() {
+
+  var result = yield M.Job.get(this.params.job);
+
+  if(!result) this.throw("Job does not exist", 404)
+
+  this.body = result;
+  this.status = 200;
+}
+
 module.exports.find = function *() {
 
   var result = yield M.User.get(this.user.id).getJoin({ jobs: true }).run();
