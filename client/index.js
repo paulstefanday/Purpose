@@ -23,8 +23,8 @@ angular.module(name, [
 	'oitozero.ngSweetAlert',
 	'ladda',
 	'ngMap',
-  	'ngFlatDatepicker',
-  	'textAngular'
+	'ngFlatDatepicker',
+	'textAngular'
 ])
   .config(require('./config'))
   .run(require('./global'))
@@ -35,7 +35,7 @@ angular.module(name, [
 // App Parts
 require('./bootstrap')(name)
 	.directive(...require('./directives/map'))
-  	.directive(...require('./directives/nav'))
+  .directive(...require('./directives/nav'))
 	.factory('socket', /*@ngInject*/ function(socketFactory) {
 		return socketFactory({ prefix: '', ioSocket: io.connect('http://localhost:3000/') })
 	})
