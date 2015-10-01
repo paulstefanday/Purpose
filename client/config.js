@@ -1,4 +1,11 @@
-export default /*@ngInject*/ function($stateProvider, $urlRouterProvider, $authProvider) {
+export default /*@ngInject*/ function($stateProvider, $urlRouterProvider, $authProvider, taOptions) {
+
+  taOptions.toolbar = [
+      [ 'h4', 'p', 'pre', 'quote'],
+      ['bold', 'italics', 'underline', 'ul', 'ol', 'clear'],
+      [],
+      ['html', 'wordcount', 'charcount']
+  ];
 
   $urlRouterProvider.otherwise("/");
 

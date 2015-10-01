@@ -48,7 +48,8 @@ article
 	h5 Descriptions
 	.frame
 		label Description
-		textarea.job-description(ng-model="vm.selected.description")
+		text-angular.job-description(ng-model="vm.selected.description")
+		//- textarea(ng-model="vm.selected.description")
 
 		label Instructions on how to apply
 		textarea(ng-model="vm.selected.apply_instructions")

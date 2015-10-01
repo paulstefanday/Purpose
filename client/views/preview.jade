@@ -1,27 +1,28 @@
-.container.jobs
+section.section-header
+	.container
+		h1 {{ vm.job.role }}
+		p {{ vm.job.type }} at {{ vm.job.organisation_name }} in {{ vm.job.state }}
 
-	header
-		h1(ng-if="!vm.selected") Manage jobs
-		h1(ng-if="vm.selected") Editing {{ vm.selected.name }}
+section.section-body.clearfix
+	.container.preview-description
 
-	.jobs-feed(ng-if="!vm.selected")
-		.third(ng-repeat="job in vm.jobs")
-			.frame
-				h2.dark {{ job.role }}
-				p This job is for {{ job.type }} and application entry finished at {{ job.finish | date }}.
-				button(ng-click="vm.select(job)") Edit
-				button.light(ng-click="vm.delete(job)") Delete
+		article
+			p {{ vm.job.description}}
 
-		.third
-			.frame.new
-				h2.dark Create new job ad?
-				a.button(href="/#/new") Get started!
 
-	form(name="jobForm" ng-submit="vm.update()" ng-if="vm.selected")
-		include jobs.form.jade
-		button(ng-disabled="jobForm.$invalid") Update
-		button.light(ng-click="vm.selected = false;") Cancel
-		br
-		br
-		br
-		br
+
+
+		aside
+			img(src="{{ vm.job.organisation_logo }}")
+			p.
+				{{ vm.job.organisation_name}}
+
+
+section
+	.container
+		.half
+			h4 How to apply
+			p {{ vm.job.apply_instructions }}
+
+		.half
+			button(style="float:right;") View campaigns like this

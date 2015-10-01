@@ -11,6 +11,8 @@ require('angular-sweetalert');
 require('ladda-angular');
 require('ngmap');
 require('ng-flat-datepicker');
+require('textangular/dist/textAngular-sanitize.min');
+require('textAngular');
 
 // App
 angular.module(name, [
@@ -21,7 +23,8 @@ angular.module(name, [
 	'oitozero.ngSweetAlert',
 	'ladda',
 	'ngMap',
-  'ngFlatDatepicker'
+  	'ngFlatDatepicker',
+  	'textAngular'
 ])
   .config(require('./config'))
   .run(require('./global'))
