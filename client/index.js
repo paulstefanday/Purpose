@@ -11,8 +11,10 @@ require('angular-sweetalert');
 require('ladda-angular');
 require('ngmap');
 require('ng-flat-datepicker');
+window.rangy = require('rangy/lib/rangy-core');
+window.rangy.saveSelection = require('rangy/lib/rangy-selectionsaverestore');
 require('textangular/dist/textAngular-sanitize.min');
-require('textAngular');
+require('textangular/dist/textAngular.min');
 
 // App
 angular.module(name, [

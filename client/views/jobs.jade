@@ -17,11 +17,7 @@
 				h2.dark Create new job ad?
 				a.button(href="/#/new") Get started!
 
-	form(name="jobForm" ng-submit="vm.update()" ng-if="vm.selected")
+	form.job-edit-form(name="jobForm" ng-submit="vm.update()" ng-if="vm.selected")
 		include jobs.form.jade
-		button(ng-disabled="jobForm.$invalid") Update
-		button.light(ng-click="vm.selected = false;") Cancel
-		br
-		br
-		br
-		br
+		button.form-button(ng-disabled="jobForm.$invalid") Update
+		button.light.form-button(ng-click="vm.selected = false;") Cancel

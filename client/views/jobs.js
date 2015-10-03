@@ -1,4 +1,11 @@
-export default /*@ngInject*/ function($auth, $http, $timeout, fileUpload, Categories) {
+export default /*@ngInject*/ function($auth, $http, $timeout, fileUpload, Categories, taOptions) {
+
+  taOptions.toolbar = [
+    [ 'h3', 'h4', 'p'],
+    ['bold', 'italics', 'ul', 'ol', 'clear'],
+    [],
+    ['html', 'insertLink']
+  ];
 
   this.categories = Categories;
 
