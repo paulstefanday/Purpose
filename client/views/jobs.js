@@ -7,6 +7,11 @@ export default /*@ngInject*/ function($auth, $http, $timeout, fileUpload, Catego
     ['html', 'insertLink']
   ];
 
+  this.config = {
+    dateFormat: 'DD/MM/YYYY',
+    allowFuture: true
+  }
+
   this.categories = Categories;
 
 	this.getJobs = () => $http.get('/api/v1/job')

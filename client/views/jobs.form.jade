@@ -30,10 +30,12 @@ aside
 			a(ng-click="vm.uploadFile()") Upload
 
 		label Application start date
-		input(type="text" ng-model="vm.selected.start" ng-flat-datepicker)
+		p(ng-model="vm.selected.start" ng-flat-datepicker ng-show="vm.selected.start") {{ vm.selected.start | date }}
+		input(type="text" ng-model="vm.selected.start" ng-flat-datepicker ng-show="!vm.selected.start")
 
 		label Application end date
-		input(type="text" ng-model="vm.selected.finish" ng-flat-datepicker)
+		p(ng-model="vm.selected.finish" ng-flat-datepicker ng-show="vm.selected.finish") {{ vm.selected.finish | date }}
+		input(type="text" ng-model="vm.selected.finish" ng-flat-datepicker ng-show="!vm.selected.finish")
 
 		label Salery amount
 		input(type="number" ng-model="vm.selected.salery_avg")
