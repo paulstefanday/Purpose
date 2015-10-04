@@ -604,7 +604,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<section class=\"section-header\"><div class=\"container\"><h1>{{ vm.job.role }}</h1><p>{{ vm.job.type }} at {{ vm.job.organisation_name }} in {{ vm.job.state }}</p></div></section><section class=\"section-body clearfix\"><div class=\"container preview-description\"><article><p>{{ vm.job.description}}</p></article><aside><img src=\"{{ vm.job.organisation_logo }}\"/><p>{{ vm.job.organisation_name}}\n\n</p></aside></div></section><section><div class=\"container\"><div class=\"half\"><h4>How to apply</h4><p>{{ vm.job.apply_instructions }}</p></div><div class=\"half\"><button style=\"float:right;\">View campaigns like this</button></div></div></section>");;return buf.join("");
+buf.push("<section class=\"section-header preview-header\"><div class=\"container\"><img src=\"{{ vm.job.organisation_logo }}\" class=\"preview-image\"/><h1>{{ vm.job.role }}</h1><p>{{ vm.job.type }} at {{ vm.job.organisation_name }} in {{ vm.job.state }}</p></div></section><section class=\"section-body clearfix\"><div class=\"container preview-description\"><article><div ng-bind-html=\"vm.job.description\"></div><h4>How to apply</h4><p>{{ vm.job.apply_instructions }}</p></article><aside><h4>Details</h4><p><b>Company:</b> {{ vm.job.organisation_name}}<br/><b>Category:</b> {{ vm.job.category }}<br/><b>Application closes:</b> {{ vm.job.finish | date }}<br/><b>Role:</b> {{ vm.job.role }}<br/><b>Type:</b> {{ vm.job.type }}</p></aside></div></section>");;return buf.join("");
 };
 },{"jade/runtime":29}],17:[function(require,module,exports){
 Object.defineProperty(exports, '__esModule', {

@@ -1,5 +1,6 @@
-section.section-header
+section.section-header.preview-header
 	.container
+		img.preview-image(src="{{ vm.job.organisation_logo }}")
 		h1 {{ vm.job.role }}
 		p {{ vm.job.type }} at {{ vm.job.organisation_name }} in {{ vm.job.state }}
 
@@ -7,22 +8,27 @@ section.section-body.clearfix
 	.container.preview-description
 
 		article
-			p {{ vm.job.description}}
+			div(ng-bind-html="vm.job.description")
 
-
-
-
-		aside
-			img(src="{{ vm.job.organisation_logo }}")
-			p.
-				{{ vm.job.organisation_name}}
-
-
-section
-	.container
-		.half
 			h4 How to apply
 			p {{ vm.job.apply_instructions }}
 
-		.half
-			button(style="float:right;") View campaigns like this
+		aside
+
+			h4 Details
+			p
+				b Company:
+				|  {{ vm.job.organisation_name}}
+				br
+				b Category:
+				|  {{ vm.job.category }}
+				br
+				b Application closes:
+				|  {{ vm.job.finish | date }}
+				br
+				b Role:
+				|  {{ vm.job.role }}
+				br
+				b Type:
+				|  {{ vm.job.type }}
+
