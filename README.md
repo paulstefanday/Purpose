@@ -17,5 +17,4 @@ Provide a free space for job ad's for the non profit sector
 - get fb to pull more demographic data
 - get profile working
 - make change of category also change route
-- add wiziwig to form
 - file upload field form

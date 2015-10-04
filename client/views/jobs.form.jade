@@ -26,7 +26,7 @@ aside
 			img(src="{{ vm.selected.organisation_logo }}")
 			a(ng-click="vm.resetFile()") Delete
 		.one(ng-if="!vm.selected.organisation_logo")
-			input( type="file" file-model="vm.selectedFile" style="width:80%;" )
+			input( type="file" file-model="vm.selectedFile" style="width:70%;" )
 			a(ng-click="vm.uploadFile()") Upload
 
 		label Application start date
