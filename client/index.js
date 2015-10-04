@@ -30,7 +30,7 @@ angular.module(name, [
 ])
   .config(require('./config'))
   .run(require('./global'))
-  .constant('Categories', ['Policy & research', 'Education', 'Social Work', 'Administration', 'Project Management', 'PR', 'Campaigning', 'Fundraising', 'Legal', 'Human Resoruces', 'Finance', 'Technoloy', 'Design', 'International Development', 'Business Development'])
+  .constant('Categories', ['Policy & research', 'Education', 'Social Work', 'Administration', 'Project Management', 'PR', 'Campaigning', 'Fundraising', 'Legal', 'Human Resoruces', 'Finance', 'Technology', 'Design', 'International Development', 'Business Development'])
   .constant('Issues', ['Social Work', 'Education', 'Environment', 'International Aid', 'Mental Health', 'Diversity', 'Drug & alcohol'])
 
 

@@ -15,6 +15,11 @@ Provide a free space for job ad's for the non profit sector
 
 ### TODO
 - get fb to pull more demographic data
-- get profile working
 - make change of category also change route
-- file upload field form
+- fix country and state fields in form
+- add preview buttons to form and list page
+- form validation
+- give descriotion proper heigh
+- fix padding on start/finish date for form
+- fix float issue with mouse over, add margin to bottom and top
+- fix styling on lists in editor and on preview page, maybe add styles to body for this

@@ -374,7 +374,7 @@ require('textangular/dist/textAngular-sanitize.min');
 require('textangular/dist/textAngular.min');
 
 // App
-angular.module(name, ['satellizer', 'btford.socket-io', 'ui.router', 'ngAnimate', 'oitozero.ngSweetAlert', 'ladda', 'ngMap', 'ngFlatDatepicker', 'textAngular']).config(require('./config')).run(require('./global')).constant('Categories', ['Policy & research', 'Education', 'Social Work', 'Administration', 'Project Management', 'PR', 'Campaigning', 'Fundraising', 'Legal', 'Human Resoruces', 'Finance', 'Technoloy', 'Design', 'International Development', 'Business Development']).constant('Issues', ['Social Work', 'Education', 'Environment', 'International Aid', 'Mental Health', 'Diversity', 'Drug & alcohol']);
+angular.module(name, ['satellizer', 'btford.socket-io', 'ui.router', 'ngAnimate', 'oitozero.ngSweetAlert', 'ladda', 'ngMap', 'ngFlatDatepicker', 'textAngular']).config(require('./config')).run(require('./global')).constant('Categories', ['Policy & research', 'Education', 'Social Work', 'Administration', 'Project Management', 'PR', 'Campaigning', 'Fundraising', 'Legal', 'Human Resoruces', 'Finance', 'Technology', 'Design', 'International Development', 'Business Development']).constant('Issues', ['Social Work', 'Education', 'Environment', 'International Aid', 'Mental Health', 'Diversity', 'Drug & alcohol']);
 
 // App Parts
 (_require$directive = (_require = require('./bootstrap')(name)).directive.apply(_require, _toConsumableArray(require('./directives/map')))).directive.apply(_require$directive, _toConsumableArray(require('./directives/nav'))).factory('socket', /*@ngInject*/["socketFactory", function (socketFactory) {
@@ -584,8 +584,12 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-exports['default'] = /*@ngInject*/["$auth", "$http", "$timeout", "fileUpload", "$state", function ($auth, $http, $timeout, fileUpload, $state) {
+exports['default'] = /*@ngInject*/["Categories", "taOptions", "$auth", "$http", "$timeout", "fileUpload", "$state", function (Categories, taOptions, $auth, $http, $timeout, fileUpload, $state) {
   var _this = this;
+
+  taOptions.toolbar = [['h3', 'h4', 'p'], ['bold', 'italics', 'ul', 'ol', 'clear'], [], ['html', 'insertLink']];
+
+  this.categories = Categories;
 
   this.create = function () {
     return $http.post('/api/v1/job', _this.selected).then(function (res) {
