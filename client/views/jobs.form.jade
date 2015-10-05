@@ -41,7 +41,8 @@ aside
 		input(type="number" ng-model="vm.selected.salery_avg")
 
 		label Country
-		input(type="text" ng-model="vm.selected.country")
+		select(ng-model="vm.selected.country")
+			option(ng-repeat="country in vm.countries" value="{{country}}") {{ country }}
 
 		label State
 		input(type="text" ng-model="vm.selected.state")

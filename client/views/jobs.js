@@ -1,4 +1,4 @@
-export default /*@ngInject*/ function($auth, $http, $timeout, fileUpload, Categories, taOptions) {
+export default /*@ngInject*/ function(Countries, $auth, $http, $timeout, fileUpload, Categories, taOptions) {
 
   taOptions.toolbar = [
     [ 'h3', 'h4', 'p'],
@@ -13,6 +13,7 @@ export default /*@ngInject*/ function($auth, $http, $timeout, fileUpload, Catego
   }
 
   this.categories = Categories;
+  this.countries = Countries;
 
 	this.getJobs = () => $http.get('/api/v1/job')
     .then(res => this.jobs = res.data)
