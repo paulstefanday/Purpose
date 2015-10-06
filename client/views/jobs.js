@@ -7,8 +7,8 @@ export default /*@ngInject*/ function(Countries, $auth, $http, $timeout, fileUpl
     ['html', 'insertLink']
   ];
 
-  this.categories = Categories;
-  this.countries = Countries;
+  this.categories = Categories
+  this.countries = Countries
 
 	this.getJobs = () => $http.get('/api/v1/job')
     .then(res => this.jobs = res.data)
@@ -36,6 +36,6 @@ export default /*@ngInject*/ function(Countries, $auth, $http, $timeout, fileUpl
     this.seletedFile = false;
   }
 
-  this.getJobs();
+  this.getJobs()
 
 }
