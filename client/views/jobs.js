@@ -7,11 +7,6 @@ export default /*@ngInject*/ function(Countries, $auth, $http, $timeout, fileUpl
     ['html', 'insertLink']
   ];
 
-  this.config = {
-    dateFormat: 'DD/MM/YYYY',
-    allowFuture: true
-  }
-
   this.categories = Categories;
   this.countries = Countries;
 

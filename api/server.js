@@ -1,6 +1,6 @@
 global.__base = __dirname + '/';
 
-require('dotenv').load();
+if(!process.env.NODE_ENV) require('dotenv').load();
 
 var app = module.exports = require('koa')(),
     config = require(__base+'/config/config'),
@@ -12,7 +12,7 @@ var app = module.exports = require('koa')(),
    	session = require('koa-session'),
     Grant = require('grant-koa'),
     serve = require('koa-static-folder'),
-   	bodyParser = require('koa-bodyparser'), server, io;
+   	bodyParser = require('koa-bodyparser');
 
 // Relations
 M.User.hasMany(M.Job, "jobs", "id", "user_id");

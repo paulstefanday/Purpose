@@ -31,13 +31,9 @@ module.exports = {
 			rawPassword = this.generatePassword(data);
 			password = yield this.hashPassword(rawPassword);
 
-			console.log(rawPassword, password)
-
 			// Update record
 			user = new M.User({email: data.email, password: password });
 			result = yield user.save();
-
-			console.log(result)
 
 			// Send an email to user with their password
 

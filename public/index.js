@@ -480,11 +480,6 @@ exports['default'] = /*@ngInject*/["Countries", "$auth", "$http", "$timeout", "f
 
   taOptions.toolbar = [['h3', 'h4', 'p'], ['bold', 'italics', 'ul', 'ol', 'clear'], [], ['html', 'insertLink']];
 
-  this.config = {
-    dateFormat: 'DD/MM/YYYY',
-    allowFuture: true
-  };
-
   this.categories = Categories;
   this.countries = Countries;
 
