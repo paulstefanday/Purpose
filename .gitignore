@@ -2,6 +2,8 @@ rethinkdb_data/
 
 client/node_modules/
 
+.env
+
 *.pem
 
 # Logs
