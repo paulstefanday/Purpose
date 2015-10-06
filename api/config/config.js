@@ -1,7 +1,10 @@
 module.exports = {
-	// basic
+	// Basic
 	"env":  process.env.NODE_ENV || 'development',
 	"port": process.env.PORT || 3000,
+
+  // S3
+  "bucket": "purposecareer",
 
 	// Database
 	"db": {

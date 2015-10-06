@@ -42,8 +42,6 @@ module.exports.facebook = function *(next) {
  *
  * @apiParam {String} email Users unique email.
  * @apiParam {String} password Users password.
- * @apiParam {String} first_name Users first name.
- * @apiParam {String} id Campaign id
  *
  * @apiSuccess {String} token Token for authentication purposes.
  *
@@ -53,13 +51,6 @@ module.exports.facebook = function *(next) {
  *       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImU2YWZmZWNmLTcwNzUtNDIzNi04OGZkLTI1NzA5OWU2ZTcyZCIsImlhdCI6MTQzMjM1OTc1OH0.M7CHKDiP4kyWi0-ek0qukE1xRB9x7OExAMwX_Le1ZZY"
  *     }
  *
- * @apiError UserNotFound The id of the User was not found.
- *
- * @apiErrorExample Error-Response:
- *     HTTP/1.1 400 Not Found
- *     {
- *       "message": "You have already signed up."
- *     }
  */
 
 module.exports.signup = function *() {
@@ -97,14 +88,6 @@ module.exports.signup = function *() {
  *     {
  *       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImU2YWZmZWNmLTcwNzUtNDIzNi04OGZkLTI1NzA5OWU2ZTcyZCIsImlhdCI6MTQzMjM1OTc1OH0.M7CHKDiP4kyWi0-ek0qukE1xRB9x7OExAMwX_Le1ZZY"
  *     }
- *
- * @apiError UserNotFound If you don't have an account, Please sign up.
- *
- * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
- *     {
- *       "message": "If you don't have an account, Please sign up."
- *     }
  */
 
 module.exports.login = function *() {
@@ -141,20 +124,12 @@ module.exports.login = function *() {
  *     {
  *       "message": "Password has been reset"
  *     }
- *
- * @apiError UserNotFound This account does not exist. Please sign up.
- *
- * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
- *     {
- *       "message": "This account does not exist. Please sign up."
- *     }
  */
 
  module.exports.reset = function *() {
 
   var body = this.request.body, email, id, realPassword, salt, password, record;
-  
+
   email = body.email;
 
   // Check if email was passed as param

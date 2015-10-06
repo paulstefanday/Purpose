@@ -585,11 +585,25 @@ exports['default'] = /*@ngInject*/["Countries", "Categories", "taOptions", "$aut
 
   this.categories = Categories;
   this.countries = Countries;
+  this.selected = {};
 
   this.create = function () {
     return $http.post('/api/v1/job', _this.selected).then(function (res) {
       $state.go('admin.jobs');
     });
+  };
+
+  this.uploadFile = function () {
+    var _this2 = this;
+
+    fileUpload.uploadFileToUrl(this.selectedFile, "/api/v1/image").then(function (res) {
+      return _this2.selected.organisation_logo = res.url;
+    });
+  };
+
+  this.resetFile = function () {
+    _this.selected.organisation_logo = '';
+    _this.seletedFile = false;
   };
 }];
 
