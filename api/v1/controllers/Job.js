@@ -41,8 +41,8 @@ module.exports.image = function *() {
       s3 = require('s3'),
       client = s3.createClient({
         s3Options: {
-          accessKeyId: 'AKIAITP7ZTGPG6RSZ3UA',
-          secretAccessKey: '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'
+          accessKeyId: process.env.S3_KEY,
+          secretAccessKey: process.env.S3_SECRET
         }
       }),
       params = { localFile: form.files.file.path, s3Params: { Bucket: "purposecareer", Key: form.files.file.name } },
