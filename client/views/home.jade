@@ -3,12 +3,12 @@ section.section-header
 	.container
 
 		.logo
-			i.ion-ios-people
-			h1 Purpose
-			p Select a category below to find a career with a purpose
+			//- i.ion-ios-people
+			img(src="/public/logo.png" style="max-width:200px;margin-bottom: 2px; margin-top: 90px;")
+			p Find a career with a purpose
 
 		form.home-category
-			select(ng-model="vm.type" style="max-width:400px;" ng-change="vm.changeFeed()")
+			select(ng-model="vm.type" style="max-width:220px;" ng-change="vm.changeFeed()")
 				option(value="") Select a category here...
 				option(value="{{ category }}" ng-repeat="category in vm.categories") {{ category }}
 
